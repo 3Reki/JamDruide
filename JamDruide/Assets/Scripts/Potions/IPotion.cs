@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Player;
 
-public interface IPotion
+namespace Potions
 {
-    
+    public interface IPotion
+    {
+        public void Drink(PlayerController player);
+        public void Throw();
+    }
 }

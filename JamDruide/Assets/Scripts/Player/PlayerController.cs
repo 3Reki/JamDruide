@@ -13,6 +13,9 @@ namespace Player
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
+        public bool CanDash;
+        public bool CanDoubleJump;
+        
         // Public for external hooks
         public Vector3 Velocity { get; private set; }
         public FrameInput Input { get; private set; }
