@@ -47,6 +47,7 @@ namespace Player
             CalculateJumpApex(); // Affects fall speed, so calculate before gravity
             CalculateGravity(); // Vertical movement
             CalculateJump(); // Possibly overrides vertical
+            CalculateDoubleJump();
 
             MoveCharacter(); // Actually perform the axis movement
         }
@@ -243,8 +244,10 @@ namespace Player
         private bool endedJumpEarly = true;
         private float apexPoint; // Becomes 1 at the apex of a jump
         private float lastJumpPressed;
+        private bool doubleJumpUsed;
         private bool CanUseCoyote => coyoteUsable && !colDown && timeLeftGrounded + _coyoteTimeThreshold > Time.time;
         private bool HasBufferedJump => colDown && lastJumpPressed + _jumpBuffer > Time.time;
+        private bool CanUseDouble => CanDoubleJump && !doubleJumpUsed && !JumpingThisFrame;
 
         private void CalculateJumpApex()
         {
@@ -270,6 +273,7 @@ namespace Player
                 coyoteUsable = false;
                 timeLeftGrounded = float.MinValue;
                 JumpingThisFrame = true;
+                doubleJumpUsed = false;
             }
             else
             {
@@ -286,6 +290,19 @@ namespace Player
             if (colUp)
             {
                 if (currentVerticalSpeed > 0) currentVerticalSpeed = 0;
+            }
+        }
+
+        private void CalculateDoubleJump()
+        {
+            if (CanUseDouble && Input.jumpDown && !CanUseCoyote)
+            {
+                currentVerticalSpeed = _jumpHeight;
+                endedJumpEarly = false;
+                coyoteUsable = false;
+                timeLeftGrounded = float.MinValue;
+                JumpingThisFrame = true;
+                doubleJumpUsed = true;
             }
         }
 
