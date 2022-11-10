@@ -7,10 +7,10 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public CraftsList.Resources[] currentResources = new CraftsList.Resources[2];
-    private CraftsList.Resources resourceToCollect;
     private bool canCollect;
     private int resourceIndex = 0;
     [SerializeField] private CraftsList craftsList;
+    private ResourceScript resourceToCollect;
 
     [SerializeField] private List<GameObject> potions;
 
@@ -21,7 +21,7 @@ public class PlayerActions : MonoBehaviour
             Debug.Log("j'ai une ressource à proximité");
             canCollect = true;
             ResourceScript script = other.GetComponent<ResourceScript>();
-            resourceToCollect = script.resourceType;
+            resourceToCollect = script;
         }
     }
 
@@ -46,8 +46,9 @@ public class PlayerActions : MonoBehaviour
         Debug.Log("Je récupère une ressource" + resourceIndex);
         if (canCollect)
         {
-            if (currentResources.Contains(resourceToCollect)) return;
-            currentResources[resourceIndex] = resourceToCollect;
+            if (currentResources.Contains(resourceToCollect.resourceType)) return;
+            currentResources[resourceIndex] = resourceToCollect.resourceType;
+            resourceToCollect.ResourceCollected();
             resourceIndex++;
             if (resourceIndex == 2)
             {
