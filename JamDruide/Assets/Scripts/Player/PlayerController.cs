@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,6 +30,15 @@ namespace Player
         private void Awake() => Invoke(nameof(Activate), 0.5f);
         private void Activate() => active = true;
 
+        private SpriteRenderer sprite;
+        private Animator animator;
+
+        private void Start()
+        {
+            sprite = GetComponent<SpriteRenderer>();
+            animator = GetComponent<Animator>();
+        }
+
         private void Update()
         {
             if (!active) return;
@@ -38,6 +48,14 @@ namespace Player
             lastPosition = position;
 
             GatherInput();
+            if (Input.x >= 0)
+            {
+                sprite.flipX = false;
+            }
+            else
+            {
+                sprite.flipX = true;
+            }
             RunCollisionChecks();
 
             CalculateWalk(); // Horizontal movement
@@ -301,6 +319,14 @@ namespace Player
             Vector3 pos = transformPos + _characterBounds.center;
             RawMovement = new Vector3(currentHorizontalSpeed, currentVerticalSpeed); // Used externally
             Vector3 move = RawMovement * Time.deltaTime;
+            if (move != Vector3.zero)
+            {
+                animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", false);
+            }
             Vector3 furthestPoint = pos + move;
 
             // check furthest movement. If nothing hit, move and don't do extra checks
