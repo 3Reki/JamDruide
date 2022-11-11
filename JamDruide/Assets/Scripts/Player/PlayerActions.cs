@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using Potions;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -36,6 +37,15 @@ namespace Player
 
         bool canAdd;
         bool hasOnePotion;
+
+        //Slider des potions
+        [SerializeField] Slider jumpSlider;
+        bool doubleJump;
+        float jumpSliderValue;
+        
+        [SerializeField] Slider speedSlider;
+        bool speedBoost;
+        float speedSliderValue;
 
         private void OnEnable()
         {
@@ -75,8 +85,43 @@ namespace Player
             }
         }
 
+        IEnumerator JumpSlider()
+        {
+            jumpSlider.gameObject.SetActive(true);
+            jumpSlider.maxValue = 10f;
+            jumpSlider.value = jumpSlider.maxValue;
+            jumpSliderValue = 10f;
+            doubleJump = true;
+            yield return new WaitForSeconds(10);
+            doubleJump = false;
+            jumpSlider.gameObject.SetActive(false);
+        }
+
+        IEnumerator SpeedSlider()
+        {
+            speedSlider.gameObject.SetActive(true);
+            speedSlider.maxValue = 10f;
+            speedSlider.value = jumpSlider.maxValue;
+            speedSliderValue = 10f;
+            speedBoost = true;
+            yield return new WaitForSeconds(10);
+            speedBoost = false;
+            speedSlider.gameObject.SetActive(false);
+        }
+
         private void Update()
         {
+            jumpSliderValue -= 1 * Time.deltaTime;
+            jumpSlider.value = jumpSliderValue;
+
+            speedSliderValue -= 1 * Time.deltaTime;
+            speedSlider.value = speedSliderValue;
+
+            if (GetComponent<PlayerController>().CanDoubleJump && !doubleJump)
+                StartCoroutine(JumpSlider());
+            if (GetComponent<PlayerController>().moveClamp > 13f && !speedBoost)
+                StartCoroutine(SpeedSlider());
+
             //detect if the player has at least one potion
             if (potions[0] == null && potions[1] == null && potions[2] == null)
                 hasOnePotion = false;
