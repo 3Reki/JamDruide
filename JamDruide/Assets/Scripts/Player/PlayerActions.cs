@@ -22,6 +22,7 @@ namespace Player
 
         private GameObject[] points;
         [SerializeField] private Animator craftedPotionUI;
+        [SerializeField] private Image craftedPotion;
         public Transform lastCheckpoint;
         [SerializeField] private float deathTimer;
         private bool invincible;
