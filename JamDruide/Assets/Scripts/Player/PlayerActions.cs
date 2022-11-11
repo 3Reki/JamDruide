@@ -61,6 +61,8 @@ namespace Player
         
         private void Start()
         {
+            jumpSlider.gameObject.SetActive(false);
+            speedSlider.gameObject.SetActive(false);
 
             animator = GetComponent<Animator>();
             points = new GameObject[pointsCount];
@@ -88,11 +90,11 @@ namespace Player
         IEnumerator JumpSlider()
         {
             jumpSlider.gameObject.SetActive(true);
-            jumpSlider.maxValue = 10f;
+            jumpSlider.maxValue = 4;
             jumpSlider.value = jumpSlider.maxValue;
-            jumpSliderValue = 10f;
+            jumpSliderValue = 4;
             doubleJump = true;
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(4);
             doubleJump = false;
             jumpSlider.gameObject.SetActive(false);
         }
@@ -100,11 +102,11 @@ namespace Player
         IEnumerator SpeedSlider()
         {
             speedSlider.gameObject.SetActive(true);
-            speedSlider.maxValue = 10f;
+            speedSlider.maxValue = 4f;
             speedSlider.value = jumpSlider.maxValue;
-            speedSliderValue = 10f;
+            speedSliderValue = 4f;
             speedBoost = true;
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(4);
             speedBoost = false;
             speedSlider.gameObject.SetActive(false);
         }
