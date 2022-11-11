@@ -38,7 +38,7 @@ Transform:
   - {fileID: 2903344727830008782}
   - {fileID: 4363168047577180003}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5987869338428308260
 SpriteRenderer:
@@ -143,10 +143,10 @@ MonoBehaviour:
   craftsList: {fileID: 2903344727830008777}
   playerController: {fileID: 2453536640117689241}
   resourceImages:
-  - {fileID: 21300000, guid: 613b827ac36b6724fb87c9202397be8e, type: 3}
-  - {fileID: 21300000, guid: f30300edd979f3a4e9adbc14e165313c, type: 3}
-  - {fileID: 21300000, guid: 5682859164df06a4da148a9b21b50e22, type: 3}
-  - {fileID: 21300000, guid: 6a956e4839e27ea4c9bb6b413b6f8fca, type: 3}
+  - {fileID: -1383507764, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
+  - {fileID: -96528867, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
+  - {fileID: -817474538, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
+  - {fileID: -1588436701, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
   - {fileID: 0}
   CraftUI:
   - {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   launchForce: 20
   pointPrefab: {fileID: 3207998565831689386, guid: d7e598630dd605f4a8bbec124be6cc96, type: 3}
   pointsCount: 20
+  craftedPotionUI: {fileID: 0}
   lastCheckpoint: {fileID: 0}
   deathTimer: 1
 --- !u!50 &3959692907899943907

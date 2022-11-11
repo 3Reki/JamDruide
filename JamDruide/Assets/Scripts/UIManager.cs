@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Player;
+using Potions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<Sprite> resourceImages;
     [SerializeField] private List<Image> CraftUI;
     [SerializeField] private Animator craftedPotionUI;
+    [SerializeField] private Image craftedPotionImage;
     
     private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
     private WaitForSeconds animDelay = new(0.5f);
@@ -39,19 +41,28 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerActions.onCollect += UpdateUI;
-        PlayerActions.onRecipeComplete += DelayAnimation;
+        PlayerActions.onRecipeComplete += OnRecipeComplete;
     }
 
     private void OnDisable()
     {
         PlayerActions.onCollect -= UpdateUI;
-        PlayerActions.onRecipeComplete -= DelayAnimation;
+        PlayerActions.onRecipeComplete -= OnRecipeComplete;
     }
 
     private void UpdateUI(int resourceIndex, CraftsList.Resources resourceType)
     {
         CraftUI[resourceIndex].sprite = resourcesImages[resourceType];
         CraftUI[resourceIndex].GetComponent<Animator>().Play("UIResourceGet");
+    }
+
+    private void OnRecipeComplete(IPotion potion)
+    {
+        craftedPotionImage.sprite = potion.Sprite;
+        for (int i = 0; i < 2; i++)
+        {
+            StartCoroutine(DelayAnimation(i));
+        }
     }
 
     private IEnumerator DelayAnimation(int index)
