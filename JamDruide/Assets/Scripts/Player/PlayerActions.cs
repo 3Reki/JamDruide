@@ -233,6 +233,13 @@ namespace Player
                 if (onThrow != null)
                     onThrow.Invoke(i);
             }
+            for (int i = 0; i < 2; i++)
+            {
+                currentResources[i] = CraftsList.Resources.None;
+            }
+
+            onDeath();
+
         }
         private void SavePlayerPosition()
         {
@@ -250,11 +257,13 @@ namespace Player
         public delegate void PlayerCallback2(IPotion potion, int slot);
         public delegate void PlayerCallback3(int slot);
         public delegate void PlayerCallback4(int slot);
+        public delegate void PlayerCallback5();
 
         public static PlayerCallback onCollect;
         public static PlayerCallback2 onRecipeComplete;
         public static PlayerCallback3 onThrow;
         public static PlayerCallback4 onSelect;
+        public static PlayerCallback5 onDeath;
     }
     
 }
