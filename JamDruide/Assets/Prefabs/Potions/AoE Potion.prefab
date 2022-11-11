@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 394973464693738289}
   - component: {fileID: 6031949411223785763}
   - component: {fileID: 761542972116115593}
+  - component: {fileID: -6363594961032415519}
   m_Layer: 7
   m_Name: AoE Potion
   m_TagString: Untagged
@@ -123,3 +124,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.67
+--- !u!114 &-6363594961032415519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4862584341863371731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2702502b93ea4269af3b6cc5fb2d00a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystem: {fileID: 4224459566537083273, guid: a1df6031e0af0a540a5415bf16b49967, type: 3}

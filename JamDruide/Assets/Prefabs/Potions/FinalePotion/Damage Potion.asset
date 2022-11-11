@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: -32395929, guid: 4a21236027890114fb51461ecf1bd6be, type: 3}
   potionPrefab: {fileID: 4862584341863371731, guid: d5469529893bbe349829baa92e0c4a76, type: 3}
+  particleSystem: {fileID: 4439237549677436334, guid: 9ba38d0be5a793144abe71202524b0ca, type: 3}

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Player;
+using UnityEditor;
 using UnityEngine;
 
 namespace Potions
@@ -20,9 +21,9 @@ namespace Potions
         {
             player.CanDoubleJump = true;
             IsActive = true;
-            
+            var newParticleSystem = Instantiate(particleSystem, PlayerActions.Instance.transform);
             yield return new WaitForSeconds(effectDuration);
-            
+            Destroy(newParticleSystem);
             player.CanDoubleJump = false;
             IsActive = false;
         }
