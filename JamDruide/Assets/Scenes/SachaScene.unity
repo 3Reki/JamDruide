@@ -562,6 +562,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2276162107322649722, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
+      propertyPath: m_Name
+      value: Shadow
+      objectReference: {fileID: 0}
     - target: {fileID: 2389814307735459762, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: m_Name
       value: Base_Scene
@@ -609,6 +613,22 @@ PrefabInstance:
     - target: {fileID: 2389814307735459763, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962642132164346149, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962642132164346149, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034318667503031226, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
+      propertyPath: startDelay
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7042653515648429317, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

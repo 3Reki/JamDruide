@@ -21,6 +21,8 @@ namespace Player
         private List<IPotion> potions = new();
         private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
 
+        public Queue<Vector3> playerPositions = new Queue<Vector3>();
+
         private void Start()
         {
             resourcesImages = new Dictionary<CraftsList.Resources, Sprite>()
@@ -65,6 +67,7 @@ namespace Player
                 potions[0].Drink(playerController);
                 potions.RemoveAt(0);
             }
+            SavePlayerPosition();
         }
         
         private void OnTriggerExit2D(Collider2D other)
@@ -108,5 +111,14 @@ namespace Player
                 }
             }
         }
+        
+        #region ghost
+    
+        private void SavePlayerPosition()
+        {
+            playerPositions.Enqueue(transform.position);
+        }
+        #endregion
     }
+    
 }
