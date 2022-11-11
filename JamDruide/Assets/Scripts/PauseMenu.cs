@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+using TMPro;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,6 +14,13 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] GameObject gameHUD;
     [SerializeField] GameObject pauseHUD;
+
+    //audio
+    [SerializeField] AudioMixer audioMixer;
+    [SerializeField] TMP_Text volume;
+    [SerializeField] Slider slider;
+    [SerializeField] private string saveName;
+    float displayNumber;
 
     private void Update()
     {
@@ -44,6 +54,15 @@ public class PauseMenu : MonoBehaviour
         OnResume.Invoke();
         pauseHUD.SetActive(false);
         gameHUD.SetActive(true);
+    }
+
+    public void SetVolume(float sliderValue)
+    {
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+
+        displayNumber = sliderValue * 100;
+        volume.text = "s o u n d s : " + displayNumber.ToString("F0");
+        PlayerPrefs.SetFloat(saveName, sliderValue);
     }
 
     public void Menu()
