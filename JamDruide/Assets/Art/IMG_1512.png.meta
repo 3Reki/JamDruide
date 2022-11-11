@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c992ff6c829dfec43b9aa220b9ee5864
+guid: dcc74a4ecbc43af4f8f6dbc6f8add903
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -165,91 +165,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: IMG_1508_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 351.25
-        height: 356
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7c7107e8d8e6d0549a091b8857d2272a
-      internalID: 611611582
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_1508_1
-      rect:
-        serializedVersion: 2
-        x: 351
-        y: 0
-        width: 351.25
-        height: 356
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 473b068457e89db4c9ba3b91eceb3af6
-      internalID: -96016125
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_1508_2
-      rect:
-        serializedVersion: 2
-        x: 702
-        y: 0
-        width: 351.25
-        height: 356
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a8fbebd3ea6ab046a2f545690d811d8
-      internalID: 1766554895
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_1508_3
-      rect:
-        serializedVersion: 2
-        x: 1053
-        y: 0
-        width: 351.25
-        height: 356
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a23157883703b64a8b43459ecccdc67
-      internalID: 548106654
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -260,11 +176,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      IMG_1508_2: 1766554895
-      IMG_1508_1: -96016125
-      IMG_1508_0: 611611582
-      IMG_1508_3: 548106654
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

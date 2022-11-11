@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c68e17282c446ff89cdaca8718a7a8c, type: 3}
   m_Name: Damage Potion
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
+  _sprite: {fileID: -32395929, guid: 4a21236027890114fb51461ecf1bd6be, type: 3}
