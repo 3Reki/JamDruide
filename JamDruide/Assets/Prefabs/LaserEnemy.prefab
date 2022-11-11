@@ -5146,7 +5146,7 @@ Transform:
   - {fileID: 101672953230641813}
   - {fileID: 101672953140459461}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &101672953060663026
 MonoBehaviour:
@@ -5164,8 +5164,8 @@ MonoBehaviour:
   laserEnd: {fileID: 101672952952622228}
   activeLineRenderer: {fileID: 101672953840045515}
   inactiveLineRenderer: {fileID: 101672952633325681}
-  laserDuration: 3
-  laserCastTime: 3
+  laserDuration: 1.2
+  laserCastTime: 1.2
   player: {fileID: 0}
   graphAnimator: {fileID: 101672953230641812}
 --- !u!50 &101672953060662988
