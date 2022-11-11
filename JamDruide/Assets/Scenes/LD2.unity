@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &128459017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 475155941084774658, guid: 29cc2d2079af7ee4e9a33e69f6bc98aa, type: 3}
+  m_PrefabInstance: {fileID: 2073005115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &235710949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34517,6 +34522,23 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: bd5c3f05b524cda4aa350c508dbafdcd, type: 3}
+--- !u!1 &1773375564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5190443223109654352, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
+  m_PrefabInstance: {fileID: 235710949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1773375565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773375564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983fcd8d254193c488f725f9e8f6596b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1820003067
 GameObject:
   m_ObjectHideFlags: 0
@@ -35509,6 +35531,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 101672952812158439, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.722
+      objectReference: {fileID: 0}
+    - target: {fileID: 101672952812158439, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.051
+      objectReference: {fileID: 0}
     - target: {fileID: 101672953060662989, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -35553,9 +35583,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 101672953060663026, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 128459017}
     - target: {fileID: 101672953060663027, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
       propertyPath: m_Name
-      value: LaserEnemy (1)
+      value: LaserEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034682073528821975, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.459
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034682073528821975, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.837
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178661915434273583, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178661915434273583, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
