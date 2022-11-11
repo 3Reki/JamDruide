@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -12,13 +13,38 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private CraftsList craftsList;
     private ResourceScript resourceToCollect;
 
+    private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
+    [SerializeField] private List<Sprite> resourceImages;
+
     [SerializeField] private List<GameObject> potions;
+    [SerializeField] private List<Image> CraftUI;
+
+    private void Start()
+    {
+        resourcesImages = new Dictionary<CraftsList.Resources, Sprite>()
+        {
+            {
+                CraftsList.Resources.Hydromel, resourceImages[0]
+            },
+            {
+                CraftsList.Resources.Mistletoe, resourceImages[1]
+            },
+            {
+                CraftsList.Resources.Mushroom, resourceImages[2]
+            },
+            {
+                CraftsList.Resources.Salt, resourceImages[3]
+            },
+            {
+                CraftsList.Resources.None, resourceImages[4]
+            }
+        };
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<ResourceScript>())
         {
-            Debug.Log("j'ai une ressource à proximité");
             canCollect = true;
             ResourceScript script = other.GetComponent<ResourceScript>();
             resourceToCollect = script;
@@ -43,11 +69,11 @@ public class PlayerActions : MonoBehaviour
 
     private void Collect()
     {
-        Debug.Log("Je récupère une ressource" + resourceIndex);
         if (canCollect)
         {
             if (currentResources.Contains(resourceToCollect.resourceType)) return;
             currentResources[resourceIndex] = resourceToCollect.resourceType;
+            CraftUI[resourceIndex].sprite = resourcesImages[resourceToCollect.resourceType];
             resourceToCollect.ResourceCollected();
             resourceIndex++;
             if (resourceIndex == 2)
@@ -68,8 +94,11 @@ public class PlayerActions : MonoBehaviour
                 if (recipe.ingredients.Contains(currentResources[1]))
                 {
                     potions.Add(recipe.output);
-                    currentResources[0] = CraftsList.Resources.None;
-                    currentResources[1] = CraftsList.Resources.None;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        currentResources[i] = CraftsList.Resources.None;
+                        CraftUI[i].sprite = resourcesImages[CraftsList.Resources.None];
+                    }
                 }
             }
         }
