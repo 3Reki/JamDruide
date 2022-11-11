@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Potions
 {
@@ -10,7 +11,7 @@ namespace Potions
         public new bool IsActive { get; private set; }
 
         [SerializeField] private float effectDuration;
-        
+
         public override void Drink(PlayerController player, PlayerActions playerActions)
         {
             player.StartCoroutine(EffectCoroutine(player));
@@ -20,11 +21,11 @@ namespace Potions
         {
             player.CanDoubleJump = true;
             IsActive = true;
-            
             yield return new WaitForSeconds(effectDuration);
-            
             player.CanDoubleJump = false;
             IsActive = false;
         }
+
+
     }
 }
