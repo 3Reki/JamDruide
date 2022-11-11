@@ -22,6 +22,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private string saveName;
     float displayNumber;
 
+    private void Start()
+    {
+        audioMixer.SetFloat("MasterVolume", PlayerPrefs.GetFloat(saveName, 1));
+        slider.value = PlayerPrefs.GetFloat(saveName, 1);
+    }
+
     private void Update()
     {
         MyInputs();

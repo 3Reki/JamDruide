@@ -12,7 +12,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<Image> CraftUI;
     [SerializeField] private Animator craftedPotionUI;
     [SerializeField] private Image craftedPotionImage;
-    
+    [SerializeField] private List<Image> potionsInventory;
+
+    [SerializeField] GameObject selectedPotion;
+
     private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
     private WaitForSeconds animDelay = new(0.5f);
 
@@ -42,6 +45,8 @@ public class UIManager : MonoBehaviour
     {
         PlayerActions.onCollect += UpdateUI;
         PlayerActions.onRecipeComplete += OnRecipeComplete;
+        PlayerActions.onThrow += RemoveInventory;
+        PlayerActions.onSelect += SelectPotion;
         PauseMenu.OnPause.AddListener(() => enabled = false);
         PauseMenu.OnResume.AddListener(() => enabled = true);
     }
@@ -50,6 +55,8 @@ public class UIManager : MonoBehaviour
     {
         PlayerActions.onCollect -= UpdateUI;
         PlayerActions.onRecipeComplete -= OnRecipeComplete;
+        PlayerActions.onThrow -= RemoveInventory;
+        PlayerActions.onSelect -= SelectPotion;
         PauseMenu.OnPause.RemoveListener(() => enabled = false);
         PauseMenu.OnResume.RemoveListener(() => enabled = true);
     }
@@ -60,13 +67,14 @@ public class UIManager : MonoBehaviour
         CraftUI[resourceIndex].GetComponent<Animator>().Play("UIResourceGet");
     }
 
-    private void OnRecipeComplete(IPotion potion)
+    private void OnRecipeComplete(IPotion potion, int slot)
     {
         craftedPotionImage.sprite = potion.Sprite;
         for (int i = 0; i < 2; i++)
         {
             StartCoroutine(DelayAnimation(i));
         }
+        FillInventory(slot);
     }
 
     private IEnumerator DelayAnimation(int index)
@@ -74,5 +82,23 @@ public class UIManager : MonoBehaviour
         yield return animDelay;
         CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
         craftedPotionUI.Play("UICraftedPotion");
+    }
+
+    void FillInventory(int slot)
+    {
+        potionsInventory[slot].sprite = craftedPotionImage.sprite;
+    }
+    void RemoveInventory(int slot)
+    {
+        potionsInventory[slot].sprite = null;
+    }
+    void SelectPotion(int select)
+    {
+        if (select == 2)
+            selectedPotion.transform.position = potionsInventory[2].transform.position;
+        else if(select == 1)
+            selectedPotion.transform.position = potionsInventory[1].transform.position;
+        else
+            selectedPotion.transform.position = potionsInventory[0].transform.position;
     }
 }
