@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c9897c40fe442d8bdc724fe2f17ff2, type: 3}
   m_Name: Double Jump Potion
   m_EditorClassIdentifier: 
-  _sprite: {fileID: -887654721, guid: 98203da4f12edcf45ae2775208c4373e, type: 3}
+  _sprite: {fileID: 125750271, guid: 4a21236027890114fb51461ecf1bd6be, type: 3}
   potionPrefab: {fileID: 4862584341863371731, guid: 38cd74cbbc20356478fe2f92eecfaead, type: 3}
   effectDuration: 10

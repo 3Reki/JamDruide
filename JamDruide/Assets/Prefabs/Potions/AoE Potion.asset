@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b383193dc99e450d9d3064b89a747365, type: 3}
   m_Name: AoE Potion
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
+  _sprite: {fileID: -590651360, guid: 4a21236027890114fb51461ecf1bd6be, type: 3}
   potionPrefab: {fileID: 4862584341863371731, guid: 817024316abba1b49a20db31c3ed8c61, type: 3}

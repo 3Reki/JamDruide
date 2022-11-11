@@ -30,9 +30,24 @@ namespace Player
         public Queue<Vector3> playerPositions = new Queue<Vector3>();
         public static PlayerActions Instance;
         private Camera cam;
+		private Animator animator;
+
+        private void OnEnable()
+        {
+            PauseMenu.OnPause.AddListener(() => enabled = false);
+            PauseMenu.OnResume.AddListener(() => enabled = true);
+        }
+
+        private void OnDisable()
+        {
+            PauseMenu.OnPause.RemoveListener(() => enabled = false);
+            PauseMenu.OnResume.RemoveListener(() => enabled = true);
+        }
         
         private void Start()
         {
+
+            animator = GetComponent<Animator>();
             points = new GameObject[pointsCount];
             Transform previewParent = new GameObject("Shot trajectory preview").transform;
 
@@ -143,8 +158,11 @@ namespace Player
 
         public IEnumerator Death()
         {
-            //animator.Play("PlayerDeath");
+            animator.Play("PlayerDeath");
+            playerController.enabled = false;
             yield return new WaitForSeconds(deathTimer);
+            playerController.enabled = true;
+            animator.Play("PlayerIdle");
             transform.position = lastCheckpoint.position;
         }
         private void SavePlayerPosition()
