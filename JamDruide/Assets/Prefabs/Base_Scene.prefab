@@ -216,7 +216,7 @@ Transform:
   - {fileID: 7423282635576971183}
   - {fileID: 4168141244084517266}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5190443221772731964
 PrefabInstance:
@@ -329,6 +329,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 5190443223109654353}
     m_Modifications:
+    - target: {fileID: 4097113047625971223, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4290095428935985641, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
       propertyPath: m_Type
       value: 1
@@ -497,6 +501,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: dacdb1c8347bd4543a354839e39a20fb, type: 3}
+    - target: {fileID: 8281616186960556324, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9217142947601149964, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
