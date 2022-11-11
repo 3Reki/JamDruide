@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject selectedPotion;
 
+    public static GameObject[] sliderObj = new GameObject[2];
+
+    [SerializeField] Transform sliderContainer;
+
     private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
     private WaitForSeconds animDelay = new(0.5f);
 
@@ -41,6 +45,7 @@ public class UIManager : MonoBehaviour
         };
     }
 
+
     private void OnEnable()
     {
         PlayerActions.onCollect += UpdateUI;
@@ -50,6 +55,7 @@ public class UIManager : MonoBehaviour
         PauseMenu.OnPause.AddListener(() => enabled = false);
         PauseMenu.OnResume.AddListener(() => enabled = true);
     }
+
 
     private void OnDisable()
     {
