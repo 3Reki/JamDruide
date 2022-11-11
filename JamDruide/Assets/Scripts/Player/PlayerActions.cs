@@ -77,11 +77,17 @@ namespace Player
 
         private void Update()
         {
+            //detect if the player has at least one potion
             if (potions[0] == null && potions[1] == null && potions[2] == null)
                 hasOnePotion = false;
             else
                 hasOnePotion = true;
-            
+
+            //detect if we can add a potion
+            if (potions[0] != null && potions[1] != null && potions[2] != null)
+                canAdd = false;
+            else
+                canAdd = true;
 
             projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
@@ -95,14 +101,16 @@ namespace Player
                 Collect();
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && hasOnePotion && !potions[selectedPotion].IsActive)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && hasOnePotion && potions[selectedPotion] != null && !potions[selectedPotion].IsActive)
             {
                 potions[selectedPotion].Drink(playerController, this);
                 potions[selectedPotion] = null;
                 CheckRecipe();
+                if (onThrow != null)
+                    onThrow.Invoke(selectedPotion);
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && hasOnePotion && !potions[selectedPotion].IsActive)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && hasOnePotion && potions[selectedPotion] != null && !potions[selectedPotion].IsActive)
             {
                 GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
                 potions[selectedPotion] = null;
@@ -155,6 +163,9 @@ namespace Player
 
         private void Collect()
         {
+            if (!canAdd)
+                return;
+
             if (canCollect)
             {
                 if (currentResources.Contains(resourceToCollect.resourceType)) return;
@@ -177,11 +188,6 @@ namespace Player
 
         private void CheckRecipe()
         {
-            if (potions[0] != null && potions[1] != null && potions[2] != null)
-                canAdd = false;
-            else
-                canAdd = true;
-
             if (!canAdd)
                 return;
 
@@ -221,6 +227,12 @@ namespace Player
             playerController.enabled = true;
             animator.Play("PlayerIdle");
             transform.position = lastCheckpoint.position;
+            for(int i = 0; i < potions.Length; i++)
+            {
+                potions[i] = null;
+                if (onThrow != null)
+                    onThrow.Invoke(i);
+            }
         }
         private void SavePlayerPosition()
         {
