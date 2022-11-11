@@ -18,7 +18,7 @@ public class LaserEnemy : MonoBehaviour
     private bool laserActive;
     [SerializeField] private PlayerActions player;
     [SerializeField] private Animator graphAnimator;
-
+    [SerializeField] LayerMask layer;
     public GameObject door;
 
     private void Start()
@@ -50,7 +50,7 @@ public class LaserEnemy : MonoBehaviour
     private void LaserCreation()
     {
         laserDirection = player.transform.position - transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection, layer);
         inactiveLineRenderer.SetPosition(1, hit.point);
         if (laserActive)
         {
@@ -102,16 +102,11 @@ public class LaserEnemy : MonoBehaviour
             graphAnimator.Play("EnemyAttack");
             startTime = Time.time;
             player = col.GetComponent<PlayerActions>();
-            Destroy(transform.GetChild(3).gameObject);
         }
 
-        if (col.CompareTag("Damage"))
-        {
-            Death();
-        }
     }
 
-    void Death()
+    public void Death()
     {
         door.GetComponent<Animator>().Play("DoorOpen");
 
