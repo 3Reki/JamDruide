@@ -42,12 +42,16 @@ public class UIManager : MonoBehaviour
     {
         PlayerActions.onCollect += UpdateUI;
         PlayerActions.onRecipeComplete += OnRecipeComplete;
+        PauseMenu.OnPause.AddListener(() => enabled = false);
+        PauseMenu.OnResume.AddListener(() => enabled = true);
     }
 
     private void OnDisable()
     {
         PlayerActions.onCollect -= UpdateUI;
         PlayerActions.onRecipeComplete -= OnRecipeComplete;
+        PauseMenu.OnPause.RemoveListener(() => enabled = false);
+        PauseMenu.OnResume.RemoveListener(() => enabled = true);
     }
 
     private void UpdateUI(int resourceIndex, CraftsList.Resources resourceType)

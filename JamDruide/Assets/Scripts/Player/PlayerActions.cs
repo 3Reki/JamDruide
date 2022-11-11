@@ -30,6 +30,18 @@ namespace Player
 
         public Queue<Vector3> playerPositions = new Queue<Vector3>();
         public static PlayerActions Instance;
+
+        private void OnEnable()
+        {
+            PauseMenu.OnPause.AddListener(() => enabled = false);
+            PauseMenu.OnResume.AddListener(() => enabled = true);
+        }
+
+        private void OnDisable()
+        {
+            PauseMenu.OnPause.RemoveListener(() => enabled = false);
+            PauseMenu.OnResume.RemoveListener(() => enabled = true);
+        }
         private void Start()
         {
             points = new GameObject[pointsCount];

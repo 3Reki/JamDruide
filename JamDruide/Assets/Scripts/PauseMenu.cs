@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -31,22 +32,28 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
         Time.timeScale = 0f;
         OnPause.Invoke();
         pauseHUD.SetActive(true);
         gameHUD.SetActive(false);
     }
 
-    void Resume()
+    public void Resume()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         Time.timeScale = 1f;
         OnResume.Invoke();
         pauseHUD.SetActive(false);
         gameHUD.SetActive(true);
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
     public static UnityEvent OnPause = new UnityEvent();
