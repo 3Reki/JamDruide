@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1653833671}
   - component: {fileID: 6781471605938628631}
   - component: {fileID: 5492518983144581915}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 2903344727830008782}
   - {fileID: 4363168047577180003}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5987869338428308260
 SpriteRenderer:
@@ -142,22 +142,11 @@ MonoBehaviour:
   currentResources: 0000000000000000
   craftsList: {fileID: 2903344727830008777}
   playerController: {fileID: 2453536640117689241}
-  resourceImages:
-  - {fileID: -1383507764, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
-  - {fileID: -96528867, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
-  - {fileID: -817474538, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
-  - {fileID: -1588436701, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
-  - {fileID: 0}
-  CraftUI:
-  - {fileID: 0}
-  - {fileID: 0}
-  projectile: {fileID: 4862584341863371731, guid: 2b12dc8a6b25f9a4ab3726e6c9b83d0a, type: 3}
   launchForce: 20
   pointPrefab: {fileID: 3207998565831689386, guid: d7e598630dd605f4a8bbec124be6cc96, type: 3}
   pointsCount: 20
-  craftedPotionUI: {fileID: 0}
-  lastCheckpoint: {fileID: 0}
   deathTimer: 1
+  lastCheckpoint: {fileID: 0}
 --- !u!50 &3959692907899943907
 Rigidbody2D:
   serializedVersion: 4
@@ -346,7 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4363168047577180003}
   - component: {fileID: 3032556809629560761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InteractCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,6 +428,10 @@ PrefabInstance:
     - target: {fileID: 3900741816797692169, guid: 7be527c173a458640a9a5263307531da, type: 3}
       propertyPath: m_Name
       value: RecipesManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900741816797692169, guid: 7be527c173a458640a9a5263307531da, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

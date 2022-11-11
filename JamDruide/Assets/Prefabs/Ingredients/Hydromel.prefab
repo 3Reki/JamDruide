@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2892712102751369178}
   - component: {fileID: 2892712102751369189}
   - component: {fileID: 2892712102751369188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hydromel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

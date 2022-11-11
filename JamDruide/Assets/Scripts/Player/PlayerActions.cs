@@ -12,7 +12,6 @@ namespace Player
         
         [SerializeField] private CraftsList craftsList;
         [SerializeField] private PlayerController playerController;
-        [SerializeField] private GameObject projectile;
         [SerializeField] private float launchForce;
         [SerializeField] private GameObject pointPrefab;
         [SerializeField] private int pointsCount;

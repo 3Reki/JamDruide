@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+namespace LDElements
 {
-
-    public GameObject door;
-    bool isOpen;
-    private void OnCollisionEnter2D(Collision2D collision)
+    public class Button : MonoBehaviour
     {
-        if (collision.gameObject.CompareTag("Damage"))
+
+        public GameObject door;
+        bool isOpen;
+
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            if(!isOpen)
-                OpenDoor();
+            if (col.CompareTag("Damage"))
+            {
+                if(!isOpen)
+                    OpenDoor();
+            }
         }
+
+        void OpenDoor()
+        {
+            isOpen = true;
+            door.GetComponent<Animator>().Play("DoorOpen");
+        }
+
     }
-
-
-    void OpenDoor()
-    {
-        isOpen = true;
-        door.GetComponent<Animator>().Play("DoorOpen");
-    }
-
 }

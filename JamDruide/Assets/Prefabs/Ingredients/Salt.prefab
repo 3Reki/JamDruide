@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2239774868686700135}
   - component: {fileID: 2239774868686700134}
   - component: {fileID: 2239774868686700133}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Salt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

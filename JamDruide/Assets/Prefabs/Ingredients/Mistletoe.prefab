@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 331742291074851656}
   - component: {fileID: 331742291074851663}
   - component: {fileID: 331742291074851658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mistletoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
