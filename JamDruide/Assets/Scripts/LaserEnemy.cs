@@ -23,13 +23,13 @@ public class LaserEnemy : MonoBehaviour
         DeactivateLaser();
         activeLineRenderer.SetPosition(0, transform.position);
         inactiveLineRenderer.SetPosition(0, transform.position);
-        startTime = Time.time;
     }
 
     private void DeactivateLaser()
     {
         activeLineRenderer.enabled = false;
         inactiveLineRenderer.enabled = false;
+        laserEnd.Stop();
     }
 
     public void Update()
@@ -37,8 +37,8 @@ public class LaserEnemy : MonoBehaviour
         if (player != null)
         {
             inactiveLineRenderer.enabled = true;
-            LaserCreation();
             LaserState();
+            LaserCreation();
         }
         
     }
@@ -56,6 +56,8 @@ public class LaserEnemy : MonoBehaviour
             if (hit.transform.CompareTag("Player"))
             {
                 StartCoroutine(player.Death());
+                Invoke("DeactivateLaser", 1);
+                laserActive = false;
                 player = null;
             }
         }
@@ -77,7 +79,7 @@ public class LaserEnemy : MonoBehaviour
             laserActive = false;
             startTime = Time.time;
             activeLineRenderer.enabled = false;
-            laserEnd.Stop();
+            DeactivateLaser();
         }
     }
 
@@ -90,6 +92,7 @@ public class LaserEnemy : MonoBehaviour
     {
         if (player == null && col.CompareTag("Player"))
         {
+            startTime = Time.time;
             player = col.GetComponent<PlayerActions>();
         }
     }
