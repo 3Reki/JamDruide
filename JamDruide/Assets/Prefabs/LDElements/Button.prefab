@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 0}
+  brokenSprite: {fileID: 21300000, guid: 21b48ce596c7c82408c16ad88c5d39f7, type: 3}
 --- !u!61 &7460895819820265554
 BoxCollider2D:
   m_ObjectHideFlags: 0
