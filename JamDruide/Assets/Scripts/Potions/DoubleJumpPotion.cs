@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Potions
 {
-    //[CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
+    [CreateAssetMenu(fileName = "Double Jump Potion", menuName = "Scriptable Objects/Double Jump Potion", order = 0)]
     public class DoubleJumpPotion : ScriptableObject, IPotion
     {
         public Image image;

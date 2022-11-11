@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace Potions
 {
+    [CreateAssetMenu(fileName = "Dash Potion", menuName = "Scriptable Objects/Dash Potion", order = 0)]
     public class DashPotion : ScriptableObject, IPotion
     {
         public Image image;

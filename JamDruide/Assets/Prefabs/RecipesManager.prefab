@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3900741816797692169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3900741816797692168}
+  - component: {fileID: 3900741816797692175}
+  m_Layer: 0
+  m_Name: RecipesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3900741816797692168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3900741816797692169}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3900741816797692175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3900741816797692169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044375333b96d7545896531ddec3ee08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipes:
+  - ingredients: 0300000002000000
+    output: {fileID: 11400000, guid: 7d6e63b2f7e74514da4bea8efec4ab1e, type: 2}
+  - ingredients: 0300000004000000
+    output: {fileID: 11400000, guid: 8b8732c8d4379c24d9d17c95e785efe8, type: 2}
+  - ingredients: 0200000004000000
+    output: {fileID: 5198879303886453717, guid: f1f86f40f9720174ea1dfddbbce27453, type: 3}
+  - ingredients: 0200000001000000
+    output: {fileID: 5198879303886453717, guid: 9b5acc2c88faed7429dedd673d51878f, type: 3}
+  - ingredients: 0100000003000000
+    output: {fileID: 5198879303886453717, guid: 2920fbc46fc9ec14189029a2c0e1ddbf, type: 3}
+  - ingredients: 0100000004000000
+    output: {fileID: 5198879303886453717, guid: 807f0f4e801dfd14c806a065991b312c, type: 3}

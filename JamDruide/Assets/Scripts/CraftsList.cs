@@ -15,7 +15,7 @@ public class CraftsList : MonoBehaviour
     public class Recipe
     {
         public Resources[] ingredients = new Resources[2];
-        public GameObject output;
+        public ScriptableObject output;
         
     }
 }
