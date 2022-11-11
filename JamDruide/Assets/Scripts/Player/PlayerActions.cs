@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using Potions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Player
@@ -271,7 +272,7 @@ namespace Player
             animator.Play("PlayerDeath");
             playerController.enabled = false;
             yield return new WaitForSeconds(deathTimer);
-            playerController.enabled = true;
+            /*playerController.enabled = true;
             animator.Play("PlayerIdle");
             transform.position = lastCheckpoint.position;
             for(int i = 0; i < potions.Length; i++)
@@ -283,10 +284,10 @@ namespace Player
             for (int i = 0; i < 2; i++)
             {
                 currentResources[i] = CraftsList.Resources.None;
-            }
+            }*/
 
             onDeath();
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         private void SavePlayerPosition()
         {
