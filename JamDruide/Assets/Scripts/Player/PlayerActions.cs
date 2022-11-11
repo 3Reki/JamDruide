@@ -3,6 +3,8 @@ using System.Collections;
 using System.Linq;
 using Potions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -37,6 +39,15 @@ namespace Player
         bool canAdd;
         bool hasOnePotion;
 
+        //Slider des potions
+        [SerializeField] Slider jumpSlider;
+        bool doubleJump;
+        float jumpSliderValue;
+        
+        [SerializeField] Slider speedSlider;
+        bool speedBoost;
+        float speedSliderValue;
+
         private void OnEnable()
         {
             PauseMenu.OnPause.AddListener(() => enabled = false);
@@ -51,6 +62,8 @@ namespace Player
         
         private void Start()
         {
+            jumpSlider.gameObject.SetActive(false);
+            speedSlider.gameObject.SetActive(false);
 
             animator = GetComponent<Animator>();
             points = new GameObject[pointsCount];
@@ -75,8 +88,43 @@ namespace Player
             }
         }
 
+        IEnumerator JumpSlider()
+        {
+            jumpSlider.gameObject.SetActive(true);
+            jumpSlider.maxValue = 4;
+            jumpSlider.value = jumpSlider.maxValue;
+            jumpSliderValue = 4;
+            doubleJump = true;
+            yield return new WaitForSeconds(4);
+            doubleJump = false;
+            jumpSlider.gameObject.SetActive(false);
+        }
+
+        IEnumerator SpeedSlider()
+        {
+            speedSlider.gameObject.SetActive(true);
+            speedSlider.maxValue = 4f;
+            speedSlider.value = jumpSlider.maxValue;
+            speedSliderValue = 4f;
+            speedBoost = true;
+            yield return new WaitForSeconds(4);
+            speedBoost = false;
+            speedSlider.gameObject.SetActive(false);
+        }
+
         private void Update()
         {
+            jumpSliderValue -= 1 * Time.deltaTime;
+            jumpSlider.value = jumpSliderValue;
+
+            speedSliderValue -= 1 * Time.deltaTime;
+            speedSlider.value = speedSliderValue;
+
+            if (GetComponent<PlayerController>().CanDoubleJump && !doubleJump)
+                StartCoroutine(JumpSlider());
+            if (GetComponent<PlayerController>().moveClamp > 13f && !speedBoost)
+                StartCoroutine(SpeedSlider());
+
             //detect if the player has at least one potion
             if (potions[0] == null && potions[1] == null && potions[2] == null)
                 hasOnePotion = false;
@@ -224,7 +272,7 @@ namespace Player
             animator.Play("PlayerDeath");
             playerController.enabled = false;
             yield return new WaitForSeconds(deathTimer);
-            playerController.enabled = true;
+            /*playerController.enabled = true;
             animator.Play("PlayerIdle");
             transform.position = lastCheckpoint.position;
             for(int i = 0; i < potions.Length; i++)
@@ -236,10 +284,10 @@ namespace Player
             for (int i = 0; i < 2; i++)
             {
                 currentResources[i] = CraftsList.Resources.None;
-            }
+            }*/
 
             onDeath();
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         private void SavePlayerPosition()
         {
