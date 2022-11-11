@@ -15,6 +15,7 @@ namespace Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private List<Sprite> resourceImages;
         [SerializeField] private List<Image> CraftUI;
+        [SerializeField] private Animator craftedPotionUI;
         public Transform lastCheckpoint;
         [SerializeField] private float deathTimer;
         private bool invincible;
@@ -133,6 +134,7 @@ namespace Player
         {
             yield return new WaitForSeconds(0.5f);
             CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
+            craftedPotionUI.Play("UICraftedPotion");
         }
     }
     
