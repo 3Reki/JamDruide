@@ -1,19 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
 using Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Potions
 {
-    [CreateAssetMenu(fileName = "Double Jump Potion", menuName = "Scriptable Objects/Double Jump Potion", order = 0)]
-    public class DoubleJumpPotion : ScriptableObject, IPotion
+    [CreateAssetMenu(fileName = "Speed Potion", menuName = "Scriptable Objects/Speed Potion", order = 0)]
+    public class SpeedPotion : ScriptableObject, IPotion
     {
         public bool IsActive { get; private set; }
         
         public Sprite sprite;
-        
+
+        [Range(0, 20)] [Tooltip("Effect duration in seconds")]
         [SerializeField] private float effectDuration;
+        [Range(1, 4)] [Tooltip("The multiplier applied to the player speed")]
+        [SerializeField] private float multiplier;
+
         
+
         public void Drink(PlayerController player)
         {
             player.StartCoroutine(EffectCoroutine(player));
@@ -23,16 +27,17 @@ namespace Potions
         {
             throw new System.NotImplementedException();
         }
-        
+
         private IEnumerator EffectCoroutine(PlayerController player)
         {
-            player.CanDoubleJump = true;
             IsActive = true;
+            float defaultMaxSpeed = player.moveClamp;
+            player.moveClamp *= multiplier;
             
             yield return new WaitForSeconds(effectDuration);
-            
-            player.CanDoubleJump = false;
+
             IsActive = false;
+            player.moveClamp = defaultMaxSpeed;
         }
     }
 }

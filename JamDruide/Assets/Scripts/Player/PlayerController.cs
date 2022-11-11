@@ -14,7 +14,6 @@ namespace Player
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
-        public bool CanDash;
         public bool CanDoubleJump;
         
         // Public for external hooks
@@ -46,7 +45,7 @@ namespace Player
         {
             if (!active) return;
             // Calculate velocity
-            var position = transform.position;
+            Vector3 position = transform.position;
             Velocity = (position - lastPosition) / Time.deltaTime;
             lastPosition = position;
 
@@ -55,14 +54,11 @@ namespace Player
             {
                 sprite.flipX = false;
             }
-            else if (Input.x == 0)
-            {
-                
-            }
-            else
+            else if (Input.x < 0)
             {
                 sprite.flipX = true;
             }
+
             RunCollisionChecks();
 
             CalculateWalk(); // Horizontal movement
@@ -191,7 +187,7 @@ namespace Player
         #region Walk
 
         [Header("WALKING")] [SerializeField] private float _acceleration = 90;
-        [SerializeField] private float _moveClamp = 13;
+        public float moveClamp = 13;
         [SerializeField] private float _deAcceleration = 60f;
         [SerializeField] private float _apexBonus = 2;
 
@@ -203,7 +199,7 @@ namespace Player
                 currentHorizontalSpeed += Input.x * _acceleration * Time.deltaTime;
 
                 // clamped by max frame movement
-                currentHorizontalSpeed = Mathf.Clamp(currentHorizontalSpeed, -_moveClamp, _moveClamp);
+                currentHorizontalSpeed = Mathf.Clamp(currentHorizontalSpeed, -moveClamp, moveClamp);
 
                 // Apply bonus at the apex of a jump
                 var apexBonus = Mathf.Sign(Input.x) * _apexBonus * apexPoint;
