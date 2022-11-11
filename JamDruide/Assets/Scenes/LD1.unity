@@ -9725,6 +9725,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2428208065571008709, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
+      propertyPath: lastCheckpoint
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5190443222812861754, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: orthographic
       value: 1
