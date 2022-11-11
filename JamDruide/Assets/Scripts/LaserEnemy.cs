@@ -17,6 +17,7 @@ public class LaserEnemy : MonoBehaviour
     private float startTime;
     private bool laserActive;
     [SerializeField] private PlayerActions player;
+    [SerializeField] private Animator graphAnimator;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class LaserEnemy : MonoBehaviour
         activeLineRenderer.enabled = false;
         inactiveLineRenderer.enabled = false;
         laserEnd.Stop();
+        laserStart.Stop();
     }
 
     public void Update()
@@ -53,6 +55,7 @@ public class LaserEnemy : MonoBehaviour
             activeLineRenderer.SetPosition(1, hit.point);
             laserEnd.transform.position = hit.point;
             laserEnd.transform.LookAt(transform.position);
+            laserStart.transform.LookAt(hit.point);
             if (hit.transform.CompareTag("Player"))
             {
                 StartCoroutine(player.Death());
@@ -70,12 +73,14 @@ public class LaserEnemy : MonoBehaviour
         {
             laserActive = true;
             activeLineRenderer.enabled = true;
+            laserStart.Play();
             laserEnd.Play();
             startTime = Time.time;
         }
 
         if (laserActive && Time.time >= startTime + laserDuration)
         {
+            graphAnimator.Play("EnemyAttack");
             laserActive = false;
             startTime = Time.time;
             activeLineRenderer.enabled = false;
@@ -92,6 +97,7 @@ public class LaserEnemy : MonoBehaviour
     {
         if (player == null && col.CompareTag("Player"))
         {
+            graphAnimator.Play("EnemyAttack");
             startTime = Time.time;
             player = col.GetComponent<PlayerActions>();
         }
