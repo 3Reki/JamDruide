@@ -24,13 +24,18 @@ namespace Player
         private bool canCollect;
         private int resourceIndex = 0;
         private ResourceScript resourceToCollect;
-        private List<IPotion> potions = new();
+        private IPotion[] potions = new IPotion[3];
         private Vector2 projectileDirection;
 
         public Queue<Vector3> playerPositions = new Queue<Vector3>();
         public static PlayerActions Instance;
         private Camera cam;
 		private Animator animator;
+
+        int selectedPotion;
+
+        bool canAdd;
+        bool hasOnePotion;
 
         private void OnEnable()
         {
@@ -72,6 +77,12 @@ namespace Player
 
         private void Update()
         {
+            if (potions[0] == null && potions[1] == null && potions[2] == null)
+                hasOnePotion = false;
+            else
+                hasOnePotion = true;
+            
+
             projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
             for (int i = 0; i < pointsCount; i++)
@@ -84,17 +95,21 @@ namespace Player
                 Collect();
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && potions.Count != 0 && !potions[0].IsActive)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && hasOnePotion && !potions[selectedPotion].IsActive)
             {
-                potions[0].Drink(playerController, this);
-                potions.RemoveAt(0);
+                potions[selectedPotion].Drink(playerController, this);
+                potions[selectedPotion] = null;
+                CheckRecipe();
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && potions.Count != 0 && !potions[0].IsActive)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && hasOnePotion && !potions[selectedPotion].IsActive)
             {
-                GameObject projectileGO = Instantiate(potions[0].Throw(), transform.position, Quaternion.identity);
-                potions.RemoveAt(0);
+                GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
+                potions[selectedPotion] = null;
                 projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * launchForce;
+                CheckRecipe();
+                if(onThrow != null)
+                    onThrow.Invoke(selectedPotion);
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -103,8 +118,33 @@ namespace Player
             }
 
             SavePlayerPosition();
+
+            Scroll();
         }
         
+        void Scroll()
+        {
+            if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                selectedPotion--;
+                if (selectedPotion == -1)
+                    selectedPotion = 2;
+            }
+            if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                selectedPotion++;
+                if (selectedPotion == 3)
+                    selectedPotion = 0;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q)) selectedPotion = 2;
+            if (Input.GetKeyDown(KeyCode.W)) selectedPotion = 1;
+            if (Input.GetKeyDown(KeyCode.E)) selectedPotion = 0;
+
+            onSelect.Invoke(selectedPotion);
+
+        }
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.GetComponent<ResourceScript>())
@@ -137,17 +177,34 @@ namespace Player
 
         private void CheckRecipe()
         {
+            if (potions[0] != null && potions[1] != null && potions[2] != null)
+                canAdd = false;
+            else
+                canAdd = true;
+
+            if (!canAdd)
+                return;
+
             foreach (var recipe in craftsList.recipes)
             {
                 if (!recipe.ingredients.Contains(currentResources[0])) continue;
                 
                 if (!recipe.ingredients.Contains(currentResources[1])) continue;
-                    
-                potions.Add((IPotion) recipe.output);
-                if (onRecipeComplete != null)
+
+                for (int i = 0; i < potions.Length; i++)
                 {
-                    onRecipeComplete.Invoke((IPotion)recipe.output);
+                    if (potions[i] == null)
+                    {
+                        potions[i] = ((IPotion)recipe.output);
+
+                        if (onRecipeComplete != null)
+                        {
+                            onRecipeComplete.Invoke((IPotion)recipe.output, i);
+                        }
+                        break;
+                    }
                 }
+                //potions.Add((IPotion) recipe.output);
                 
                 for (int i = 0; i < 2; i++)
                 {
@@ -178,10 +235,14 @@ namespace Player
         }
 
         public delegate void PlayerCallback(int resourceIndex, CraftsList.Resources resourceType);
-        public delegate void PlayerCallback2(IPotion potion);
+        public delegate void PlayerCallback2(IPotion potion, int slot);
+        public delegate void PlayerCallback3(int slot);
+        public delegate void PlayerCallback4(int slot);
 
         public static PlayerCallback onCollect;
         public static PlayerCallback2 onRecipeComplete;
+        public static PlayerCallback3 onThrow;
+        public static PlayerCallback4 onSelect;
     }
     
 }
