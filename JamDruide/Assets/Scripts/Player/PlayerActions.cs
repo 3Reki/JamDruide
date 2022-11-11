@@ -96,7 +96,7 @@ namespace Player
                 points[i].transform.position = PointPosition(i * 0.1f);
             }
             
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 Collect();
             }
