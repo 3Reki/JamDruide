@@ -30,17 +30,20 @@ namespace Player
 
         public Queue<Vector3> playerPositions = new Queue<Vector3>();
         public static PlayerActions Instance;
+        private Camera cam;
+        
         private void Start()
         {
             points = new GameObject[pointsCount];
+            Transform previewParent = new GameObject("Shot trajectory preview").transform;
 
             for (int i = 0; i < pointsCount; i++)
             {
-                points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity);
+                points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity, previewParent);
             }
             
             Instance = this;
-            
+            cam = Camera.main;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -55,7 +58,7 @@ namespace Player
 
         private void Update()
         {
-            projectileDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
             for (int i = 0; i < pointsCount; i++)
             {
@@ -73,11 +76,11 @@ namespace Player
                 potions.RemoveAt(0);
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0)) // && potions.Count != 0 && !potions[0].IsActive)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && potions.Count != 0 && !potions[0].IsActive)
             {
-                GameObject projectileGO = Instantiate(projectile, transform.position, Quaternion.identity);
-                projectileGO.GetComponent<Rigidbody2D>().velocity =
-                    projectileDirection * launchForce;
+                GameObject projectileGO = Instantiate(potions[0].Throw(), transform.position, Quaternion.identity);
+                potions.RemoveAt(0);
+                projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * launchForce;
             }
             SavePlayerPosition();
         }
@@ -120,7 +123,8 @@ namespace Player
                 
                 if (!recipe.ingredients.Contains(currentResources[1])) continue;
                     
-                //potions.Add((IPotion) recipe.output);
+                potions.Add((IPotion) recipe.output);
+                
                 for (int i = 0; i < 2; i++)
                 {
                     currentResources[i] = CraftsList.Resources.None;

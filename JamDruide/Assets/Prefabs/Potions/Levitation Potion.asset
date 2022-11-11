@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Levitation Potion
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  potionPrefab: {fileID: 4862584341863371731, guid: b9dfdf49d9d98fc43a388924af877a5c, type: 3}

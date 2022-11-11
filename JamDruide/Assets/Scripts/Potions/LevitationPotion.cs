@@ -4,23 +4,11 @@ using UnityEngine;
 namespace Potions
 {
     [CreateAssetMenu(fileName = "Levitation Potion", menuName = "Scriptable Objects/Levitation Potion", order = 0)]
-    public class LevitationPotion : ScriptableObject, IPotion
+    public class LevitationPotion : AbstractPotion
     {
-        public bool IsActive => false;
-        
-        public Sprite Sprite => _sprite;
-
-        [SerializeField] private Sprite _sprite;
-
-        public void Drink(PlayerController player)
+        public override void Drink(PlayerController player)
         {
             throw new System.NotImplementedException();
         }
-
-        public void Throw()
-        {
-            throw new System.NotImplementedException();
-        }
-        
     }
 }

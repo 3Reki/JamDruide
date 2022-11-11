@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Size Potion
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  potionPrefab: {fileID: 4862584341863371731, guid: 2dc5f10a47974794ab0afc7f4b5ef289, type: 3}

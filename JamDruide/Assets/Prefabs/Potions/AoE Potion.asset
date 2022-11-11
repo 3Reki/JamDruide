@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: AoE Potion
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  potionPrefab: {fileID: 4862584341863371731, guid: 817024316abba1b49a20db31c3ed8c61, type: 3}

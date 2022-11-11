@@ -9,6 +9,6 @@ namespace Potions
         public Sprite Sprite { get; }
 
         public void Drink(PlayerController player);
-        public void Throw();
+        public GameObject Throw();
     }
 }

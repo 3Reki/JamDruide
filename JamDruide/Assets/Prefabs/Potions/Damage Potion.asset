@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Damage Potion
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  potionPrefab: {fileID: 4862584341863371731, guid: d5469529893bbe349829baa92e0c4a76, type: 3}
