@@ -118,10 +118,12 @@ namespace Player
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private int _detectorCount = 3;
         [SerializeField] private float _detectionRayLength = 0.1f;
-        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f; // Prevents side detectors hitting the ground
+        [SerializeField] [Range(0.05f, 0.3f)] private float _rayBuffer = 0.1f; // Prevents side detectors hitting the ground
 
         private RayRange raysUp, raysRight, raysDown, raysLeft;
+        private Vector2 upLeftStart, upRightStart;
         private bool colUp, colRight, colDown, colLeft;
+        private bool slip;
 
         private float timeLeftGrounded;
 
@@ -133,6 +135,7 @@ namespace Player
 
             // Ground
             LandingThisFrame = false;
+            slip = false;
             var groundedCheck = RunDetection(raysDown);
             animator.SetBool("Grounded", groundedCheck);
             if (groundedCheck)
@@ -159,6 +162,18 @@ namespace Player
                 return EvaluateRayPositions(range)
                     .Any(point => Physics2D.Raycast(point, range.dir, _detectionRayLength, _groundLayer));
             }
+
+            var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
+            if (Physics2D.Raycast(upLeftStart, Vector2.up, _detectionRayLength * 0.8f + _characterBounds.extents.y, _groundLayer))
+            {
+                colUp = true;
+                slip = true;
+            } 
+            else if (Physics2D.Raycast(upRightStart, Vector2.up, _detectionRayLength * 0.8f + _characterBounds.extents.y, _groundLayer))
+            {
+                colUp = true;
+                slip = true;
+            }
         }
 
         private void CalculateRayRanged()
@@ -170,6 +185,10 @@ namespace Player
             raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
             raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
             raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
+            
+            float height = (transform.position + _characterBounds.center).y;
+            upLeftStart = new Vector2(b.min.x, height);
+            upRightStart = new Vector2(b.max.x, height);
         }
 
 
@@ -189,8 +208,8 @@ namespace Player
             Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
 
             // Rays
-            if (!Application.isPlaying)
-            {
+            // if (!Application.isPlaying)
+            // {
                 CalculateRayRanged();
                 Gizmos.color = Color.blue;
                 foreach (var range in new List<RayRange> {raysUp, raysRight, raysDown, raysLeft})
@@ -200,7 +219,10 @@ namespace Player
                         Gizmos.DrawRay(point, range.dir * _detectionRayLength);
                     }
                 }
-            }
+                var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
+                Gizmos.DrawRay(upLeftStart, Vector3.up * (_detectionRayLength + _characterBounds.extents.y));
+                Gizmos.DrawRay(upRightStart, Vector3.up * (_detectionRayLength + _characterBounds.extents.y));
+            // }
 
             if (!Application.isPlaying) return;
 
@@ -337,7 +359,15 @@ namespace Player
 
             if (colUp)
             {
-                if (currentVerticalSpeed > 0) currentVerticalSpeed = 0;
+                if (currentVerticalSpeed > 0)
+                {
+                    endedJumpEarly = true;
+                    currentVerticalSpeed = 0;
+                }
+                if (slip)
+                {
+                    currentVerticalSpeed = -8; // TODO
+                }
             }
         }
 
