@@ -139,11 +139,6 @@ namespace Player
 
             projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
-            for (int i = 0; i < pointsCount; i++)
-            {
-                points[i].transform.position = PointPosition(i * 0.1f);
-            }
-            
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Collect();
@@ -158,7 +153,15 @@ namespace Player
                     onThrow.Invoke(selectedPotion);
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && hasOnePotion && potions[selectedPotion] != null && !potions[selectedPotion].IsActive)
+            if (Input.GetKey(KeyCode.Mouse0) && hasOnePotion)
+            {
+                for (int i = 0; i < pointsCount; i++)
+                {
+                    points[i].transform.position = PointPosition(i * 0.1f);
+                }
+            }
+            
+            if (Input.GetKeyUp(KeyCode.Mouse0) && hasOnePotion && potions[selectedPotion] != null && !potions[selectedPotion].IsActive)
             {
                 GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
                 potions[selectedPotion] = null;
