@@ -20,4 +20,12 @@ public class ShadowBehaviour : MonoBehaviour
             transform.position = playerActions.playerPositions.Dequeue();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            StartCoroutine(PlayerActions.Instance.Death());
+        }
+    }
 }
