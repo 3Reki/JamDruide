@@ -121,13 +121,15 @@ namespace Player
                 if (!recipe.ingredients.Contains(currentResources[1])) continue;
                     
                 //potions.Add((IPotion) recipe.output);
+                
+                if (onRecipeComplete != null)
+                {
+                    onRecipeComplete.Invoke((IPotion)recipe.output);
+                }
+                
                 for (int i = 0; i < 2; i++)
                 {
                     currentResources[i] = CraftsList.Resources.None;
-                    if (onRecipeComplete != null)
-                    {
-                        StartCoroutine(onRecipeComplete(i));
-                    }
                 }
             }
         }
@@ -151,7 +153,7 @@ namespace Player
         }
 
         public delegate void PlayerCallback(int resourceIndex, CraftsList.Resources resourceType);
-        public delegate IEnumerator PlayerCallback2(int index);
+        public delegate void PlayerCallback2(IPotion potion);
 
         public static PlayerCallback onCollect;
         public static PlayerCallback2 onRecipeComplete;

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15beed63d67d90048a9aa052e8ed61a0, type: 3}
   m_Name: Dash Potion
   m_EditorClassIdentifier: 
-  sprite: {fileID: 172389248, guid: 98203da4f12edcf45ae2775208c4373e, type: 3}
+  _sprite: {fileID: 172389248, guid: 98203da4f12edcf45ae2775208c4373e, type: 3}
   effectDuration: 10
   multiplier: 2

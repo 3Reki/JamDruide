@@ -616,7 +616,7 @@ RectTransform:
   - {fileID: 4290095429266665113}
   - {fileID: 6488908636683428555}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -707,6 +707,7 @@ MonoBehaviour:
   - {fileID: 4290095428935985641}
   - {fileID: 4290095429017610521}
   craftedPotionUI: {fileID: 1755117663811142147}
+  craftedPotionImage: {fileID: 3105329304765133428}
 --- !u!1 &4290095429734550407
 GameObject:
   m_ObjectHideFlags: 0
