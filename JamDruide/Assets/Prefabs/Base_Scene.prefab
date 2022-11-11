@@ -353,7 +353,19 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2389814307735459763}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 4290095429734441067, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+=======
+    - target: {fileID: 1755117663811142147, guid: a052314881542d14d9f7e021c8032ac7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 78f1dc17259e9144697947b31d1407c3, type: 2}
+    - target: {fileID: 3105329304765133428, guid: a052314881542d14d9f7e021c8032ac7, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290095429734441067, guid: a052314881542d14d9f7e021c8032ac7, type: 3}
+>>>>>>> sacha_branch
       propertyPath: m_Name
       value: MainCanvas 1
       objectReference: {fileID: 0}
@@ -443,8 +455,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
+<<<<<<< HEAD
   m_SourcePrefab: {fileID: 100100000, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
 --- !u!224 &1753106572912155147 stripped
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: a052314881542d14d9f7e021c8032ac7, type: 3}
+--- !u!95 &213998310703523456 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1755117663811142147, guid: a052314881542d14d9f7e021c8032ac7, type: 3}
+  m_PrefabInstance: {fileID: 1919422272771089539}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2389814305855326996 stripped
+>>>>>>> sacha_branch
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4290095429734444951, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
   m_PrefabInstance: {fileID: 2584276960067581340}
@@ -477,6 +499,10 @@ PrefabInstance:
       propertyPath: craftsList
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: craftedPotionUI
+      value: 
+      objectReference: {fileID: 213998310703523456}
     - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
       propertyPath: CraftUI.Array.size
       value: 2

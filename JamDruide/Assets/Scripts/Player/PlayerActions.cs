@@ -21,6 +21,7 @@ namespace Player
         [SerializeField] private int pointsCount;
 
         private GameObject[] points;
+        [SerializeField] private Animator craftedPotionUI;
         public Transform lastCheckpoint;
         [SerializeField] private float deathTimer;
         private bool invincible;
@@ -161,6 +162,7 @@ namespace Player
         {
             yield return new WaitForSeconds(0.5f);
             CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
+            craftedPotionUI.Play("UICraftedPotion");
         }
         
         private Vector2 PointPosition(float t)
