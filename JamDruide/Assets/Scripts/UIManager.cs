@@ -95,7 +95,8 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-             CraftUI[i].GetComponent<Animator>().Play("UIResourceUse");
+            if (CraftUI[i] == null) return;
+                CraftUI[i].GetComponent<Animator>().Play("UIResourceUse");
         }
     }
 
