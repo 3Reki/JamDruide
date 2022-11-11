@@ -8,7 +8,7 @@ namespace Potions
         public bool IsActive { get; }
         public Sprite Sprite { get; }
 
-        public void Drink(PlayerController player);
+        public void Drink(PlayerController player, PlayerActions playerActions);
         public GameObject Throw();
     }
 }

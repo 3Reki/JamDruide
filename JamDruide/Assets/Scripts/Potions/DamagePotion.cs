@@ -7,10 +7,9 @@ namespace Potions
     public class DamagePotion : AbstractPotion
     {
 
-        public override void Drink(PlayerController player)
+        public override void Drink(PlayerController player, PlayerActions playerActions)
         {
-            // TODO kill player
-            throw new System.NotImplementedException();
+            playerActions.StartCoroutine(playerActions.Death());
         }
     }
 }

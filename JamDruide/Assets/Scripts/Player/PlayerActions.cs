@@ -86,7 +86,7 @@ namespace Player
 
             if (Input.GetKeyDown(KeyCode.Mouse1) && potions.Count != 0 && !potions[0].IsActive)
             {
-                potions[0].Drink(playerController);
+                potions[0].Drink(playerController, this);
                 potions.RemoveAt(0);
             }
 

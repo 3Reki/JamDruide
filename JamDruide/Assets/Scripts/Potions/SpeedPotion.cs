@@ -14,7 +14,7 @@ namespace Potions
         [Range(1, 4)] [Tooltip("The multiplier applied to the player speed")]
         [SerializeField] private float multiplier;
 
-        public override void Drink(PlayerController player)
+        public override void Drink(PlayerController player, PlayerActions playerActions)
         {
             player.StartCoroutine(EffectCoroutine(player));
         }

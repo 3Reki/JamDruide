@@ -11,7 +11,7 @@ namespace Potions
 
         [SerializeField] private float effectDuration;
         
-        public override void Drink(PlayerController player)
+        public override void Drink(PlayerController player, PlayerActions playerActions)
         {
             player.StartCoroutine(EffectCoroutine(player));
         }
