@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using Potions;
 using UnityEngine;
@@ -20,6 +21,10 @@ namespace Player
         [SerializeField] private int pointsCount;
 
         private GameObject[] points;
+        public Transform lastCheckpoint;
+        [SerializeField] private float deathTimer;
+        private bool invincible;
+        
         private bool canCollect;
         private int resourceIndex = 0;
         private ResourceScript resourceToCollect;
@@ -27,6 +32,8 @@ namespace Player
         private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
         private Vector2 projectileDirection;
 
+        public Queue<Vector3> playerPositions = new Queue<Vector3>();
+        public static PlayerActions Instance;
         private void Start()
         {
             points = new GameObject[pointsCount];
@@ -36,6 +43,7 @@ namespace Player
                 points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity);
             }
             
+            Instance = this;
             resourcesImages = new Dictionary<CraftsList.Resources, Sprite>()
             {
                 {
@@ -92,6 +100,7 @@ namespace Player
                 projectileGO.GetComponent<Rigidbody2D>().velocity =
                     projectileDirection * launchForce;
             }
+            SavePlayerPosition();
         }
         
         private void OnTriggerExit2D(Collider2D other)
@@ -109,6 +118,7 @@ namespace Player
                 if (currentResources.Contains(resourceToCollect.resourceType)) return;
                 currentResources[resourceIndex] = resourceToCollect.resourceType;
                 CraftUI[resourceIndex].sprite = resourcesImages[resourceToCollect.resourceType];
+                CraftUI[resourceIndex].GetComponent<Animator>().Play("UIResourceGet");
                 resourceToCollect.ResourceCollected();
                 resourceIndex++;
                 if (resourceIndex == 2)
@@ -127,15 +137,32 @@ namespace Player
                 
                 if (!recipe.ingredients.Contains(currentResources[1])) continue;
                     
-                potions.Add((IPotion) recipe.output);
+                //potions.Add((IPotion) recipe.output);
                 for (int i = 0; i < 2; i++)
                 {
                     currentResources[i] = CraftsList.Resources.None;
-                    CraftUI[i].sprite = resourcesImages[CraftsList.Resources.None];
+                    StartCoroutine(DelayAnimation(i));
                 }
             }
         }
 
+        public IEnumerator Death()
+        {
+            //animator.Play("PlayerDeath");
+            yield return new WaitForSeconds(deathTimer);
+            transform.position = lastCheckpoint.position;
+        }
+        private void SavePlayerPosition()
+        {
+            playerPositions.Enqueue(transform.position);
+        }
+
+        private IEnumerator DelayAnimation(int index)
+        {
+            yield return new WaitForSeconds(0.5f);
+            CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
+        }
+        
         private Vector2 PointPosition(float t)
         {
             Vector2 currentPosition = (Vector2) transform.position + projectileDirection * (launchForce * t) + Physics2D.gravity *
@@ -143,4 +170,5 @@ namespace Player
             return currentPosition;
         }
     }
+    
 }
