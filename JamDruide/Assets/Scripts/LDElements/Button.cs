@@ -8,6 +8,13 @@ namespace LDElements
 
         public GameObject door;
         bool isOpen;
+        public Sprite brokenSprite;
+        private SpriteRenderer _spriteRenderer;
+
+        private void Start()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
@@ -20,6 +27,7 @@ namespace LDElements
 
         void OpenDoor()
         {
+            _spriteRenderer.sprite = brokenSprite;
             isOpen = true;
             door.GetComponent<Animator>().Play("DoorOpen");
         }
