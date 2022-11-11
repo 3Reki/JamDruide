@@ -102,7 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8d71360b8db3f478db90001c71e9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanDash: 0
   CanDoubleJump: 0
   _characterBounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -114,7 +113,7 @@ MonoBehaviour:
   _detectionRayLength: 0.1
   _rayBuffer: 0.1
   _acceleration: 90
-  _moveClamp: 13
+  moveClamp: 13
   _deAcceleration: 60
   _apexBonus: 2
   _fallClamp: -40
@@ -150,6 +149,7 @@ MonoBehaviour:
   CraftUI:
   - {fileID: 0}
   - {fileID: 0}
+  projectile: {fileID: 4862584341863371731, guid: 2b12dc8a6b25f9a4ab3726e6c9b83d0a, type: 3}
 --- !u!58 &1730453856219938655
 CircleCollider2D:
   m_ObjectHideFlags: 0
