@@ -10,7 +10,9 @@ namespace Potions
     {
         public bool IsActive => false;
         
-        public Sprite sprite;
+        public Sprite Sprite => _sprite;
+
+        [SerializeField] private Sprite _sprite;
 
         public void Drink(PlayerController player)
         {

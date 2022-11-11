@@ -10,7 +10,9 @@ namespace Potions
     {
         public bool IsActive { get; private set; }
         
-        public Sprite sprite;
+        public Sprite Sprite => _sprite;
+
+        [SerializeField] private Sprite _sprite;
         
         [SerializeField] private float effectDuration;
         
