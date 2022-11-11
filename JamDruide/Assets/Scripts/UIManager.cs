@@ -87,10 +87,17 @@ public class UIManager : MonoBehaviour
     void FillInventory(int slot)
     {
         potionsInventory[slot].sprite = craftedPotionImage.sprite;
+        potionsInventory[slot].GetComponent<Animator>().Play("UIResourceGet");
     }
     void RemoveInventory(int slot)
     {
-        potionsInventory[slot].sprite = null;
+        StartCoroutine(DelayPotionAnimation(slot));
+    }
+    private IEnumerator DelayPotionAnimation(int index)
+    {
+        potionsInventory[index].GetComponent<Animator>().Play("UIResourceUse");
+        yield return animDelay;
+        potionsInventory[index].sprite = null;
     }
     void SelectPotion(int select)
     {
