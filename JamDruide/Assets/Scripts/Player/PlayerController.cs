@@ -35,6 +35,18 @@ namespace Player
         private SpriteRenderer sprite;
         private Animator animator;
 
+        private void OnEnable()
+        {
+            PauseMenu.OnPause.AddListener(() => enabled = false);
+            PauseMenu.OnResume.AddListener(() => enabled = true);
+        }
+
+        private void OnDisable()
+        {
+            PauseMenu.OnPause.RemoveListener(() => enabled = false);
+            PauseMenu.OnResume.RemoveListener(() => enabled = true);
+        }
+
         private void Start()
         {
             sprite = GetComponent<SpriteRenderer>();

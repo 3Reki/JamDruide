@@ -8,6 +8,18 @@ public class ShadowBehaviour : MonoBehaviour
     [SerializeField] private float startDelay;
     private float startTime;
 
+    private void OnEnable()
+    {
+        PauseMenu.OnPause.AddListener(() => enabled = false);
+        PauseMenu.OnResume.AddListener(() => enabled = true);
+    }
+
+    private void OnDisable()
+    {
+        PauseMenu.OnPause.RemoveListener(() => enabled = false);
+        PauseMenu.OnResume.RemoveListener(() => enabled = true);
+    }
+
     private void Start()
     {
         startTime = Time.time;

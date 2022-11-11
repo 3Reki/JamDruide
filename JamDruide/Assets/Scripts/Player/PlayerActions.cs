@@ -82,6 +82,12 @@ namespace Player
                 potions.RemoveAt(0);
                 projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * launchForce;
             }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Death());
+            }
+
             SavePlayerPosition();
         }
         
