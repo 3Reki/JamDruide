@@ -30,6 +30,7 @@ namespace Player
 
         public Queue<Vector3> playerPositions = new Queue<Vector3>();
         public static PlayerActions Instance;
+		private Animator animator;
 
         private void OnEnable()
         {
@@ -42,8 +43,11 @@ namespace Player
             PauseMenu.OnPause.RemoveListener(() => enabled = false);
             PauseMenu.OnResume.RemoveListener(() => enabled = true);
         }
+        
         private void Start()
         {
+
+            animator = GetComponent<Animator>();
             points = new GameObject[pointsCount];
 
             for (int i = 0; i < pointsCount; i++)
@@ -154,8 +158,11 @@ namespace Player
 
         public IEnumerator Death()
         {
-            //animator.Play("PlayerDeath");
+            animator.Play("PlayerDeath");
+            playerController.enabled = false;
             yield return new WaitForSeconds(deathTimer);
+            playerController.enabled = true;
+            animator.Play("PlayerIdle");
             transform.position = lastCheckpoint.position;
         }
         private void SavePlayerPosition()

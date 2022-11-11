@@ -71,6 +71,11 @@ namespace Player
                 sprite.flipX = true;
             }
 
+            if (Velocity.y < 0)
+            {
+                animator.SetBool("IsFalling", true);
+            }
+
             RunCollisionChecks();
 
             CalculateWalk(); // Horizontal movement
@@ -123,6 +128,12 @@ namespace Player
             // Ground
             LandingThisFrame = false;
             var groundedCheck = RunDetection(raysDown);
+            animator.SetBool("Grounded", groundedCheck);
+            if (groundedCheck)
+            {
+                animator.SetBool("IsJumping", false);
+                animator.SetBool("IsFalling", false);
+            }
             if (colDown && !groundedCheck) timeLeftGrounded = Time.time; // Only trigger when first leaving
             else if (!colDown && groundedCheck)
             {
@@ -304,6 +315,7 @@ namespace Player
                 timeLeftGrounded = float.MinValue;
                 JumpingThisFrame = true;
                 doubleJumpUsed = false;
+                animator.SetBool("IsJumping", true);
             }
             else
             {

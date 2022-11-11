@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c992ff6c829dfec43b9aa220b9ee5864
+guid: 7062cb827ba9f5e4caef959c47ff6961
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -167,13 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_1508_0
+      name: IMG_1515_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 351.25
-        height: 356
+        width: 496
+        height: 496
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c7107e8d8e6d0549a091b8857d2272a
-      internalID: 611611582
+      spriteID: d6522b3fc07b97640ab1180fd07a0042
+      internalID: -32525728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_1508_1
+      name: IMG_1515_1
       rect:
         serializedVersion: 2
-        x: 351
+        x: 496
         y: 0
-        width: 351.25
-        height: 356
+        width: 496
+        height: 496
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 473b068457e89db4c9ba3b91eceb3af6
-      internalID: -96016125
+      spriteID: 895ad0dc951d32c4fb075c655f23ff57
+      internalID: 1297470175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_1508_2
+      name: IMG_1515_2
       rect:
         serializedVersion: 2
-        x: 702
+        x: 992
         y: 0
-        width: 351.25
-        height: 356
+        width: 496
+        height: 496
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a8fbebd3ea6ab046a2f545690d811d8
-      internalID: 1766554895
+      spriteID: a9e7b00cd04d7d649b35733af63ce840
+      internalID: -1547934451
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_1508_3
+      name: IMG_1515_3
       rect:
         serializedVersion: 2
-        x: 1053
+        x: 1488
         y: 0
-        width: 351.25
-        height: 356
+        width: 496
+        height: 496
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,8 +244,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a23157883703b64a8b43459ecccdc67
-      internalID: 548106654
+      spriteID: 25ea5b1a48793d4429cfbe18124185fe
+      internalID: 584866901
       vertices: []
       indices: 
       edges: []
@@ -261,10 +261,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IMG_1508_2: 1766554895
-      IMG_1508_1: -96016125
-      IMG_1508_0: 611611582
-      IMG_1508_3: 548106654
+      IMG_1515_3: 584866901
+      IMG_1515_0: -32525728
+      IMG_1515_2: -1547934451
+      IMG_1515_1: 1297470175
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
