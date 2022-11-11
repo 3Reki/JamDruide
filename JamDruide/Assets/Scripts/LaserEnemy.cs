@@ -19,6 +19,8 @@ public class LaserEnemy : MonoBehaviour
     [SerializeField] private PlayerActions player;
     [SerializeField] private Animator graphAnimator;
 
+    public GameObject door;
+
     private void Start()
     {
         DeactivateLaser();
@@ -100,6 +102,19 @@ public class LaserEnemy : MonoBehaviour
             graphAnimator.Play("EnemyAttack");
             startTime = Time.time;
             player = col.GetComponent<PlayerActions>();
+            Destroy(transform.GetChild(3).gameObject);
         }
+
+        if (col.CompareTag("Damage"))
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        door.GetComponent<Animator>().Play("DoorOpen");
+
+        Destroy(gameObject);
     }
 }
