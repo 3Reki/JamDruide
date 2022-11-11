@@ -141,6 +141,15 @@ MonoBehaviour:
   currentResources: 0000000000000000
   craftsList: {fileID: 2903344727830008777}
   playerController: {fileID: 2453536640117689241}
+  resourceImages:
+  - {fileID: 21300000, guid: 613b827ac36b6724fb87c9202397be8e, type: 3}
+  - {fileID: 21300000, guid: f30300edd979f3a4e9adbc14e165313c, type: 3}
+  - {fileID: 21300000, guid: 5682859164df06a4da148a9b21b50e22, type: 3}
+  - {fileID: 21300000, guid: 6a956e4839e27ea4c9bb6b413b6f8fca, type: 3}
+  - {fileID: 0}
+  CraftUI:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!58 &1730453856219938655
 CircleCollider2D:
   m_ObjectHideFlags: 0

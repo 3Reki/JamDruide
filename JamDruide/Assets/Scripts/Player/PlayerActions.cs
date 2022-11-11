@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Potions;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -11,28 +12,44 @@ namespace Player
         
         [SerializeField] private CraftsList craftsList;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private List<Sprite> resourceImages;
+        [SerializeField] private List<Image> CraftUI;
         
         private bool canCollect;
         private int resourceIndex = 0;
         private ResourceScript resourceToCollect;
         private List<IPotion> potions = new();
+        private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
+
+        private void Start()
+        {
+            resourcesImages = new Dictionary<CraftsList.Resources, Sprite>()
+            {
+                {
+                    CraftsList.Resources.Hydromel, resourceImages[0]
+                },
+                {
+                    CraftsList.Resources.Mistletoe, resourceImages[1]
+                },
+                {
+                    CraftsList.Resources.Mushroom, resourceImages[2]
+                },
+                {
+                    CraftsList.Resources.Salt, resourceImages[3]
+                },
+                {
+                    CraftsList.Resources.None, resourceImages[4]
+                }
+            };
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.GetComponent<ResourceScript>())
             {
-                Debug.Log("j'ai une ressource à proximité");
                 canCollect = true;
                 ResourceScript script = other.GetComponent<ResourceScript>();
                 resourceToCollect = script;
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.GetComponent<ResourceScript>())
-            {
-                canCollect = false;
             }
         }
 
@@ -43,20 +60,28 @@ namespace Player
                 Collect();
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && potions.Count != 0)
             {
                 potions[0].Drink(playerController);
                 potions.RemoveAt(0);
             }
         }
+        
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.GetComponent<ResourceScript>())
+            {
+                canCollect = false;
+            }
+        }
 
         private void Collect()
         {
-            Debug.Log("Je récupère une ressource" + resourceIndex);
             if (canCollect)
             {
                 if (currentResources.Contains(resourceToCollect.resourceType)) return;
                 currentResources[resourceIndex] = resourceToCollect.resourceType;
+                CraftUI[resourceIndex].sprite = resourcesImages[resourceToCollect.resourceType];
                 resourceToCollect.ResourceCollected();
                 resourceIndex++;
                 if (resourceIndex == 2)
@@ -69,17 +94,17 @@ namespace Player
 
         private void CheckRecipe()
         {
-            Debug.Log("Je check la recette");
             foreach (var recipe in craftsList.recipes)
             {
-                if (recipe.ingredients.Contains(currentResources[0]))
+                if (!recipe.ingredients.Contains(currentResources[0])) continue;
+                
+                if (!recipe.ingredients.Contains(currentResources[1])) continue;
+                    
+                potions.Add((IPotion) recipe.output);
+                for (int i = 0; i < 2; i++)
                 {
-                    if (recipe.ingredients.Contains(currentResources[1]))
-                    {
-                        potions.Add((IPotion) recipe.output);
-                        currentResources[0] = CraftsList.Resources.None;
-                        currentResources[1] = CraftsList.Resources.None;
-                    }
+                    currentResources[i] = CraftsList.Resources.None;
+                    CraftUI[i].sprite = resourcesImages[CraftsList.Resources.None];
                 }
             }
         }
