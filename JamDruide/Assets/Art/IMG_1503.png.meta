@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d81731682e1885468a770a3c2723a52
+guid: e388b88920e21e749a8a35d9bb9ece0d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -167,13 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_1495_0
+      name: IMG_1503_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 582.8
-        height: 868
+        width: 508.4
+        height: 682
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da3437c7cd64d294180acbea85651e78
-      internalID: -437526264
+      spriteID: b7c341f78782f6441bf5be377e65dda9
+      internalID: 1132898501
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_1495_1
+      name: IMG_1503_1
       rect:
         serializedVersion: 2
-        x: 582
+        x: 508
         y: 0
-        width: 582.8
-        height: 868
+        width: 508.4
+        height: 682
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 136abcdf2e0cdba429357c3d23630029
-      internalID: -2089312193
+      spriteID: ae68742d4a35f824fa0d845ff2ff40cc
+      internalID: -293847806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_1495_2
+      name: IMG_1503_2
       rect:
         serializedVersion: 2
-        x: 1164
+        x: 1016
         y: 0
-        width: 582.8
-        height: 868
+        width: 508.4
+        height: 682
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60d7ded7b98ec5c469dd5cfcfda9b3b6
-      internalID: -1011807420
+      spriteID: 29a8bbba0e685a1438389b366d64adeb
+      internalID: -773572133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_1495_3
+      name: IMG_1503_3
       rect:
         serializedVersion: 2
-        x: 1746
+        x: 1524
         y: 0
-        width: 582.8
-        height: 868
+        width: 508.4
+        height: 682
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a1cf1393bf88a24abd1a6fe9fcf683a
-      internalID: 679428415
+      spriteID: f4a0d5fb3ae3201459645de49641801e
+      internalID: -1604210856
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_1495_4
+      name: IMG_1503_4
       rect:
         serializedVersion: 2
-        x: 2328
+        x: 2032
         y: 0
-        width: 582.8
-        height: 868
+        width: 508.4
+        height: 682
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a9da28dcfe88a741960367cf28095ca
-      internalID: 198284638
+      spriteID: e7a5a3def49a87b43aa8c770e8d695c5
+      internalID: 1266945328
       vertices: []
       indices: 
       edges: []
@@ -282,11 +282,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IMG_1495_1: -2089312193
-      IMG_1495_2: -1011807420
-      IMG_1495_4: 198284638
-      IMG_1495_3: 679428415
-      IMG_1495_0: -437526264
+      IMG_1503_3: -1604210856
+      IMG_1503_4: 1266945328
+      IMG_1503_0: 1132898501
+      IMG_1503_2: -773572133
+      IMG_1503_1: -293847806
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

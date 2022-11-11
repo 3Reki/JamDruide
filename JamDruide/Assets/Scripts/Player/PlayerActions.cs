@@ -3,7 +3,6 @@ using System.Collections;
 using System.Linq;
 using Potions;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Player
 {
@@ -13,24 +12,20 @@ namespace Player
         
         [SerializeField] private CraftsList craftsList;
         [SerializeField] private PlayerController playerController;
-        [SerializeField] private List<Sprite> resourceImages;
-        [SerializeField] private List<Image> CraftUI;
         [SerializeField] private GameObject projectile;
         [SerializeField] private float launchForce;
         [SerializeField] private GameObject pointPrefab;
         [SerializeField] private int pointsCount;
+        [SerializeField] private float deathTimer;
 
         private GameObject[] points;
-        [SerializeField] private Animator craftedPotionUI;
         public Transform lastCheckpoint;
-        [SerializeField] private float deathTimer;
         private bool invincible;
         
         private bool canCollect;
         private int resourceIndex = 0;
         private ResourceScript resourceToCollect;
         private List<IPotion> potions = new();
-        private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
         private Vector2 projectileDirection;
 
         public Queue<Vector3> playerPositions = new Queue<Vector3>();
@@ -45,24 +40,7 @@ namespace Player
             }
             
             Instance = this;
-            resourcesImages = new Dictionary<CraftsList.Resources, Sprite>()
-            {
-                {
-                    CraftsList.Resources.Hydromel, resourceImages[0]
-                },
-                {
-                    CraftsList.Resources.Mistletoe, resourceImages[1]
-                },
-                {
-                    CraftsList.Resources.Mushroom, resourceImages[2]
-                },
-                {
-                    CraftsList.Resources.Salt, resourceImages[3]
-                },
-                {
-                    CraftsList.Resources.None, resourceImages[4]
-                }
-            };
+            
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -118,8 +96,12 @@ namespace Player
             {
                 if (currentResources.Contains(resourceToCollect.resourceType)) return;
                 currentResources[resourceIndex] = resourceToCollect.resourceType;
-                CraftUI[resourceIndex].sprite = resourcesImages[resourceToCollect.resourceType];
-                CraftUI[resourceIndex].GetComponent<Animator>().Play("UIResourceGet");
+
+                if (onCollect != null)
+                {
+                    onCollect.Invoke(resourceIndex, resourceToCollect.resourceType);
+                }
+                
                 resourceToCollect.ResourceCollected();
                 resourceIndex++;
                 if (resourceIndex == 2)
@@ -139,10 +121,15 @@ namespace Player
                 if (!recipe.ingredients.Contains(currentResources[1])) continue;
                     
                 //potions.Add((IPotion) recipe.output);
+                
+                if (onRecipeComplete != null)
+                {
+                    onRecipeComplete.Invoke((IPotion)recipe.output);
+                }
+                
                 for (int i = 0; i < 2; i++)
                 {
                     currentResources[i] = CraftsList.Resources.None;
-                    StartCoroutine(DelayAnimation(i));
                 }
             }
         }
@@ -158,19 +145,18 @@ namespace Player
             playerPositions.Enqueue(transform.position);
         }
 
-        private IEnumerator DelayAnimation(int index)
-        {
-            yield return new WaitForSeconds(0.5f);
-            CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
-            craftedPotionUI.Play("UICraftedPotion");
-        }
-        
         private Vector2 PointPosition(float t)
         {
             Vector2 currentPosition = (Vector2) transform.position + projectileDirection * (launchForce * t) + Physics2D.gravity *
                 (.5f * t * t);
             return currentPosition;
         }
+
+        public delegate void PlayerCallback(int resourceIndex, CraftsList.Resources resourceType);
+        public delegate void PlayerCallback2(IPotion potion);
+
+        public static PlayerCallback onCollect;
+        public static PlayerCallback2 onRecipeComplete;
     }
     
 }

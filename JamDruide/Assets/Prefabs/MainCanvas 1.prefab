@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 4290095429734441064}
   - component: {fileID: 4290095429734441065}
   - component: {fileID: 4290095429734441066}
+  - component: {fileID: 3855058694200624090}
   m_Layer: 5
   m_Name: MainCanvas 1
   m_TagString: Untagged
@@ -684,6 +685,29 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3855058694200624090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4290095429734441067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d4bab031b997e4097cb815de8447a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceImages:
+  - {fileID: -1383507764, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
+  - {fileID: -96528867, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
+  - {fileID: -817474538, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
+  - {fileID: -1588436701, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
+  - {fileID: 0}
+  CraftUI:
+  - {fileID: 4290095428935985641}
+  - {fileID: 4290095429017610521}
+  craftedPotionUI: {fileID: 1755117663811142147}
+  craftedPotionImage: {fileID: 3105329304765133428}
 --- !u!1 &4290095429734550407
 GameObject:
   m_ObjectHideFlags: 0

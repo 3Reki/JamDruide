@@ -9,7 +9,9 @@ namespace Potions
     {
         public bool IsActive { get; private set; }
         
-        public Sprite sprite;
+        public Sprite Sprite => _sprite;
+
+        [SerializeField] private Sprite _sprite;
 
         [Range(0, 20)] [Tooltip("Effect duration in seconds")]
         [SerializeField] private float effectDuration;
