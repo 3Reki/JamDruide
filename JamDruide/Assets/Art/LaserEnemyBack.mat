@@ -70,12 +70,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DissolveAmount: -1.92
+    - _DissolveAmount: 0.54
     - _EnableExternalAlpha: 0
     - _Pixelisation: 0
     - _Scale: 1
-    - _TimeScale: 0.3
-    - _TwirlStrength: 10
+    - _TimeScale: 0.79
+    - _TwirlStrength: 11.21
     m_Colors:
     - _Color: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

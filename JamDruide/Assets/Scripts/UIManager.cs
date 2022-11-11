@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
         PlayerActions.onRecipeComplete += OnRecipeComplete;
         PlayerActions.onThrow += RemoveInventory;
         PlayerActions.onSelect += SelectPotion;
+        PlayerActions.onDeath += ResetInventoryAfterDeath;
         PauseMenu.OnPause.AddListener(() => enabled = false);
         PauseMenu.OnResume.AddListener(() => enabled = true);
     }
@@ -82,6 +83,14 @@ public class UIManager : MonoBehaviour
         yield return animDelay;
         CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
         craftedPotionUI.Play("UICraftedPotion");
+    }
+    
+    private void ResetInventoryAfterDeath()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+             CraftUI[i].GetComponent<Animator>().Play("UIResourceUse");
+        }
     }
 
     void FillInventory(int slot)
