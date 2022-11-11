@@ -239,6 +239,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: jumpSlider
+      value: 
+      objectReference: {fileID: 3048069835146470615}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: speedSlider
+      value: 
+      objectReference: {fileID: 361213233999141895}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
       propertyPath: craftedPotionUI
       value: 
       objectReference: {fileID: 5788047646861601345}
@@ -472,6 +480,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+--- !u!114 &361213233999141895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5551637727829750853, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+  m_PrefabInstance: {fileID: 5190443222169724994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3048069835146470615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7080999751490964629, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+  m_PrefabInstance: {fileID: 5190443222169724994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &5788047646861601345 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1755117663811142147, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
