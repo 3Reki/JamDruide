@@ -35525,6 +35525,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 101672953060663026, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 2073005116}
     - target: {fileID: 101672953060663027, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
       propertyPath: m_Name
       value: LaserEnemy (1)
@@ -36314,3 +36318,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 29cc2d2079af7ee4e9a33e69f6bc98aa, type: 3}
+--- !u!1 &2073005116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 475155941084774658, guid: 29cc2d2079af7ee4e9a33e69f6bc98aa, type: 3}
+  m_PrefabInstance: {fileID: 2073005115}
+  m_PrefabAsset: {fileID: 0}

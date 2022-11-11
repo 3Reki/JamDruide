@@ -241,6 +241,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 29cc2d2079af7ee4e9a33e69f6bc98aa, type: 3}
+--- !u!1 &107763290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 475155941084774658, guid: 29cc2d2079af7ee4e9a33e69f6bc98aa, type: 3}
+  m_PrefabInstance: {fileID: 107763289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &257416382
 GameObject:
   m_ObjectHideFlags: 0
@@ -44491,6 +44496,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7460895819820265553, guid: 21a788280a6fa6c47b31f9a20dc5c23d, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 107763290}
     - target: {fileID: 7460895819820265553, guid: 21a788280a6fa6c47b31f9a20dc5c23d, type: 3}
       propertyPath: brokenSprite
       value: 
