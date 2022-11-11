@@ -77,7 +77,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5190443222812861729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -158,7 +158,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -216,7 +216,7 @@ Transform:
   - {fileID: 7423282635576971183}
   - {fileID: 4168141244084517266}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5190443221772731964
 PrefabInstance:
@@ -256,11 +256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8898814656071910455, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.98
+      value: -11.27
       objectReference: {fileID: 0}
     - target: {fileID: 8898814656071910455, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.54
+      value: -2.75
       objectReference: {fileID: 0}
     - target: {fileID: 8898814656071910455, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -321,6 +321,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 5190443223109654353}
     m_Modifications:
+    - target: {fileID: 4290095428935985641, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290095428935985641, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4290095428935985642, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -345,6 +353,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4290095429199361644, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dacdb1c8347bd4543a354839e39a20fb, type: 3}
+    - target: {fileID: 4290095429292003113, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dacdb1c8347bd4543a354839e39a20fb, type: 3}
     - target: {fileID: 4290095429734441067, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
       propertyPath: m_Name
       value: MainCanvas 1
@@ -469,6 +485,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4290095430825022945, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dacdb1c8347bd4543a354839e39a20fb, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8791bbcf14333634a9a4d8af71e68b84, type: 3}
