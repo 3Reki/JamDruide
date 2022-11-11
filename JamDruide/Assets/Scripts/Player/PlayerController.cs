@@ -48,9 +48,13 @@ namespace Player
             lastPosition = position;
 
             GatherInput();
-            if (Input.x >= 0)
+            if (Input.x > 0)
             {
                 sprite.flipX = false;
+            }
+            else if (Input.x == 0)
+            {
+                
             }
             else
             {

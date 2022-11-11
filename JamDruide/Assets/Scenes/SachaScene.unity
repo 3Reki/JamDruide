@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1394315251}
-  smoothTime: 0.4
+  smoothTime: 0.15
 --- !u!1 &1649609152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,6 +1681,38 @@ PrefabInstance:
       propertyPath: craftsList
       value: 
       objectReference: {fileID: 316538484}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: CraftUI.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: CraftUI.Array.data[0]
+      value: 
+      objectReference: {fileID: 280358526}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: CraftUI.Array.data[1]
+      value: 
+      objectReference: {fileID: 233533070}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: resourceImages.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: resourceImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 613b827ac36b6724fb87c9202397be8e, type: 3}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: resourceImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: f30300edd979f3a4e9adbc14e165313c, type: 3}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: resourceImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5682859164df06a4da148a9b21b50e22, type: 3}
+    - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
+      propertyPath: resourceImages.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a956e4839e27ea4c9bb6b413b6f8fca, type: 3}
     - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
       propertyPath: currentResources.Array.data[0]
       value: 0
