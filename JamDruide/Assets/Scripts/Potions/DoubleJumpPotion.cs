@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using Player;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Potions
 {
@@ -10,7 +12,7 @@ namespace Potions
         public new bool IsActive { get; private set; }
 
         [SerializeField] private float effectDuration;
-        
+
         public override void Drink(PlayerController player, PlayerActions playerActions)
         {
             player.StartCoroutine(EffectCoroutine(player));
@@ -20,11 +22,13 @@ namespace Potions
         {
             player.CanDoubleJump = true;
             IsActive = true;
-            
+            var newParticleSystem = Instantiate(particleSystem, PlayerActions.Instance.transform);
             yield return new WaitForSeconds(effectDuration);
-            
+            Destroy(newParticleSystem);
             player.CanDoubleJump = false;
             IsActive = false;
         }
+
+
     }
 }

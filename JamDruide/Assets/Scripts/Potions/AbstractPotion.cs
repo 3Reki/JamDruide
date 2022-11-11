@@ -11,6 +11,7 @@ namespace Potions
 
         [SerializeField] private Sprite _sprite;
         [SerializeField] private GameObject potionPrefab;
+        public GameObject particleSystem;
 
         public abstract void Drink(PlayerController player, PlayerActions playerActions);
 

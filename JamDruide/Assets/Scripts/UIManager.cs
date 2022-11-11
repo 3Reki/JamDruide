@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject selectedPotion;
 
+    public static GameObject[] sliderObj = new GameObject[2];
+
+    [SerializeField] Transform sliderContainer;
+
     private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
     private WaitForSeconds animDelay = new(0.5f);
 
@@ -41,15 +45,18 @@ public class UIManager : MonoBehaviour
         };
     }
 
+
     private void OnEnable()
     {
         PlayerActions.onCollect += UpdateUI;
         PlayerActions.onRecipeComplete += OnRecipeComplete;
         PlayerActions.onThrow += RemoveInventory;
         PlayerActions.onSelect += SelectPotion;
+        PlayerActions.onDeath += ResetInventoryAfterDeath;
         PauseMenu.OnPause.AddListener(() => enabled = false);
         PauseMenu.OnResume.AddListener(() => enabled = true);
     }
+
 
     private void OnDisable()
     {
@@ -82,6 +89,14 @@ public class UIManager : MonoBehaviour
         yield return animDelay;
         CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
         craftedPotionUI.Play("UICraftedPotion");
+    }
+    
+    private void ResetInventoryAfterDeath()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+             CraftUI[i].GetComponent<Animator>().Play("UIResourceUse");
+        }
     }
 
     void FillInventory(int slot)

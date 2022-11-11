@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c9897c40fe442d8bdc724fe2f17ff2, type: 3}
+  m_Name: Double Jump Potion
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 125750271, guid: 4a21236027890114fb51461ecf1bd6be, type: 3}
+  potionPrefab: {fileID: 4862584341863371731, guid: 38cd74cbbc20356478fe2f92eecfaead, type: 3}
+  particleSystem: {fileID: 4439237549677436334, guid: c8306fb2118069a4faa8a0c4c2628aff, type: 3}
+  effectDuration: 10
