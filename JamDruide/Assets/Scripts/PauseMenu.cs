@@ -27,6 +27,8 @@ public class PauseMenu : MonoBehaviour
     {
         audioMixer.SetFloat("Master", PlayerPrefs.GetFloat(saveName, 1));
         slider.value = PlayerPrefs.GetFloat(saveName, 1);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Update()
