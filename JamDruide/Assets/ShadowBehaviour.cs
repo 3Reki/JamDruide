@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Player;
 using UnityEngine;
 
@@ -6,7 +6,10 @@ public class ShadowBehaviour : MonoBehaviour
 {
     [SerializeField] private PlayerActions playerActions;
     [SerializeField] private float startDelay;
+    
     private float startTime;
+    private PlayerActions player;
+    public Queue<Vector3> playerPositions = new();
 
     private void OnEnable()
     {
@@ -23,13 +26,16 @@ public class ShadowBehaviour : MonoBehaviour
     private void Start()
     {
         startTime = Time.time;
+        player = PlayerActions.Instance;
     }
 
     private void Update()
     {
+        SavePlayerPosition();
+        
         if (Time.time >= startTime + startDelay)
         {
-            transform.position = playerActions.playerPositions.Dequeue();
+            transform.position = playerPositions.Dequeue();
         }
     }
 
@@ -37,7 +43,12 @@ public class ShadowBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(PlayerActions.Instance.Death());
+            StartCoroutine(player.Death());
         }
+    }
+    
+    private void SavePlayerPosition()
+    {
+        playerPositions.Enqueue(player.transform.position);
     }
 }

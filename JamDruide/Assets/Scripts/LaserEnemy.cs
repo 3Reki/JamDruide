@@ -18,11 +18,14 @@ public class LaserEnemy : MonoBehaviour
     private bool laserActive;
     private PlayerActions player;
 
+    AudioSource audio;
+    [SerializeField] AudioClip shoot;
     private void Start()
     {
         DeactivateLaser();
         activeLineRenderer.SetPosition(0, transform.position);
         inactiveLineRenderer.SetPosition(0, transform.position);
+        audio = GetComponent<AudioSource>();
     }
 
     private void DeactivateLaser()
@@ -76,6 +79,8 @@ public class LaserEnemy : MonoBehaviour
             laserStart.Play();
             laserEnd.Play();
             startTime = Time.time;
+            audio.PlayOneShot(shoot);
+
         }
 
         if (laserActive && Time.time >= startTime + laserDuration)
