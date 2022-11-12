@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 101672953060663026, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
+      propertyPath: layer.m_Bits
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 101672953060663027, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
       propertyPath: m_Name
       value: LaserEnemy
