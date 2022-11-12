@@ -5120,6 +5120,7 @@ GameObject:
   - component: {fileID: 101672953060662989}
   - component: {fileID: 101672953060663026}
   - component: {fileID: 101672953060662988}
+  - component: {fileID: 248533829}
   m_Layer: 0
   m_Name: LaserEnemy
   m_TagString: Enemy
@@ -5148,7 +5149,7 @@ Transform:
   - {fileID: 3034682073528821975}
   - {fileID: 6174037021115699255}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &101672953060663026
 MonoBehaviour:
@@ -5192,6 +5193,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &248533829
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101672953060663027}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!1 &101672953103446248
 GameObject:
   m_ObjectHideFlags: 0

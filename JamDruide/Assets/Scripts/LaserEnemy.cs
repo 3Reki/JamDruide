@@ -18,6 +18,7 @@ public class LaserEnemy : MonoBehaviour
     private bool laserActive;
     [SerializeField] private PlayerActions player;
     [SerializeField] private Animator graphAnimator;
+    [SerializeField] LayerMask layer;
     public GameObject door;
 
     private void Start()
@@ -49,9 +50,8 @@ public class LaserEnemy : MonoBehaviour
     private void LaserCreation()
     {
         laserDirection = player.transform.position - transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection, 100, 1<< LayerMask.NameToLayer("Player"));
         inactiveLineRenderer.SetPosition(1, hit.point);
-        Debug.Log(hit.transform.name);
         if (laserActive)
         {
             activeLineRenderer.SetPosition(1, hit.point);

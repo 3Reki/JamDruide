@@ -24,9 +24,9 @@ namespace Potions
             IsActive = true;
             float defaultMaxSpeed = player.moveClamp;
             player.moveClamp *= multiplier;
-            
+            var newParticleSystem = Instantiate(particleSystem, PlayerActions.Instance.transform);
             yield return new WaitForSeconds(effectDuration);
-
+            Destroy(newParticleSystem);
             IsActive = false;
             player.moveClamp = defaultMaxSpeed;
         }
