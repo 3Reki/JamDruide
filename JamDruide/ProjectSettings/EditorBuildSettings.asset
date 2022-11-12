@@ -9,23 +9,23 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1bc4eac9a587c8449a96f16fcaa78693
   - enabled: 1
-    path: Assets/Scenes/LD0.unity
+    path: Assets/Scenes/LD0 Tutoriel.unity
     guid: 7de03ac7cec9ef946844c10d796d3a77
   - enabled: 1
-    path: Assets/Scenes/LD1.unity
-    guid: d1a5d0365094eb14b9f7420d2a5eee90
+    path: Assets/Scenes/LD2 Platforms.unity
+    guid: 670744326ee568e4ebcc76f7466d0c3e
   - enabled: 1
-    path: Assets/Scenes/LD2.unity
+    path: Assets/Scenes/LD3 ennemis.unity
     guid: 179c61d5e925f1a4ea2361429fc9ec30
   - enabled: 1
-    path: Assets/Scenes/LD3.unity
+    path: Assets/Scenes/LD4 logique.unity
     guid: 69d9c18acb032fb4c94098bde003d928
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/hdhd.unity
+    guid: d1a5d0365094eb14b9f7420d2a5eee90
+  - enabled: 0
     path: Assets/Scenes/LD4.unity
     guid: 1a85decaaf600194c822100ae8733e33
-  - enabled: 1
-    path: Assets/Scenes/LD5.unity
-    guid: 670744326ee568e4ebcc76f7466d0c3e
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
