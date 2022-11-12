@@ -9,7 +9,7 @@ public class TimerManager : MonoBehaviour
 
     public static TimerManager Instance;
     [SerializeField] private TextMeshProUGUI timerText;
-    private float totalTime;
+    public float totalTime;
     private float currentLevelTime;
     [SerializeField] private List<float> times;
 
