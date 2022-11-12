@@ -8,6 +8,7 @@ public class ResourceScript : MonoBehaviour
     private CircleCollider2D collider2D;
     public CraftsList.Resources resourceType;
     [SerializeField] private float resourceSpawnTime;
+    [SerializeField] private GameObject input;
     Animator animator;
 
     private void Start()
@@ -20,6 +21,22 @@ public class ResourceScript : MonoBehaviour
     {
         collider2D.enabled = false;
         StartCoroutine(NewResource());
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            input.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            input.SetActive(false);
+        }
     }
 
     private IEnumerator NewResource()
