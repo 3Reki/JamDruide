@@ -1,25 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using Player;
-using UnityEditor;
 using UnityEngine;
 
 public class LaserEnemy : MonoBehaviour
 {
+    public GameObject door;
+    
     [SerializeField] private ParticleSystem laserStart;
     [SerializeField] private ParticleSystem laserEnd;
-    private Vector2 laserDirection;
     [SerializeField] private LineRenderer activeLineRenderer, inactiveLineRenderer;
     [SerializeField] private float laserDuration;
     [SerializeField] private float laserCastTime;
+    [SerializeField] private Animator graphAnimator;
+    [SerializeField] private LayerMask layer;
+    
+    private Vector2 laserDirection;
     private float startTime;
     private bool laserActive;
-    [SerializeField] private PlayerActions player;
-    [SerializeField] private Animator graphAnimator;
-    [SerializeField] LayerMask layer;
-    public GameObject door;
+    private PlayerActions player;
 
     private void Start()
     {
@@ -51,6 +48,7 @@ public class LaserEnemy : MonoBehaviour
     {
         laserDirection = player.transform.position - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection, 100, layer);
+
         inactiveLineRenderer.SetPosition(1, hit.point);
         if (laserActive)
         {
@@ -58,7 +56,7 @@ public class LaserEnemy : MonoBehaviour
             laserEnd.transform.position = hit.point;
             laserEnd.transform.LookAt(transform.position);
             laserStart.transform.LookAt(hit.point);
-            if (hit.transform.CompareTag("Player"))
+            if (hit.collider != null && hit.transform.CompareTag("Player"))
             {
                 StartCoroutine(player.Death());
                 Invoke("DeactivateLaser", 1);

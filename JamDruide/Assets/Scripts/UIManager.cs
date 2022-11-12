@@ -71,6 +71,7 @@ public class UIManager : MonoBehaviour
     private void UpdateUI(int resourceIndex, CraftsList.Resources resourceType)
     {
         CraftUI[resourceIndex].sprite = resourcesImages[resourceType];
+        CraftUI[resourceIndex].enabled = true;
         CraftUI[resourceIndex].GetComponent<Animator>().Play("UIResourceGet");
     }
 
@@ -103,18 +104,23 @@ public class UIManager : MonoBehaviour
     void FillInventory(int slot)
     {
         potionsInventory[slot].sprite = craftedPotionImage.sprite;
+        potionsInventory[slot].enabled = true;
         potionsInventory[slot].GetComponent<Animator>().Play("UIResourceGet");
     }
+    
     void RemoveInventory(int slot)
     {
         StartCoroutine(DelayPotionAnimation(slot));
     }
+    
     private IEnumerator DelayPotionAnimation(int index)
     {
         potionsInventory[index].GetComponent<Animator>().Play("UIResourceUse");
         yield return animDelay;
         potionsInventory[index].sprite = null;
+        potionsInventory[index].enabled = false;
     }
+    
     void SelectPotion(int select)
     {
         if (select == 2)

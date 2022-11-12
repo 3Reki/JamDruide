@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 7031559956786229378}
   - component: {fileID: 7031559956786229377}
   - component: {fileID: 7031559956786229376}
-  - component: {fileID: 955060997796184069}
   m_Layer: 8
   m_Name: Mushroom
   m_TagString: Untagged
@@ -118,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 424256662285826338}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7031559956786229378
 MonoBehaviour:
@@ -133,8 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceType: 3
-  resourceSpawnTime: 3
   input: {fileID: 6085785844954351349}
+  collider2D: {fileID: 7031559956786229377}
 --- !u!58 &7031559956786229377
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -150,7 +149,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
 --- !u!212 &7031559956786229376
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -191,7 +190,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 205335663, guid: e525a09dc13f57545ab18ebb0d6815c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -203,23 +202,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &955060997796184069
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7031559956786230143}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca9d0cce67bff344faa13705221405d0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

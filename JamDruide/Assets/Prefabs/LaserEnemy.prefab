@@ -5149,7 +5149,7 @@ Transform:
   - {fileID: 3034682073528821975}
   - {fileID: 6174037021115699255}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &101672953060663026
 MonoBehaviour:
@@ -5171,6 +5171,9 @@ MonoBehaviour:
   laserCastTime: 1.2
   player: {fileID: 0}
   graphAnimator: {fileID: 101672953230641812}
+  layer:
+    serializedVersion: 2
+    m_Bits: 72
   door: {fileID: 0}
 --- !u!50 &101672953060662988
 Rigidbody2D:
