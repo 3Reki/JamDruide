@@ -10,6 +10,8 @@ namespace LDElements
         bool isOpen;
         public Sprite brokenSprite;
         private SpriteRenderer _spriteRenderer;
+	[SerializeField]
+	private GameObject explosion;
 
         private void Start()
         {
@@ -30,6 +32,7 @@ namespace LDElements
             _spriteRenderer.sprite = brokenSprite;
             isOpen = true;
             door.GetComponent<Animator>().Play("DoorOpen");
+	    Instantiate(explosion, transform.position, Quaternion.identity);
         }
 
     }
