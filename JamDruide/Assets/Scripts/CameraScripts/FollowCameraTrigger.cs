@@ -11,12 +11,20 @@ namespace CameraScripts
     {
         [SerializeField] private float movementDuration;
         [SerializeField] private float viewSize;
+        [SerializeField] private bool lockX;
+        [SerializeField] private float lockXPos;
+        [SerializeField] private bool lockY;
+        [SerializeField] private float lockYPos;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
                 CameraController.instance.enabled = true;
+                CameraController.instance.lockX = lockX;
+                CameraController.instance.lockXPos = lockXPos;
+                CameraController.instance.lockY = lockY;
+                CameraController.instance.lockYPos = lockYPos;
                 CameraController.mainCamera.DOOrthoSize(viewSize, movementDuration);
             }
         }
