@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15beed63d67d90048a9aa052e8ed61a0, type: 3}
   m_Name: Speed Potion
   m_EditorClassIdentifier: 
-  _sprite: {fileID: -844633655, guid: 4a21236027890114fb51461ecf1bd6be, type: 3}
+  _sprite: {fileID: 21300000, guid: b4b5e19a8d462e24982e07cd4a720696, type: 3}
   potionPrefab: {fileID: 4862584341863371731, guid: 0dfff7f9247852d47aff8d22fbbfc54f, type: 3}
   particleSystem: {fileID: 4439237549677436334, guid: 1e056b34d5a04904d9f6eb511c9a83f6, type: 3}
   effectDuration: 4
