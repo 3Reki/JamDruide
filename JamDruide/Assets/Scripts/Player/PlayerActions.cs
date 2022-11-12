@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using LDElements;
 using Potions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,7 +26,7 @@ namespace Player
         
         private bool canCollect;
         private int resourceIndex = 0;
-        private ResourceScript resourceToCollect;
+        private Ingredient resourceToCollect;
         private IPotion[] potions = new IPotion[3];
         private Vector2 projectileDirection;
 
@@ -59,6 +60,14 @@ namespace Player
             PauseMenu.OnPause.RemoveListener(() => enabled = false);
             PauseMenu.OnResume.RemoveListener(() => enabled = true);
         }
+
+#if !UNITY_EDITOR
+        private void Awake()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+#endif
         
         private void Start()
         {
@@ -166,10 +175,10 @@ namespace Player
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetComponent<ResourceScript>())
+            if (other.GetComponent<Ingredient>())
             {
                 canCollect = true;
-                resourceToCollect = other.GetComponent<ResourceScript>();
+                resourceToCollect = other.GetComponent<Ingredient>();
             }
         }
         
@@ -224,7 +233,7 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.W)) selectedPotion = 1;
             if (Input.GetKeyDown(KeyCode.E)) selectedPotion = 0;
 
-            onSelect.Invoke(selectedPotion);
+            onSelect?.Invoke(selectedPotion);
 
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,9 +18,20 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private string saveName;
     float displayNumber;
 
+    private void Awake()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void Play()
     {
         SceneManager.LoadScene(level);
+    }
+
+    public void GoTo(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 
     public void Exit()
