@@ -35,6 +35,10 @@ namespace Player
         private SpriteRenderer sprite;
         private Animator animator;
 
+
+        [SerializeField] AudioClip jump;
+        [SerializeField] AudioClip doubleJump;
+        AudioSource audio;
         private void OnEnable()
         {
             PauseMenu.OnPause.AddListener(() => enabled = false);
@@ -51,6 +55,7 @@ namespace Player
         {
             sprite = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -337,6 +342,7 @@ namespace Player
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
             if (Input.jumpDown && CanUseCoyote || HasBufferedJump)
             {
+                audio.PlayOneShot(jump);
                 currentVerticalSpeed = _jumpHeight;
                 endedJumpEarly = false;
                 coyoteUsable = false;
@@ -375,6 +381,7 @@ namespace Player
         {
             if (CanUseDouble && Input.jumpDown && !CanUseCoyote)
             {
+                audio.PlayOneShot(doubleJump);
                 currentVerticalSpeed = _jumpHeight;
                 endedJumpEarly = false;
                 coyoteUsable = false;
