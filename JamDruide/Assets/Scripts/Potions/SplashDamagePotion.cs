@@ -9,6 +9,10 @@ namespace Potions
         {
             Instantiate(particleSystem, transform.position, Quaternion.identity);
             Destroy(gameObject);
+            if(col.CompareTag("Enemy"))
+            {
+                col.GetComponent<LaserEnemy>().Death();
+            }
         }
     }
 }
