@@ -42101,7 +42101,7 @@ PrefabInstance:
       objectReference: {fileID: 2073005116}
     - target: {fileID: 101672953060663027, guid: 07a36112c50c5d64ba08f159b9220c32, type: 3}
       propertyPath: m_Name
-      value: LaserEnemy (1)
+      value: LaserEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
