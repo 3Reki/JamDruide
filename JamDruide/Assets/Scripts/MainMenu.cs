@@ -24,6 +24,12 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    private void Start()
+    {
+        audioMixer.SetFloat("Master", PlayerPrefs.GetFloat(saveName, 1));
+        slider.value = PlayerPrefs.GetFloat(saveName, 1);
+    }
+
     public void Play()
     {
         SceneManager.LoadScene(level);
@@ -41,7 +47,7 @@ public class MainMenu : MonoBehaviour
 
     public void SetVolume(float sliderValue)
     {
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+        audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
 
         displayNumber = sliderValue * 100;
         volume.text = "s o u n d s : " + displayNumber.ToString("F0");
