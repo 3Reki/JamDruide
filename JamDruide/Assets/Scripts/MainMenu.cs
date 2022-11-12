@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] private string saveName;
     float displayNumber;
+
+    private void Awake()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     public void Play()
     {

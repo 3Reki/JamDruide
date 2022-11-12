@@ -59,6 +59,14 @@ namespace Player
             PauseMenu.OnPause.RemoveListener(() => enabled = false);
             PauseMenu.OnResume.RemoveListener(() => enabled = true);
         }
+
+#if !UNITY_EDITOR
+        private void Awake()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+#endif
         
         private void Start()
         {
@@ -224,7 +232,7 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.W)) selectedPotion = 1;
             if (Input.GetKeyDown(KeyCode.E)) selectedPotion = 0;
 
-            onSelect.Invoke(selectedPotion);
+            onSelect?.Invoke(selectedPotion);
 
         }
 
