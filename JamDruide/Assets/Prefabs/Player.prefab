@@ -147,6 +147,8 @@ MonoBehaviour:
   pointsCount: 20
   deathTimer: 1
   lastCheckpoint: {fileID: 0}
+  jumpSlider: {fileID: 0}
+  speedSlider: {fileID: 0}
 --- !u!50 &3959692907899943907
 Rigidbody2D:
   serializedVersion: 4
@@ -196,7 +198,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2242150849785592421}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

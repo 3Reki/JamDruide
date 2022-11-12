@@ -230,10 +230,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6781471605938628631, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7618563085757855481, guid: feec0c5e2e466024ca49c59e5ecf5dc9, type: 3}
       propertyPath: deathTimer
       value: 1
