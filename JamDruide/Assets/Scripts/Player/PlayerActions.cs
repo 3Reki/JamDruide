@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using CameraScripts;
 using LDElements;
 using Potions;
 using UnityEngine;
@@ -27,10 +27,10 @@ namespace Player
         private bool canCollect;
         private int resourceIndex = 0;
         private Ingredient resourceToCollect;
+        private Telescope telescope;
         private IPotion[] potions = new IPotion[3];
         private Vector2 projectileDirection;
-
-        public Queue<Vector3> playerPositions = new Queue<Vector3>();
+        
         public static PlayerActions Instance;
         private Camera cam;
 		private Animator animator;
@@ -72,13 +72,17 @@ namespace Player
             PauseMenu.OnResume.RemoveListener(() => enabled = true);
         }
 
-#if !UNITY_EDITOR
+
         private void Awake()
         {
+            Instance = this;
+            
+#if !UNITY_EDITOR
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
-        }
 #endif
+        }
+
         
         private void Start()
         {
@@ -96,7 +100,6 @@ namespace Player
                 points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity, previewParent);
             }
             
-            Instance = this;
             cam = Camera.main;
         }
 
@@ -117,8 +120,6 @@ namespace Player
                 canAdd = true;
 
             HandleInputs();
-
-            SavePlayerPosition();
 
             Scroll();
         }
@@ -141,7 +142,28 @@ namespace Player
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                Collect();
+                if (canCollect)
+                {
+                    Collect();
+                } else if (canUse)
+                {
+                    isUsing = true;
+                    telescope.StartUsing();
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.F))
+            {
+                if (isUsing)
+                {
+                    isUsing = false;
+                    telescope.StopUsing();
+                }
+            }
+
+            if (isUsing && Input.GetAxisRaw("Horizontal") != 0)
+            {
+                isUsing = false;
+                telescope.StopUsing();
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse1) && hasOnePotion && potions[selectedPotion] != null &&
@@ -193,7 +215,14 @@ namespace Player
             if (other.GetComponent<Ingredient>())
             {
                 canCollect = true;
+                canUse = false;
                 resourceToCollect = other.GetComponent<Ingredient>();
+            }
+            else if (other.GetComponent<Telescope>())
+            {
+                canUse = true;
+                canCollect = false;
+                telescope = other.GetComponent<Telescope>();
             }
         }
         
@@ -202,6 +231,10 @@ namespace Player
             if (canCollect && other.gameObject == resourceToCollect.gameObject)
             {
                 canCollect = false;
+            }
+            else if (canUse && other.gameObject == telescope.gameObject)
+            {
+                canUse = false;
             }
         }
         
@@ -336,10 +369,6 @@ namespace Player
             onDeath();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        private void SavePlayerPosition()
-        {
-            playerPositions.Enqueue(transform.position);
-        }
 
         private Vector2 PointPosition(float t)
         {
@@ -359,6 +388,8 @@ namespace Player
         public static PlayerCallback3 onThrow;
         public static PlayerCallback4 onSelect;
         public static PlayerCallback5 onDeath;
+        private bool canUse;
+        private bool isUsing;
     }
     
 }
