@@ -13,11 +13,11 @@ namespace LDElements
         {
             if (col.CompareTag("Speed"))
             {
-                IsActive = true;
+                rb.velocity = Vector2.right * platformSpeed;
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D col)
+        /*private void OnCollisionEnter2D(Collision2D col)
         {
             if (!IsActive)
             {
@@ -38,6 +38,6 @@ namespace LDElements
                     rb.velocity = Vector2.left * platformSpeed;
                 }
             }
-        }
+        }*/
     }
 }
