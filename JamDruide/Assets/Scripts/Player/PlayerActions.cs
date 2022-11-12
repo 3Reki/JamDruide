@@ -78,16 +78,109 @@ namespace Player
             cam = Camera.main;
         }
 
+        private void Update()
+        {
+            HandleSliders();
+
+            //detect if the player has at least one potion
+            if (potions[0] == null && potions[1] == null && potions[2] == null)
+                hasOnePotion = false;
+            else
+                hasOnePotion = true;
+
+            //detect if we can add a potion
+            if (potions[0] != null && potions[1] != null && potions[2] != null)
+                canAdd = false;
+            else
+                canAdd = true;
+
+            HandleInputs();
+
+            SavePlayerPosition();
+
+            Scroll();
+        }
+
+        private void HandleSliders()
+        {
+            jumpSliderValue -= 1 * Time.deltaTime;
+            jumpSlider.value = jumpSliderValue;
+
+            speedSliderValue -= 1 * Time.deltaTime;
+            speedSlider.value = speedSliderValue;
+
+            if (GetComponent<PlayerController>().CanDoubleJump && !doubleJump)
+                StartCoroutine(JumpSlider());
+            if (GetComponent<PlayerController>().moveClamp > 13f && !speedBoost)
+                StartCoroutine(SpeedSlider());
+        }
+        
+        private void HandleInputs()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Collect();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse1) && hasOnePotion && potions[selectedPotion] != null &&
+                !potions[selectedPotion].IsActive)
+            {
+                potions[selectedPotion].Drink(playerController, this);
+                potions[selectedPotion] = null;
+                CheckRecipe();
+                if (onThrow != null)
+                    onThrow.Invoke(selectedPotion);
+            }
+
+            HandleThrow();
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Death());
+            }
+        }
+
+        private void HandleThrow()
+        {
+            projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            
+            if (Input.GetKey(KeyCode.Mouse0) && hasOnePotion)
+            {
+                for (int i = 0; i < pointsCount; i++)
+                {
+                    points[i].transform.position = PointPosition(i * 0.1f);
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.Mouse0) && hasOnePotion && potions[selectedPotion] != null &&
+                !potions[selectedPotion].IsActive)
+            {
+                GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
+                potions[selectedPotion] = null;
+                projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * (1.5f * launchForce);
+                CheckRecipe();
+                if (onThrow != null)
+                    onThrow.Invoke(selectedPotion);
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.GetComponent<ResourceScript>())
             {
                 canCollect = true;
-                ResourceScript script = other.GetComponent<ResourceScript>();
-                resourceToCollect = script;
+                resourceToCollect = other.GetComponent<ResourceScript>();
             }
         }
-
+        
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (canCollect && other.gameObject == resourceToCollect.gameObject)
+            {
+                canCollect = false;
+            }
+        }
+        
         IEnumerator JumpSlider()
         {
             jumpSlider.gameObject.SetActive(true);
@@ -110,75 +203,6 @@ namespace Player
             yield return new WaitForSeconds(4);
             speedBoost = false;
             speedSlider.gameObject.SetActive(false);
-        }
-
-        private void Update()
-        {
-            jumpSliderValue -= 1 * Time.deltaTime;
-            jumpSlider.value = jumpSliderValue;
-
-            speedSliderValue -= 1 * Time.deltaTime;
-            speedSlider.value = speedSliderValue;
-
-            if (GetComponent<PlayerController>().CanDoubleJump && !doubleJump)
-                StartCoroutine(JumpSlider());
-            if (GetComponent<PlayerController>().moveClamp > 13f && !speedBoost)
-                StartCoroutine(SpeedSlider());
-
-            //detect if the player has at least one potion
-            if (potions[0] == null && potions[1] == null && potions[2] == null)
-                hasOnePotion = false;
-            else
-                hasOnePotion = true;
-
-            //detect if we can add a potion
-            if (potions[0] != null && potions[1] != null && potions[2] != null)
-                canAdd = false;
-            else
-                canAdd = true;
-
-            projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                Collect();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Mouse1) && hasOnePotion && potions[selectedPotion] != null && !potions[selectedPotion].IsActive)
-            {
-                potions[selectedPotion].Drink(playerController, this);
-                potions[selectedPotion] = null;
-                CheckRecipe();
-                if (onThrow != null)
-                    onThrow.Invoke(selectedPotion);
-            }
-
-            if (Input.GetKey(KeyCode.Mouse0) && hasOnePotion)
-            {
-                for (int i = 0; i < pointsCount; i++)
-                {
-                    points[i].transform.position = PointPosition(i * 0.1f);
-                }
-            }
-            
-            if (Input.GetKeyUp(KeyCode.Mouse0) && hasOnePotion && potions[selectedPotion] != null && !potions[selectedPotion].IsActive)
-            {
-                GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
-                potions[selectedPotion] = null;
-                projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * 1.5f * launchForce;
-                CheckRecipe();
-                if(onThrow != null)
-                    onThrow.Invoke(selectedPotion);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                StartCoroutine(Death());
-            }
-
-            SavePlayerPosition();
-
-            Scroll();
         }
         
         void Scroll()
@@ -204,14 +228,6 @@ namespace Player
 
         }
 
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.GetComponent<ResourceScript>())
-            {
-                canCollect = false;
-            }
-        }
-
         private void Collect()
         {
             if (!canAdd)
@@ -220,6 +236,7 @@ namespace Player
             if (canCollect)
             {
                 if (currentResources.Contains(resourceToCollect.resourceType)) return;
+                
                 currentResources[resourceIndex] = resourceToCollect.resourceType;
 
                 if (onCollect != null)
