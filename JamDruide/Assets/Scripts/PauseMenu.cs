@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] GameObject gameHUD;
     [SerializeField] GameObject pauseHUD;
+    [SerializeField] GameObject optionHUD;
 
     //audio
     [SerializeField] AudioMixer audioMixer;
@@ -61,6 +62,7 @@ public class PauseMenu : MonoBehaviour
         OnResume.Invoke();
         pauseHUD.SetActive(false);
         gameHUD.SetActive(true);
+        optionHUD.SetActive(false);
         gameIsPause = false;
     }
 
