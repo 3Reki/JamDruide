@@ -27,6 +27,27 @@ EditorBuildSettings:
     path: Assets/Scenes/LD5.unity
     guid: 670744326ee568e4ebcc76f7466d0c3e
   - enabled: 0
-    path: Assets/Scenes/LD0 1.unity
-    guid: 3a192273effee3b4da268ec1a825c695
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/hardcore/Hard-Enemy.unity
+    guid: d49e17c3751cdbf489b49ff7c741dbbb
+  - enabled: 1
+    path: Assets/Scenes/hardcore/Hard-Final.unity
+    guid: ff3b4deac564fea43993b05e91d2344a
+  - enabled: 1
+    path: Assets/Scenes/hardcore/Hard-Cosmos.unity
+    guid: 43a491d46a438e14dab8e9f4f3addb24
+  - enabled: 1
+    path: Assets/Scenes/hardcore/Hard-Potions.unity
+    guid: d904a026d65ae8e4e8508c2bd7878939
+  - enabled: 1
+    path: Assets/Scenes/hardcore/Hard-Platforms.unity
+    guid: 8cfce202f1d76804fbaba044b2c71fe1
+  - enabled: 1
+    path: Assets/Scenes/hardcore/The Cave.unity
+    guid: 7ea154baa7b0a1743874ceb18a60aeb3
+  - enabled: 1
+    path: Assets/Scenes/hardcore/Hard-Jump.unity
+    guid: a0127ef858514c44dac28a10fc369a7e
   m_configObjects: {}
