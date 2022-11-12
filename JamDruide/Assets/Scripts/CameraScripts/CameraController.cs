@@ -12,6 +12,11 @@ namespace CameraScripts
         public float smoothTime = 0.3F;
         private Vector3 velocity = Vector3.zero;
         public Vector3 offset = new Vector3(0, 2, -10);
+        
+        public bool lockX;
+        public float lockXPos;
+        public bool lockY;
+        public float lockYPos;
 
         private void Awake()
         {
@@ -43,6 +48,16 @@ namespace CameraScripts
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 targetPosition += new Vector3(0, -5);
+            }
+
+            if (lockX)
+            {
+                targetPosition.x = lockXPos;
+            }
+
+            if (lockY)
+            {
+                targetPosition.y = lockYPos;
             }
  
             // Smoothly move the camera towards that target position

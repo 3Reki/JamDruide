@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using LDElements;
@@ -29,8 +28,7 @@ namespace Player
         private Ingredient resourceToCollect;
         private IPotion[] potions = new IPotion[3];
         private Vector2 projectileDirection;
-
-        public Queue<Vector3> playerPositions = new Queue<Vector3>();
+        
         public static PlayerActions Instance;
         private Camera cam;
 		private Animator animator;
@@ -61,13 +59,17 @@ namespace Player
             PauseMenu.OnResume.RemoveListener(() => enabled = true);
         }
 
-#if !UNITY_EDITOR
+
         private void Awake()
         {
+            Instance = this;
+            
+#if !UNITY_EDITOR
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
-        }
 #endif
+        }
+
         
         private void Start()
         {
@@ -83,7 +85,6 @@ namespace Player
                 points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity, previewParent);
             }
             
-            Instance = this;
             cam = Camera.main;
         }
 
@@ -104,8 +105,6 @@ namespace Player
                 canAdd = true;
 
             HandleInputs();
-
-            SavePlayerPosition();
 
             Scroll();
         }
@@ -317,10 +316,6 @@ namespace Player
 
             onDeath();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        private void SavePlayerPosition()
-        {
-            playerPositions.Enqueue(transform.position);
         }
 
         private Vector2 PointPosition(float t)
