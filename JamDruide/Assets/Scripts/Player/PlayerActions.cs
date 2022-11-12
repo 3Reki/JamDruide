@@ -165,7 +165,7 @@ namespace Player
             {
                 GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
                 potions[selectedPotion] = null;
-                projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * launchForce;
+                projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * 1.5f * launchForce;
                 CheckRecipe();
                 if(onThrow != null)
                     onThrow.Invoke(selectedPotion);
