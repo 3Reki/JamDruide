@@ -15,6 +15,7 @@ public class NextLevel : MonoBehaviour
 
     void LoadLevel()
     {
+        TimerManager.Instance.SaveTime();
         SceneManager.LoadScene(nextLevel);
     }
 
