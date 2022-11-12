@@ -1812,6 +1812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameHUD: {fileID: 8785664006852030517}
   pauseHUD: {fileID: 5409776702705888500}
+  optionHUD: {fileID: 6424194607099219387}
   audioMixer: {fileID: 24100000, guid: 1dfed899f67a2bd48b0b9a8bbfbb5016, type: 2}
   volume: {fileID: 841812166821607778}
   slider: {fileID: 8958704532468099622}
