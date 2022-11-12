@@ -865,7 +865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249e3d4711ddc3f4cad267f9e1d009b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: 7
 --- !u!212 &273394334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -73762,10 +73761,6 @@ PrefabInstance:
     - target: {fileID: 2239774868686700128, guid: bd5c3f05b524cda4aa350c508dbafdcd, type: 3}
       propertyPath: m_RootOrder
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2239774868686700128, guid: bd5c3f05b524cda4aa350c508dbafdcd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.280648
       objectReference: {fileID: 0}
     - target: {fileID: 2239774868686700128, guid: bd5c3f05b524cda4aa350c508dbafdcd, type: 3}
       propertyPath: m_LocalPosition.x
