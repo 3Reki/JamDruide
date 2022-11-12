@@ -49,6 +49,17 @@ namespace Player
         bool speedBoost;
         float speedSliderValue;
 
+
+        [Header("Sounds")]
+        AudioSource audio;
+        [SerializeField] AudioClip die;
+        [SerializeField] AudioClip craft;
+        [SerializeField] AudioClip collect;
+        [SerializeField] AudioClip drink;
+        [SerializeField] AudioClip throwBottle;
+
+
+
         private void OnEnable()
         {
             PauseMenu.OnPause.AddListener(() => enabled = false);
@@ -77,6 +88,8 @@ namespace Player
         {
             jumpSlider.gameObject.SetActive(false);
             speedSlider.gameObject.SetActive(false);
+
+            audio = GetComponent<AudioSource>();
 
             animator = GetComponent<Animator>();
             points = new GameObject[pointsCount];
@@ -159,6 +172,7 @@ namespace Player
                 potions[selectedPotion].Drink(playerController, this);
                 potions[selectedPotion] = null;
                 CheckRecipe();
+                audio.PlayOneShot(drink);
                 if (onThrow != null)
                     onThrow.Invoke(selectedPotion);
             }
@@ -190,6 +204,7 @@ namespace Player
                 potions[selectedPotion] = null;
                 projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * (1.5f * launchForce);
                 CheckRecipe();
+                audio.PlayOneShot(throwBottle);
                 if (onThrow != null)
                     onThrow.Invoke(selectedPotion);
             }
@@ -277,6 +292,7 @@ namespace Player
 
             if (canCollect)
             {
+                audio.PlayOneShot(collect);
                 if (currentResources.Contains(resourceToCollect.resourceType)) return;
                 
                 currentResources[resourceIndex] = resourceToCollect.resourceType;
@@ -316,6 +332,7 @@ namespace Player
                         if (onRecipeComplete != null)
                         {
                             onRecipeComplete.Invoke((IPotion)recipe.output, i);
+                            audio.PlayOneShot(craft);
                         }
                         break;
                     }
@@ -331,6 +348,7 @@ namespace Player
 
         public IEnumerator Death()
         {
+            audio.PlayOneShot(die);
             animator.Play("PlayerDeath");
             playerController.enabled = false;
             yield return new WaitForSeconds(deathTimer);

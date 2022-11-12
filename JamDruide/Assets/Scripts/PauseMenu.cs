@@ -25,7 +25,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        audioMixer.SetFloat("MasterVolume", PlayerPrefs.GetFloat(saveName, 1));
+        audioMixer.SetFloat("Master", PlayerPrefs.GetFloat(saveName, 1));
         slider.value = PlayerPrefs.GetFloat(saveName, 1);
     }
 
@@ -68,8 +68,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SetVolume(float sliderValue)
     {
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
-
+        audioMixer.SetFloat("Master", Mathf.Log10(sliderValue) * 20);
         displayNumber = sliderValue * 100;
         volume.text = "s o u n d s : " + displayNumber.ToString("F0");
         PlayerPrefs.SetFloat(saveName, sliderValue);
