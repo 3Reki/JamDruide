@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OrangeParticles 4
+  m_Name: OrangeParticles 5
   m_Shader: {fileID: -6465566751694194690, guid: 71568ee342f29ae4bbefa597435de1f1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -79,7 +79,7 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _EnableExternalAlpha: 0
-    - _Pixelisation: 8
+    - _Pixelisation: 32
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
