@@ -62351,10 +62351,6 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 107763290}
-    - target: {fileID: 7460895819820265553, guid: 21a788280a6fa6c47b31f9a20dc5c23d, type: 3}
-      propertyPath: brokenSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 21b48ce596c7c82408c16ad88c5d39f7, type: 3}
     - target: {fileID: 7460895819820265555, guid: 21a788280a6fa6c47b31f9a20dc5c23d, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -63724,11 +63720,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4092783528728212737, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4333839723576788751, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5190443223109654352, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: m_Name
@@ -63816,7 +63812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8323025449158150185, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
