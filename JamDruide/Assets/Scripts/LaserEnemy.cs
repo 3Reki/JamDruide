@@ -50,7 +50,7 @@ public class LaserEnemy : MonoBehaviour
     private void LaserCreation()
     {
         laserDirection = player.transform.position - transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection, layer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection, 100, 1<< LayerMask.NameToLayer("Player"));
         inactiveLineRenderer.SetPosition(1, hit.point);
         if (laserActive)
         {
