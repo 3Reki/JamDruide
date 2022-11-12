@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LD4 logique.unity
     guid: 69d9c18acb032fb4c94098bde003d928
   - enabled: 0
-    path: Assets/Scenes/LD.unity
+    path: Assets/Scenes/LD1.5 Potion-saut.unity
     guid: d1a5d0365094eb14b9f7420d2a5eee90
   - enabled: 0
     path: Assets/Scenes/ARCHIVES/LD4.unity
