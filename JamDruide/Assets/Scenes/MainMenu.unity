@@ -617,7 +617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &109101122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Archi Honorez\r\nCharles Huyghes\r\nCorentin Oger\r\nEliot Transon\r\nMatteo
+  m_text: "Archi Honorez\r\nCharles Huyghe\nCorentin Oger\r\nEliot Transon\r\nMatteo
     Gaerenyck\r\nOlympe Bapsolle\r\nPix Farin \r\nSacha Villecroze\r\nThomas Druesne"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4504d64a10381a4490900362321fce8, type: 2}
@@ -2446,13 +2446,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 431956105}
   m_HandleRect: {fileID: 36314705}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 163572155}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &633434203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4305,6 +4317,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474874247}
   m_CullTransparentMesh: 1
+--- !u!1001 &1488381271
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 403801752683409540, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_Name
+      value: MUSIC
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
 --- !u!1 &1532276991
 GameObject:
   m_ObjectHideFlags: 0
@@ -5481,7 +5552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2044114412
 MonoBehaviour:
   m_ObjectHideFlags: 0
