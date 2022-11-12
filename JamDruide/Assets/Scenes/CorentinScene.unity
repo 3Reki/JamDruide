@@ -551,6 +551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Salt (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2239774868686700133, guid: bd5c3f05b524cda4aa350c508dbafdcd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: bd5c3f05b524cda4aa350c508dbafdcd, type: 3}
