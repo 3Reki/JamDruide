@@ -52,6 +52,7 @@ public class PauseMenu : MonoBehaviour
         OnPause.Invoke();
         pauseHUD.SetActive(true);
         gameHUD.SetActive(false);
+        gameIsPause = true;
     }
 
     public void Resume()
@@ -60,6 +61,7 @@ public class PauseMenu : MonoBehaviour
         OnResume.Invoke();
         pauseHUD.SetActive(false);
         gameHUD.SetActive(true);
+        gameIsPause = false;
     }
 
     public void SetVolume(float sliderValue)
