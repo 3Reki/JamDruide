@@ -142,7 +142,7 @@ MonoBehaviour:
   currentResources: 0000000000000000
   craftsList: {fileID: 2903344727830008777}
   playerController: {fileID: 2453536640117689241}
-  launchForce: 20
+  launchForce: 14
   pointPrefab: {fileID: 3207998565831689386, guid: d7e598630dd605f4a8bbec124be6cc96, type: 3}
   pointsCount: 20
   deathTimer: 1
