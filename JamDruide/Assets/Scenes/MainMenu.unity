@@ -3034,7 +3034,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: enter the <size=180%> panoramix
+  m_text: enter the <size=180%> painoramix
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4504d64a10381a4490900362321fce8, type: 2}
   m_sharedMaterial: {fileID: 2173219564563390576, guid: e4504d64a10381a4490900362321fce8, type: 2}
