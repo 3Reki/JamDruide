@@ -9,6 +9,7 @@ namespace Potions
 
         public override void Drink(PlayerController player, PlayerActions playerActions)
         {
+            Instantiate(particleSystem, PlayerActions.Instance.transform);
             playerActions.StartCoroutine(playerActions.Death());
         }
     }
