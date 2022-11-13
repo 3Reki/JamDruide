@@ -4,9 +4,9 @@ namespace Potions
 {
     public class SplashDamagePotion : MonoBehaviour
     {
-        [SerializeField] private GameObject particleSystem;
-        [SerializeField] AudioSource audio;
-        [SerializeField] AudioClip explose;
+        [SerializeField] private new GameObject particleSystem;
+        [SerializeField] private new AudioSource audio;
+        [SerializeField] private AudioClip explose;
         private void OnTriggerEnter2D(Collider2D col)
         {
             Instantiate(particleSystem, transform.position, Quaternion.identity);
@@ -15,10 +15,6 @@ namespace Potions
             Destroy(GetComponent<Rigidbody2D>());
             Destroy(GetComponent<TrailRenderer>());
             Destroy(gameObject, 2);
-            if (col.CompareTag("Enemy"))
-            {
-                col.GetComponent<LaserEnemy>().Death();
-            }
         }
     }
 }

@@ -12,19 +12,20 @@ public class LaserEnemy : MonoBehaviour
     [SerializeField] private float laserCastTime;
     [SerializeField] private Animator graphAnimator;
     [SerializeField] private LayerMask layer;
+    [SerializeField] private AudioClip shoot;
     
     private Vector2 laserDirection;
     private float startTime;
     private bool laserActive;
     private PlayerActions player;
 
-    AudioSource audio;
-    [SerializeField] AudioClip shoot;
+    private new AudioSource audio;
     private void Start()
     {
         DeactivateLaser();
-        activeLineRenderer.SetPosition(0, transform.position);
-        inactiveLineRenderer.SetPosition(0, transform.position);
+        Vector3 position = transform.position;
+        activeLineRenderer.SetPosition(0, position);
+        inactiveLineRenderer.SetPosition(0, position);
         audio = GetComponent<AudioSource>();
     }
 
@@ -49,25 +50,26 @@ public class LaserEnemy : MonoBehaviour
 
     private void LaserCreation()
     {
-        laserDirection = player.transform.position - transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, laserDirection, 100, layer);
+        Vector3 position = transform.position;
+        laserDirection = player.transform.position - position;
+        RaycastHit2D hit = Physics2D.Raycast(position, laserDirection, 100, layer);
 
         inactiveLineRenderer.SetPosition(1, hit.point);
-        if (laserActive)
-        {
-            activeLineRenderer.SetPosition(1, hit.point);
-            laserEnd.transform.position = hit.point;
-            laserEnd.transform.LookAt(transform.position);
-            laserStart.transform.LookAt(hit.point);
-            if (hit.collider != null && hit.transform.CompareTag("Player"))
-            {
-                StartCoroutine(player.Death());
-                Invoke("DeactivateLaser", 1);
-                laserActive = false;
-                player = null;
-            }
-        }
         
+        if (!laserActive) return;
+        
+        activeLineRenderer.SetPosition(1, hit.point);
+        laserEnd.transform.position = hit.point;
+        laserEnd.transform.LookAt(transform.position);
+        laserStart.transform.LookAt(hit.point);
+            
+        if (hit.collider == null || !hit.transform.CompareTag("Player")) return;
+            
+        StartCoroutine(player.Death());
+        Invoke(nameof(DeactivateLaser), 1);
+        laserActive = false;
+        player = null;
+
     }
 
     private void LaserState()
