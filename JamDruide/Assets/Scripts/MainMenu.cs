@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        TimerManager.Instance.totalTime = 0;
+        TimerManager.Instance.ResetTimer();
         SceneManager.LoadScene(level);
     }
 
