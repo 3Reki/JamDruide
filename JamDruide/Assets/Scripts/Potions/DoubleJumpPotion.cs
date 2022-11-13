@@ -23,12 +23,15 @@ namespace Potions
             player.CanDoubleJump = true;
             IsActive = true;
             var newParticleSystem = Instantiate(particleSystem, PlayerActions.Instance.transform);
+            onDrink?.Invoke(effectDuration);
             yield return new WaitForSeconds(effectDuration);
             Destroy(newParticleSystem);
             player.CanDoubleJump = false;
             IsActive = false;
         }
 
+        public delegate void DoubleJumpPotionCallback(float duration);
 
+        public static DoubleJumpPotionCallback onDrink;
     }
 }

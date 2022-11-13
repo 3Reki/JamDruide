@@ -44,7 +44,7 @@ namespace Player
 
         [SerializeField] AudioClip jump;
         [SerializeField] AudioClip doubleJump;
-        AudioSource audio;
+        private new AudioSource audio;
         private void OnEnable()
         {
             PauseMenu.OnPause.AddListener(() => enabled = false);
@@ -174,7 +174,6 @@ namespace Player
                     .Any(point => Physics2D.Raycast(point, range.dir, _detectionRayLength, _groundLayer));
             }
 
-            var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
             if (Physics2D.Raycast(upLeftStart, Vector2.up, _detectionRayLength * 0.8f + _characterBounds.extents.y, _groundLayer))
             {
                 colUp = true;
@@ -190,14 +189,15 @@ namespace Player
         private void CalculateRayRanged()
         {
             // This is crying out for some kind of refactor. 
-            var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
+            var position = transform.position;
+            var b = new Bounds(position + _characterBounds.center, _characterBounds.size);
 
             raysDown = new RayRange(b.min.x + _rayBuffer, b.min.y, b.max.x - _rayBuffer, b.min.y, Vector2.down);
             raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
             raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
             raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
             
-            float height = (transform.position + _characterBounds.center).y;
+            float height = (position + _characterBounds.center).y;
             upLeftStart = new Vector2(b.min.x, height);
             upRightStart = new Vector2(b.max.x, height);
         }
@@ -219,8 +219,8 @@ namespace Player
             Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
 
             // Rays
-            // if (!Application.isPlaying)
-            // {
+            if (!Application.isPlaying)
+            {
                 CalculateRayRanged();
                 Gizmos.color = Color.blue;
                 foreach (var range in new List<RayRange> {raysUp, raysRight, raysDown, raysLeft})
@@ -230,10 +230,9 @@ namespace Player
                         Gizmos.DrawRay(point, range.dir * _detectionRayLength);
                     }
                 }
-                var b = new Bounds(transform.position + _characterBounds.center, _characterBounds.size);
                 Gizmos.DrawRay(upLeftStart, Vector3.up * (_detectionRayLength + _characterBounds.extents.y));
                 Gizmos.DrawRay(upRightStart, Vector3.up * (_detectionRayLength + _characterBounds.extents.y));
-            // }
+            }
 
             if (!Application.isPlaying) return;
 

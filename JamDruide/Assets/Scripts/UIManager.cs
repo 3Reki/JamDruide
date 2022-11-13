@@ -13,8 +13,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Animator craftedPotionUI;
     [SerializeField] private Image craftedPotionImage;
     [SerializeField] private List<Image> potionsInventory;
-
-    [SerializeField] GameObject selectedPotion;
+    [SerializeField] private GameObject selectedPotion;
+    [SerializeField] private Image doubleJumpSlider;
+    [SerializeField] private GameObject doubleJumpGameObject;
+    [SerializeField] private Image speedSlider;
+    [SerializeField] private GameObject speedGameObject;
 
     private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
     private readonly WaitForSeconds animDelay = new(0.5f);
@@ -51,6 +54,8 @@ public class UIManager : MonoBehaviour
         PlayerActions.onDeath += ResetInventoryAfterDeath;
         PauseMenu.OnPause.AddListener(() => enabled = false);
         PauseMenu.OnResume.AddListener(() => enabled = true);
+        SpeedPotion.onDrink += duration => HandleSlider(speedSlider, speedGameObject, duration);
+        DoubleJumpPotion.onDrink += duration => HandleSlider(doubleJumpSlider, doubleJumpGameObject, duration);
     }
 
 
@@ -62,6 +67,8 @@ public class UIManager : MonoBehaviour
         PlayerActions.onSelect -= SelectPotion;
         PauseMenu.OnPause.RemoveListener(() => enabled = false);
         PauseMenu.OnResume.RemoveListener(() => enabled = true);
+        SpeedPotion.onDrink -= duration => HandleSlider(speedSlider, speedGameObject, duration);
+        DoubleJumpPotion.onDrink -= duration => HandleSlider(doubleJumpSlider, doubleJumpGameObject, duration);
     }
 
     private void UpdateUI(int resourceIndex, CraftsList.Resources resourceType)
@@ -101,14 +108,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void FillInventory(int slot)
+    private void FillInventory(int slot)
     {
         potionsInventory[slot].sprite = craftedPotionImage.sprite;
         potionsInventory[slot].enabled = true;
         AnimateGet(potionsInventory[slot].transform);
     }
-    
-    void RemoveInventory(int slot)
+
+    private void RemoveInventory(int slot)
     {
         StartCoroutine(DelayPotionAnimation(slot));
     }
@@ -120,8 +127,8 @@ public class UIManager : MonoBehaviour
         potionsInventory[index].sprite = null;
         potionsInventory[index].enabled = false;
     }
-    
-    void SelectPotion(int select)
+
+    private void SelectPotion(int select)
     {
         if (select == 2)
             selectedPotion.transform.position = potionsInventory[2].transform.position;
@@ -129,6 +136,13 @@ public class UIManager : MonoBehaviour
             selectedPotion.transform.position = potionsInventory[1].transform.position;
         else
             selectedPotion.transform.position = potionsInventory[0].transform.position;
+    }
+
+    private static void HandleSlider(Image slider, GameObject sliderGameObject, float duration)
+    {
+        sliderGameObject.SetActive(true);
+        slider.fillAmount = 1;
+        slider.DOFillAmount(0, duration).onComplete = () => sliderGameObject.SetActive(false);
     }
 
     private static void AnimateUse(Transform imageTransform)

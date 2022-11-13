@@ -5,13 +5,14 @@ using LDElements;
 using Potions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace Player
 {
     public class PlayerActions : MonoBehaviour
     {
+        public static PlayerActions Instance;
         public CraftsList.Resources[] currentResources = new CraftsList.Resources[2];
+        public Transform lastCheckpoint;
         
         [SerializeField] private CraftsList craftsList;
         [SerializeField] private PlayerController playerController;
@@ -19,46 +20,32 @@ namespace Player
         [SerializeField] private GameObject pointPrefab;
         [SerializeField] private int pointsCount;
         [SerializeField] private float deathTimer;
-
-        private GameObject[] points;
-        public Transform lastCheckpoint;
-        private bool invincible;
         
-        private bool canCollect;
-        private int resourceIndex = 0;
-        private Ingredient resourceToCollect;
-        private Telescope telescope;
-        private IPotion[] potions = new IPotion[3];
-        private Vector2 projectileDirection;
-        
-        public static PlayerActions Instance;
-        private Camera cam;
-		private Animator animator;
-
-        int selectedPotion;
-
-        bool canAdd;
-        bool hasOnePotion;
-
-        //Slider des potions
-        [SerializeField] Slider jumpSlider;
-        bool doubleJump;
-        float jumpSliderValue;
-        
-        [SerializeField] Slider speedSlider;
-        bool speedBoost;
-        float speedSliderValue;
-
-
-        [Header("Sounds")]
-        AudioSource audio;
+        [Header("Sounds")] 
         [SerializeField] AudioClip die;
         [SerializeField] AudioClip craft;
         [SerializeField] AudioClip collect;
         [SerializeField] AudioClip drink;
         [SerializeField] AudioClip throwBottle;
+        private new AudioSource audio;
 
+        private GameObject[] points;
+        private bool invincible;
+        
+        private bool canCollect;
+        private int resourceIndex;
+        private Ingredient resourceToCollect;
+        private Telescope telescope;
+        private readonly IPotion[] potions = new IPotion[3];
+        private Vector2 projectileDirection;
+        
+        private Camera cam;
+		private Animator animator;
 
+        private int selectedPotion;
+
+        private bool canAdd;
+        private bool hasOnePotion;
 
         private void OnEnable()
         {
@@ -86,9 +73,6 @@ namespace Player
         
         private void Start()
         {
-            jumpSlider.gameObject.SetActive(false);
-            speedSlider.gameObject.SetActive(false);
-
             audio = GetComponent<AudioSource>();
 
             animator = GetComponent<Animator>();
@@ -106,39 +90,33 @@ namespace Player
 
         private void Update()
         {
-            HandleSliders();
+            CheckOnePotion();
 
-            //detect if the player has at least one potion
-            if (potions[0] == null && potions[1] == null && potions[2] == null)
-                hasOnePotion = false;
-            else
-                hasOnePotion = true;
-
-            //detect if we can add a potion
-            if (potions[0] != null && potions[1] != null && potions[2] != null)
-                canAdd = false;
-            else
-                canAdd = true;
+            CheckFullPotions();
 
             HandleInputs();
 
             Scroll();
         }
 
-        private void HandleSliders()
+        private void CheckFullPotions()
         {
-            jumpSliderValue -= 1 * Time.deltaTime;
-            jumpSlider.value = jumpSliderValue;
-
-            speedSliderValue -= 1 * Time.deltaTime;
-            speedSlider.value = speedSliderValue;
-
-            if (GetComponent<PlayerController>().CanDoubleJump && !doubleJump)
-                StartCoroutine(JumpSlider());
-            if (GetComponent<PlayerController>().moveClamp > 13f && !speedBoost)
-                StartCoroutine(SpeedSlider());
+            //detect if we can add a potion
+            if (potions[0] != null && potions[1] != null && potions[2] != null)
+                canAdd = false;
+            else
+                canAdd = true;
         }
-        
+
+        private void CheckOnePotion()
+        {
+            //detect if the player has at least one potion
+            if (potions[0] == null && potions[1] == null && potions[2] == null)
+                hasOnePotion = false;
+            else
+                hasOnePotion = true;
+        }
+
         private void HandleInputs()
         {
             if (PlayerController.Controls.Action.Interact.WasPerformedThisFrame())
@@ -254,30 +232,6 @@ namespace Player
             {
                 canUse = false;
             }
-        }
-
-        private IEnumerator JumpSlider()
-        {
-            jumpSlider.gameObject.SetActive(true);
-            jumpSlider.maxValue = 4;
-            jumpSlider.value = jumpSlider.maxValue;
-            jumpSliderValue = 4;
-            doubleJump = true;
-            yield return new WaitForSeconds(4);
-            doubleJump = false;
-            jumpSlider.gameObject.SetActive(false);
-        }
-
-        private IEnumerator SpeedSlider()
-        {
-            speedSlider.gameObject.SetActive(true);
-            speedSlider.maxValue = 4f;
-            speedSlider.value = jumpSlider.maxValue;
-            speedSliderValue = 4f;
-            speedBoost = true;
-            yield return new WaitForSeconds(4);
-            speedBoost = false;
-            speedSlider.gameObject.SetActive(false);
         }
 
         private void Scroll()

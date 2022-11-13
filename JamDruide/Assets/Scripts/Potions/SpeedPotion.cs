@@ -25,10 +25,15 @@ namespace Potions
             float defaultMaxSpeed = player.moveClamp;
             player.moveClamp *= multiplier;
             var newParticleSystem = Instantiate(particleSystem, PlayerActions.Instance.transform);
+            onDrink?.Invoke(effectDuration);
             yield return new WaitForSeconds(effectDuration);
             Destroy(newParticleSystem);
             IsActive = false;
             player.moveClamp = defaultMaxSpeed;
         }
+        
+        public delegate void SpeedPotionCallback(float duration);
+
+        public static SpeedPotionCallback onDrink;
     }
 }
