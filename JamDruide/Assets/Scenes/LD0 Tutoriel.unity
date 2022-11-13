@@ -47862,10 +47862,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2428208065571008709, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
-      propertyPath: deathTimer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2428208065571008709, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: lastCheckpoint
       value: 
       objectReference: {fileID: 1030084255}

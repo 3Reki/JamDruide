@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using CameraScripts;
@@ -13,16 +14,17 @@ namespace Player
         public static PlayerActions Instance;
         public CraftsList.Resources[] currentResources = new CraftsList.Resources[2];
         public Transform lastCheckpoint;
-        
+
         [SerializeField] private CraftsList craftsList;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerDeviceHandler playerDeviceHandler;
         [SerializeField] private float launchForce;
+        [SerializeField] private AnimationCurve launchDistTransformation;
         [SerializeField] private GameObject pointPrefab;
         [SerializeField] private int pointsCount;
         [SerializeField] private float deathTimer;
-        
-        [Header("Sounds")] 
-        [SerializeField] AudioClip die;
+
+        [Header("Sounds")] [SerializeField] AudioClip die;
         [SerializeField] AudioClip craft;
         [SerializeField] AudioClip collect;
         [SerializeField] AudioClip drink;
@@ -31,19 +33,21 @@ namespace Player
 
         private GameObject[] points;
         private bool invincible;
-        
+
         private bool canCollect;
         private int resourceIndex;
         private Ingredient resourceToCollect;
         private Telescope telescope;
         private readonly IPotion[] potions = new IPotion[3];
         private Vector2 projectileDirection;
-        
+        private float projectileStrength;
+
         private Camera cam;
-		private Animator animator;
+        private Animator animator;
 
         private int selectedPotion;
-
+        private bool canUse;
+        private bool isUsing;
         private bool canAdd;
         private bool hasOnePotion;
 
@@ -63,14 +67,14 @@ namespace Player
         private void Awake()
         {
             Instance = this;
-            
+
 #if !UNITY_EDITOR
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Confined;
 #endif
         }
 
-        
+
         private void Start()
         {
             audio = GetComponent<AudioSource>();
@@ -84,7 +88,7 @@ namespace Player
                 points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity, previewParent);
                 points[i].SetActive(false);
             }
-            
+
             cam = Camera.main;
         }
 
@@ -124,12 +128,14 @@ namespace Player
                 if (canCollect)
                 {
                     Collect();
-                } else if (canUse)
+                }
+                else if (canUse)
                 {
                     isUsing = true;
                     telescope.StartUsing();
                 }
             }
+
             if (PlayerController.Controls.Action.Interact.WasReleasedThisFrame())
             {
                 if (isUsing)
@@ -145,7 +151,8 @@ namespace Player
                 telescope.StopUsing();
             }
 
-            if (PlayerController.Controls.Action.Drink.WasPressedThisFrame() && hasOnePotion && potions[selectedPotion] != null &&
+            if (PlayerController.Controls.Action.Drink.WasPressedThisFrame() && hasOnePotion &&
+                potions[selectedPotion] != null &&
                 !potions[selectedPotion].IsActive)
             {
                 potions[selectedPotion].Drink(playerController, this);
@@ -166,7 +173,14 @@ namespace Player
 
         private void HandleThrow()
         {
-            projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+            if (playerDeviceHandler.currentAimMethod == PlayerDeviceHandler.AimMethod.Mouse)
+            {
+                MouseAim();
+            }
+            else
+            {
+                GamepadAim();
+            }
 
             if (!hasOnePotion)
                 return;
@@ -189,17 +203,19 @@ namespace Player
             }
 
             if (!PlayerController.Controls.Action.Throw.WasReleasedThisFrame()) return;
-            
+
             for (int i = 0; i < pointsCount; i++)
             {
                 points[i].SetActive(false);
             }
 
             if (potions[selectedPotion] == null || potions[selectedPotion].IsActive) return;
-            
-            GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
+
+            GameObject projectileGO =
+                Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
             potions[selectedPotion] = null;
-            projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * (1.5f * launchForce);
+            projectileGO.GetComponent<Rigidbody2D>().velocity =
+                projectileDirection * (launchForce * projectileStrength);
             CheckRecipe();
             audio.PlayOneShot(throwBottle);
             if (onThrow != null)
@@ -221,7 +237,7 @@ namespace Player
                 telescope = other.GetComponent<Telescope>();
             }
         }
-        
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (canCollect && other.gameObject == resourceToCollect.gameObject)
@@ -236,13 +252,14 @@ namespace Player
 
         private void Scroll()
         {
-            if(PlayerController.Controls.Other.ScrollPotionDown.WasPressedThisFrame())
+            if (PlayerController.Controls.Other.ScrollPotionDown.WasPressedThisFrame())
             {
                 selectedPotion--;
                 if (selectedPotion == -1)
                     selectedPotion = 2;
             }
-            if(PlayerController.Controls.Other.ScrollPotionUp.WasPressedThisFrame())
+
+            if (PlayerController.Controls.Other.ScrollPotionUp.WasPressedThisFrame())
             {
                 selectedPotion++;
                 if (selectedPotion == 3)
@@ -254,7 +271,6 @@ namespace Player
             if (PlayerController.Controls.Other.Potion1.WasPerformedThisFrame()) selectedPotion = 0;
 
             onSelect?.Invoke(selectedPotion);
-
         }
 
         private void Collect()
@@ -263,17 +279,17 @@ namespace Player
                 return;
 
             if (!canCollect) return;
-            
+
             audio.PlayOneShot(collect);
             if (currentResources.Contains(resourceToCollect.resourceType)) return;
-                
+
             currentResources[resourceIndex] = resourceToCollect.resourceType;
 
             if (onCollect != null)
             {
                 onCollect.Invoke(resourceIndex, resourceToCollect.resourceType);
             }
-                
+
             resourceToCollect.ResourceCollected();
             resourceIndex++;
             if (resourceIndex == 2)
@@ -291,25 +307,26 @@ namespace Player
             foreach (var recipe in craftsList.recipes)
             {
                 if (!recipe.ingredients.Contains(currentResources[0])) continue;
-                
+
                 if (!recipe.ingredients.Contains(currentResources[1])) continue;
 
                 for (int i = 0; i < potions.Length; i++)
                 {
                     if (potions[i] == null)
                     {
-                        potions[i] = ((IPotion)recipe.output);
+                        potions[i] = ((IPotion) recipe.output);
 
                         if (onRecipeComplete != null)
                         {
-                            onRecipeComplete.Invoke((IPotion)recipe.output, i);
+                            onRecipeComplete.Invoke((IPotion) recipe.output, i);
                             audio.PlayOneShot(craft);
                         }
+
                         break;
                     }
                 }
                 //potions.Add((IPotion) recipe.output);
-                
+
                 for (int i = 0; i < 2; i++)
                 {
                     currentResources[i] = CraftsList.Resources.None;
@@ -343,15 +360,36 @@ namespace Player
 
         private Vector2 PointPosition(float t)
         {
-            Vector2 currentPosition = (Vector2) transform.position + projectileDirection * (launchForce * t) + Physics2D.gravity *
-                (.5f * t * t);
+            Vector2 currentPosition = (Vector2) transform.position +
+                                      projectileDirection * (launchForce * t * projectileStrength) + Physics2D.gravity *
+                                      (2.5f * .5f * t * t);
             return currentPosition;
         }
 
+        private void MouseAim()
+        {
+            Vector2 aimDir =
+                (Vector2) cam.ScreenToWorldPoint(PlayerController.Controls.Action.KeyboardAim.ReadValue<Vector2>()) -
+                (Vector2) transform.position;
+            projectileStrength = launchDistTransformation.Evaluate(aimDir.sqrMagnitude);
+            projectileDirection = aimDir.normalized;
+        }
+
+        private void GamepadAim()
+        {
+            Vector2 aimDir = PlayerController.Controls.Action.GamepadAim.ReadValue<Vector2>();
+            projectileStrength = aimDir.magnitude;
+            projectileDirection = aimDir.normalized;
+        }
+
         public delegate void PlayerCallback(int resourceIndex, CraftsList.Resources resourceType);
+
         public delegate void PlayerCallback2(IPotion potion, int slot);
+
         public delegate void PlayerCallback3(int slot);
+
         public delegate void PlayerCallback4(int slot);
+
         public delegate void PlayerCallback5();
 
         public static PlayerCallback onCollect;
@@ -359,8 +397,5 @@ namespace Player
         public static PlayerCallback3 onThrow;
         public static PlayerCallback4 onSelect;
         public static PlayerCallback5 onDeath;
-        private bool canUse;
-        private bool isUsing;
     }
-    
 }

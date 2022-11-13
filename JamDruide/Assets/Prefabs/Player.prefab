@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 6781471605938628631}
   - component: {fileID: 5492518983144581915}
   - component: {fileID: 4234863353365465767}
+  - component: {fileID: 4681178203734162024}
+  - component: {fileID: 8262510174065837144}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -39,7 +41,7 @@ Transform:
   - {fileID: 2903344727830008782}
   - {fileID: 4363168047577180003}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5987869338428308260
 SpriteRenderer:
@@ -143,15 +145,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentResources: 0000000000000000
+  lastCheckpoint: {fileID: 0}
   craftsList: {fileID: 2903344727830008777}
   playerController: {fileID: 2453536640117689241}
-  launchForce: 14
+  playerDeviceHandler: {fileID: 8262510174065837144}
+  launchForce: 20
+  launchDistTransformation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.021557642
+      outSlope: 0.021557642
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0192604
+    - serializedVersion: 3
+      time: 35.395298
+      value: 0.7934549
+      inSlope: 0.0049423934
+      outSlope: 0.0049423934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.038081568
+    - serializedVersion: 3
+      time: 144
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   pointPrefab: {fileID: 3207998565831689386, guid: d7e598630dd605f4a8bbec124be6cc96, type: 3}
   pointsCount: 20
   deathTimer: 1
-  lastCheckpoint: {fileID: 0}
-  jumpSlider: {fileID: 0}
-  speedSlider: {fileID: 0}
   die: {fileID: 8300000, guid: 8189d41bb2246874d851ee661d2b0570, type: 3}
   craft: {fileID: 8300000, guid: e7989f306e8604f48b2681d19be57681, type: 3}
   collect: {fileID: 8300000, guid: d7fad1dab2e5d0c408bf50762bb11a89, type: 3}
@@ -431,6 +465,49 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4681178203734162024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242150849785592421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3344c91be0924a14fa3220815d3c5786, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Movement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &8262510174065837144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242150849785592421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a00d558faf8f4b8a8e224d9c7af259a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 4681178203734162024}
 --- !u!1 &3022842604460926363
 GameObject:
   m_ObjectHideFlags: 0

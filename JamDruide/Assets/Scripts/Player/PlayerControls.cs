@@ -198,6 +198,24 @@ namespace Player
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KeyboardAim"",
+                    ""type"": ""Value"",
+                    ""id"": ""5e64bc50-604f-4fc4-8246-e1a0ce699d88"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GamepadAim"",
+                    ""type"": ""Value"",
+                    ""id"": ""2d2afd90-7489-424d-8b4e-7c815564a7a0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -286,6 +304,28 @@ namespace Player
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c2148b7-da06-4202-9741-115bdbff04da"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""GamepadAim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44d90439-5afd-47c4-8e32-49b81cd42f46"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""KeyboardAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -494,6 +534,8 @@ namespace Player
             m_Action_Drink = m_Action.FindAction("Drink", throwIfNotFound: true);
             m_Action_Throw = m_Action.FindAction("Throw", throwIfNotFound: true);
             m_Action_Interact = m_Action.FindAction("Interact", throwIfNotFound: true);
+            m_Action_KeyboardAim = m_Action.FindAction("KeyboardAim", throwIfNotFound: true);
+            m_Action_GamepadAim = m_Action.FindAction("GamepadAim", throwIfNotFound: true);
             // Other
             m_Other = asset.FindActionMap("Other", throwIfNotFound: true);
             m_Other_Potion1 = m_Other.FindAction("Potion1", throwIfNotFound: true);
@@ -614,6 +656,8 @@ namespace Player
         private readonly InputAction m_Action_Drink;
         private readonly InputAction m_Action_Throw;
         private readonly InputAction m_Action_Interact;
+        private readonly InputAction m_Action_KeyboardAim;
+        private readonly InputAction m_Action_GamepadAim;
         public struct ActionActions
         {
             private @PlayerControls m_Wrapper;
@@ -622,6 +666,8 @@ namespace Player
             public InputAction @Drink => m_Wrapper.m_Action_Drink;
             public InputAction @Throw => m_Wrapper.m_Action_Throw;
             public InputAction @Interact => m_Wrapper.m_Action_Interact;
+            public InputAction @KeyboardAim => m_Wrapper.m_Action_KeyboardAim;
+            public InputAction @GamepadAim => m_Wrapper.m_Action_GamepadAim;
             public InputActionMap Get() { return m_Wrapper.m_Action; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -643,6 +689,12 @@ namespace Player
                     @Interact.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnInteract;
                     @Interact.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnInteract;
                     @Interact.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnInteract;
+                    @KeyboardAim.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnKeyboardAim;
+                    @KeyboardAim.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnKeyboardAim;
+                    @KeyboardAim.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnKeyboardAim;
+                    @GamepadAim.started -= m_Wrapper.m_ActionActionsCallbackInterface.OnGamepadAim;
+                    @GamepadAim.performed -= m_Wrapper.m_ActionActionsCallbackInterface.OnGamepadAim;
+                    @GamepadAim.canceled -= m_Wrapper.m_ActionActionsCallbackInterface.OnGamepadAim;
                 }
                 m_Wrapper.m_ActionActionsCallbackInterface = instance;
                 if (instance != null)
@@ -659,6 +711,12 @@ namespace Player
                     @Interact.started += instance.OnInteract;
                     @Interact.performed += instance.OnInteract;
                     @Interact.canceled += instance.OnInteract;
+                    @KeyboardAim.started += instance.OnKeyboardAim;
+                    @KeyboardAim.performed += instance.OnKeyboardAim;
+                    @KeyboardAim.canceled += instance.OnKeyboardAim;
+                    @GamepadAim.started += instance.OnGamepadAim;
+                    @GamepadAim.performed += instance.OnGamepadAim;
+                    @GamepadAim.canceled += instance.OnGamepadAim;
                 }
             }
         }
@@ -766,6 +824,8 @@ namespace Player
             void OnDrink(InputAction.CallbackContext context);
             void OnThrow(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnKeyboardAim(InputAction.CallbackContext context);
+            void OnGamepadAim(InputAction.CallbackContext context);
         }
         public interface IOtherActions
         {
