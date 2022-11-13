@@ -98,6 +98,7 @@ namespace Player
             for (int i = 0; i < pointsCount; i++)
             {
                 points[i] = Instantiate(pointPrefab, transform.position, Quaternion.identity, previewParent);
+                points[i].SetActive(false);
             }
             
             cam = Camera.main;
@@ -188,26 +189,35 @@ namespace Player
         private void HandleThrow()
         {
             projectileDirection = (cam.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-            
-            if (Input.GetKey(KeyCode.Mouse0) && hasOnePotion)
+
+            if (!hasOnePotion)
+                return;
+
+            if (Input.GetKey(KeyCode.Mouse0))
             {
                 for (int i = 0; i < pointsCount; i++)
                 {
                     points[i].transform.position = PointPosition(i * 0.1f);
+                    points[i].SetActive(true);
                 }
             }
 
-            if (Input.GetKeyUp(KeyCode.Mouse0) && hasOnePotion && potions[selectedPotion] != null &&
-                !potions[selectedPotion].IsActive)
+            if (!Input.GetKeyUp(KeyCode.Mouse0)) return;
+            
+            for (int i = 0; i < pointsCount; i++)
             {
-                GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
-                potions[selectedPotion] = null;
-                projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * (1.5f * launchForce);
-                CheckRecipe();
-                audio.PlayOneShot(throwBottle);
-                if (onThrow != null)
-                    onThrow.Invoke(selectedPotion);
+                points[i].SetActive(false);
             }
+
+            if (potions[selectedPotion] == null || potions[selectedPotion].IsActive) return;
+            
+            GameObject projectileGO = Instantiate(potions[selectedPotion].Throw(), transform.position, Quaternion.identity);
+            potions[selectedPotion] = null;
+            projectileGO.GetComponent<Rigidbody2D>().velocity = projectileDirection * (1.5f * launchForce);
+            CheckRecipe();
+            audio.PlayOneShot(throwBottle);
+            if (onThrow != null)
+                onThrow.Invoke(selectedPotion);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
