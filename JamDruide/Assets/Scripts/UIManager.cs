@@ -51,13 +51,13 @@ public class UIManager : MonoBehaviour
         PlayerActions.onRecipeComplete += OnRecipeComplete;
         PlayerActions.onThrow += RemoveInventory;
         PlayerActions.onSelect += SelectPotion;
-        PlayerActions.onDeath += ResetInventoryAfterDeath;
         PauseMenu.OnPause.AddListener(() => enabled = false);
         PauseMenu.OnResume.AddListener(() => enabled = true);
-        SpeedPotion.onDrink += duration => HandleSlider(speedSlider, speedGameObject, duration);
-        DoubleJumpPotion.onDrink += duration => HandleSlider(doubleJumpSlider, doubleJumpGameObject, duration);
+        SpeedPotion.onDrink += SpeedSlider;
+        DoubleJumpPotion.onDrink += DoubleJumpSlider;
     }
 
+    
 
     private void OnDisable()
     {
@@ -67,8 +67,8 @@ public class UIManager : MonoBehaviour
         PlayerActions.onSelect -= SelectPotion;
         PauseMenu.OnPause.RemoveListener(() => enabled = false);
         PauseMenu.OnResume.RemoveListener(() => enabled = true);
-        SpeedPotion.onDrink -= duration => HandleSlider(speedSlider, speedGameObject, duration);
-        DoubleJumpPotion.onDrink -= duration => HandleSlider(doubleJumpSlider, doubleJumpGameObject, duration);
+        SpeedPotion.onDrink -= SpeedSlider;
+        DoubleJumpPotion.onDrink -= DoubleJumpSlider;
     }
 
     private void UpdateUI(int resourceIndex, CraftsList.Resources resourceType)
@@ -96,16 +96,6 @@ public class UIManager : MonoBehaviour
         
         FillInventory(slot);
         craftedPotionUI.Play("UICraftedPotion");
-    }
-    
-    private void ResetInventoryAfterDeath()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            if (CraftUI[i] == null) return;
-            
-            AnimateUse(CraftUI[i].transform);
-        }
     }
 
     private void FillInventory(int slot)
@@ -136,6 +126,16 @@ public class UIManager : MonoBehaviour
             selectedPotion.transform.position = potionsInventory[1].transform.position;
         else
             selectedPotion.transform.position = potionsInventory[0].transform.position;
+    }
+    
+    private void DoubleJumpSlider(float duration)
+    {
+        HandleSlider(doubleJumpSlider, doubleJumpGameObject, duration);
+    }
+    
+    private void SpeedSlider(float duration)
+    {
+        HandleSlider(speedSlider, speedGameObject, duration);
     }
 
     private static void HandleSlider(Image slider, GameObject sliderGameObject, float duration)

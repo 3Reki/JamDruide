@@ -338,7 +338,7 @@ namespace Player
         {
             audio.PlayOneShot(die);
             animator.Play("PlayerDeath");
-            playerController.enabled = false;
+            PlayerController.Controls.Disable();
             yield return new WaitForSeconds(deathTimer);
             /*playerController.enabled = true;
             animator.Play("PlayerIdle");
@@ -354,7 +354,6 @@ namespace Player
                 currentResources[i] = CraftsList.Resources.None;
             }*/
 
-            onDeath();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
