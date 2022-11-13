@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -12,16 +11,16 @@ public class PauseMenu : MonoBehaviour
 
     public static bool gameIsPause;
 
-    [SerializeField] GameObject gameHUD;
-    [SerializeField] GameObject pauseHUD;
-    [SerializeField] GameObject optionHUD;
+    [SerializeField] private GameObject gameHUD;
+    [SerializeField] private GameObject pauseHUD;
+    [SerializeField] private GameObject optionHUD;
 
     //audio
-    [SerializeField] AudioMixer audioMixer;
-    [SerializeField] TMP_Text volume;
-    [SerializeField] Slider slider;
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private TMP_Text volume;
+    [SerializeField] private Slider slider;
     [SerializeField] private string saveName;
-    float displayNumber;
+    private float displayNumber;
 
     private void Start()
     {
@@ -37,9 +36,9 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    void MyInputs()
+    private void MyInputs()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (PlayerController.Controls.Other.Menu.WasPerformedThisFrame())
         {
             gameIsPause = !gameIsPause;
             if (gameIsPause)
@@ -49,7 +48,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void Pause()
+    private void Pause()
     {
         Time.timeScale = 0f;
         OnPause.Invoke();

@@ -1092,7 +1092,6 @@ GameObject:
   - component: {fileID: 4290095428935985642}
   - component: {fileID: 4290095428935985640}
   - component: {fileID: 4290095428935985641}
-  - component: {fileID: 2861657933318892475}
   m_Layer: 5
   m_Name: ResourceImage
   m_TagString: Untagged
@@ -1158,26 +1157,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &2861657933318892475
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290095428935985643}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd2866a6b3f84834ca954ddbc693eccb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4290095428970652697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,7 +1207,6 @@ GameObject:
   - component: {fileID: 4290095429017610522}
   - component: {fileID: 4290095429017610520}
   - component: {fileID: 4290095429017610521}
-  - component: {fileID: 71943884729449271}
   m_Layer: 5
   m_Name: ResourceImage
   m_TagString: Untagged
@@ -1294,26 +1272,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &71943884729449271
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290095429017610523}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd2866a6b3f84834ca954ddbc693eccb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4290095429199361646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1658,7 @@ RectTransform:
   - {fileID: 3812944990070690123}
   - {fileID: 4487725569741178419}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1797,7 +1755,6 @@ MonoBehaviour:
   - {fileID: 4290095430223466814}
   - {fileID: 4290095429912678525}
   selectedPotion: {fileID: 6740130506988683746}
-  sliderContainer: {fileID: 0}
 --- !u!114 &6281733226756635131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1828,7 +1785,6 @@ GameObject:
   - component: {fileID: 4290095429734550406}
   - component: {fileID: 4290095429734550404}
   - component: {fileID: 4290095429734550405}
-  - component: {fileID: 4771040921270471795}
   m_Layer: 5
   m_Name: PotionImage
   m_TagString: Untagged
@@ -1894,26 +1850,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &4771040921270471795
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290095429734550407}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd2866a6b3f84834ca954ddbc693eccb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4290095429872987782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,7 +1938,6 @@ GameObject:
   - component: {fileID: 4290095429912678526}
   - component: {fileID: 4290095429912678524}
   - component: {fileID: 4290095429912678525}
-  - component: {fileID: 3193739342852615855}
   m_Layer: 5
   m_Name: PotionImage
   m_TagString: Untagged
@@ -2068,26 +2003,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &3193739342852615855
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290095429912678527}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd2866a6b3f84834ca954ddbc693eccb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4290095429968514666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,7 +2091,6 @@ GameObject:
   - component: {fileID: 4290095430223466815}
   - component: {fileID: 4290095430223466813}
   - component: {fileID: 4290095430223466814}
-  - component: {fileID: 1997986354259352352}
   m_Layer: 5
   m_Name: PotionImage
   m_TagString: Untagged
@@ -2242,26 +2156,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &1997986354259352352
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4290095430223466800}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd2866a6b3f84834ca954ddbc693eccb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4290095430649465616
 GameObject:
   m_ObjectHideFlags: 0

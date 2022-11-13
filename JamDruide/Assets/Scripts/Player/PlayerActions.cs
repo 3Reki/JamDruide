@@ -141,7 +141,7 @@ namespace Player
         
         private void HandleInputs()
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (PlayerController.Controls.Action.Interact.WasPerformedThisFrame())
             {
                 if (canCollect)
                 {
@@ -152,7 +152,7 @@ namespace Player
                     telescope.StartUsing();
                 }
             }
-            if (Input.GetKeyUp(KeyCode.F))
+            if (PlayerController.Controls.Action.Interact.WasReleasedThisFrame())
             {
                 if (isUsing)
                 {
@@ -161,13 +161,13 @@ namespace Player
                 }
             }
 
-            if (isUsing && Input.GetAxisRaw("Horizontal") != 0)
+            if (isUsing && PlayerController.Controls.Movement.Move.IsPressed())
             {
                 isUsing = false;
                 telescope.StopUsing();
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && hasOnePotion && potions[selectedPotion] != null &&
+            if (PlayerController.Controls.Action.Drink.WasPressedThisFrame() && hasOnePotion && potions[selectedPotion] != null &&
                 !potions[selectedPotion].IsActive)
             {
                 potions[selectedPotion].Drink(playerController, this);
@@ -180,7 +180,7 @@ namespace Player
 
             HandleThrow();
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (PlayerController.Controls.Action.Restart.WasPerformedThisFrame())
             {
                 StartCoroutine(Death());
             }
@@ -193,16 +193,24 @@ namespace Player
             if (!hasOnePotion)
                 return;
 
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (PlayerController.Controls.Action.Throw.IsPressed())
             {
                 for (int i = 0; i < pointsCount; i++)
                 {
                     points[i].transform.position = PointPosition(i * 0.1f);
                     points[i].SetActive(true);
                 }
+
+                if (!points[0].activeSelf)
+                {
+                    for (int i = 0; i < pointsCount; i++)
+                    {
+                        points[i].SetActive(true);
+                    }
+                }
             }
 
-            if (!Input.GetKeyUp(KeyCode.Mouse0)) return;
+            if (!PlayerController.Controls.Action.Throw.WasReleasedThisFrame()) return;
             
             for (int i = 0; i < pointsCount; i++)
             {
@@ -247,8 +255,8 @@ namespace Player
                 canUse = false;
             }
         }
-        
-        IEnumerator JumpSlider()
+
+        private IEnumerator JumpSlider()
         {
             jumpSlider.gameObject.SetActive(true);
             jumpSlider.maxValue = 4;
@@ -260,7 +268,7 @@ namespace Player
             jumpSlider.gameObject.SetActive(false);
         }
 
-        IEnumerator SpeedSlider()
+        private IEnumerator SpeedSlider()
         {
             speedSlider.gameObject.SetActive(true);
             speedSlider.maxValue = 4f;
@@ -271,25 +279,25 @@ namespace Player
             speedBoost = false;
             speedSlider.gameObject.SetActive(false);
         }
-        
-        void Scroll()
+
+        private void Scroll()
         {
-            if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+            if(PlayerController.Controls.Other.ScrollPotionDown.WasPressedThisFrame())
             {
                 selectedPotion--;
                 if (selectedPotion == -1)
                     selectedPotion = 2;
             }
-            if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+            if(PlayerController.Controls.Other.ScrollPotionUp.WasPressedThisFrame())
             {
                 selectedPotion++;
                 if (selectedPotion == 3)
                     selectedPotion = 0;
             }
 
-            if (Input.GetKeyDown(KeyCode.Q)) selectedPotion = 2;
-            if (Input.GetKeyDown(KeyCode.W)) selectedPotion = 1;
-            if (Input.GetKeyDown(KeyCode.E)) selectedPotion = 0;
+            if (PlayerController.Controls.Other.Potion3.WasPerformedThisFrame()) selectedPotion = 2;
+            if (PlayerController.Controls.Other.Potion2.WasPerformedThisFrame()) selectedPotion = 1;
+            if (PlayerController.Controls.Other.Potion1.WasPerformedThisFrame()) selectedPotion = 0;
 
             onSelect?.Invoke(selectedPotion);
 
@@ -300,25 +308,24 @@ namespace Player
             if (!canAdd)
                 return;
 
-            if (canCollect)
-            {
-                audio.PlayOneShot(collect);
-                if (currentResources.Contains(resourceToCollect.resourceType)) return;
+            if (!canCollect) return;
+            
+            audio.PlayOneShot(collect);
+            if (currentResources.Contains(resourceToCollect.resourceType)) return;
                 
-                currentResources[resourceIndex] = resourceToCollect.resourceType;
+            currentResources[resourceIndex] = resourceToCollect.resourceType;
 
-                if (onCollect != null)
-                {
-                    onCollect.Invoke(resourceIndex, resourceToCollect.resourceType);
-                }
+            if (onCollect != null)
+            {
+                onCollect.Invoke(resourceIndex, resourceToCollect.resourceType);
+            }
                 
-                resourceToCollect.ResourceCollected();
-                resourceIndex++;
-                if (resourceIndex == 2)
-                {
-                    resourceIndex = 0;
-                    CheckRecipe();
-                }
+            resourceToCollect.ResourceCollected();
+            resourceIndex++;
+            if (resourceIndex == 2)
+            {
+                resourceIndex = 0;
+                CheckRecipe();
             }
         }
 

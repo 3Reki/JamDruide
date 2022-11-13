@@ -14,6 +14,7 @@ namespace Player
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerControls Controls;
         public bool CanDoubleJump;
         
         // Public for external hooks
@@ -29,7 +30,12 @@ namespace Player
 
         // This is horrible, but for some reason colliders are not fully established when update starts...
         private bool active;
-        private void Awake() => Invoke(nameof(Activate), 0.5f);
+        private void Awake()
+        {
+            Controls = new PlayerControls();
+            Controls.Enable();
+            Invoke(nameof(Activate), 0.5f);
+        }
         private void Activate() => active = true;
 
         private SpriteRenderer sprite;
@@ -99,9 +105,9 @@ namespace Player
         {
             Input = new FrameInput
             {
-                jumpDown = UnityEngine.Input.GetButtonDown("Jump"),
-                jumpUp = UnityEngine.Input.GetButtonUp("Jump"),
-                x = UnityEngine.Input.GetAxisRaw("Horizontal")
+                jumpDown = Controls.Movement.Jump.WasPerformedThisFrame(),
+                jumpUp = Controls.Movement.Jump.WasReleasedThisFrame(),
+                x = Controls.Movement.Move.ReadValue<float>()
             };
             if (Input.jumpDown)
             {

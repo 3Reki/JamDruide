@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Player;
 using Potions;
 using UnityEngine;
@@ -16,12 +16,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject selectedPotion;
 
-    public static GameObject[] sliderObj = new GameObject[2];
-
-    [SerializeField] Transform sliderContainer;
-
     private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
-    private WaitForSeconds animDelay = new(0.5f);
+    private readonly WaitForSeconds animDelay = new(0.5f);
 
     private void Start()
     {
@@ -72,23 +68,26 @@ public class UIManager : MonoBehaviour
     {
         CraftUI[resourceIndex].sprite = resourcesImages[resourceType];
         CraftUI[resourceIndex].enabled = true;
-        CraftUI[resourceIndex].GetComponent<Animator>().Play("UIResourceGet");
+        AnimateGet(CraftUI[resourceIndex].transform);
     }
 
     private void OnRecipeComplete(IPotion potion, int slot)
     {
         craftedPotionImage.sprite = potion.Sprite;
-        for (int i = 0; i < 2; i++)
-        {
-            StartCoroutine(DelayAnimation(i));
-        }
-        FillInventory(slot);
+
+        StartCoroutine(DelayAnimation(slot));
     }
 
-    private IEnumerator DelayAnimation(int index)
+    private IEnumerator DelayAnimation(int slot)
     {
         yield return animDelay;
-        CraftUI[index].GetComponent<Animator>().Play("UIResourceUse");
+        
+        for (int i = 0; i < 2; i++)
+        {
+            AnimateUse(CraftUI[i].transform);
+        }
+        
+        FillInventory(slot);
         craftedPotionUI.Play("UICraftedPotion");
     }
     
@@ -97,7 +96,8 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             if (CraftUI[i] == null) return;
-             CraftUI[i].GetComponent<Animator>().Play("UIResourceUse");
+            
+            AnimateUse(CraftUI[i].transform);
         }
     }
 
@@ -105,7 +105,7 @@ public class UIManager : MonoBehaviour
     {
         potionsInventory[slot].sprite = craftedPotionImage.sprite;
         potionsInventory[slot].enabled = true;
-        potionsInventory[slot].GetComponent<Animator>().Play("UIResourceGet");
+        AnimateGet(potionsInventory[slot].transform);
     }
     
     void RemoveInventory(int slot)
@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
     
     private IEnumerator DelayPotionAnimation(int index)
     {
-        potionsInventory[index].GetComponent<Animator>().Play("UIResourceUse");
+        AnimateUse(potionsInventory[index].transform);
         yield return animDelay;
         potionsInventory[index].sprite = null;
         potionsInventory[index].enabled = false;
@@ -129,5 +129,19 @@ public class UIManager : MonoBehaviour
             selectedPotion.transform.position = potionsInventory[1].transform.position;
         else
             selectedPotion.transform.position = potionsInventory[0].transform.position;
+    }
+
+    private static void AnimateUse(Transform imageTransform)
+    {
+        imageTransform.DOKill();
+        imageTransform.localScale = Vector3.one;
+        imageTransform.DOScale(1.3f, 5f / 60f).onComplete = () => imageTransform.DOScale(0, 1f / 3f);
+    }
+    
+    private static void AnimateGet(Transform imageTransform)
+    {
+        imageTransform.DOKill();
+        imageTransform.localScale = Vector3.zero;
+        imageTransform.DOScale(1.3f, 17f / 60f).onComplete = () => imageTransform.DOScale(1, 1f / 20f);
     }
 }
