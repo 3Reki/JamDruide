@@ -125,6 +125,10 @@ MonoBehaviour:
   particleSystem: {fileID: 4224459566537083273, guid: a4d016c65f6ba3347bc5cd282e288696, type: 3}
   audio: {fileID: 1676780920860312031}
   explose: {fileID: 8300000, guid: 60cf1f57488dcfb4eb4d95accd7c29bb, type: 3}
+  spriteRenderer: {fileID: 394973464693738289}
+  rigidbody2D: {fileID: 6031949411223785763}
+  collider2D: {fileID: -907756405288690214}
+  trailRenderer: {fileID: 3461609489186796521}
 --- !u!58 &-907756405288690214
 CircleCollider2D:
   m_ObjectHideFlags: 0

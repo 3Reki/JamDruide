@@ -141,6 +141,10 @@ MonoBehaviour:
   particles: {fileID: 4224459566537083273, guid: 1f91b2e574ca3644189a9baa4e7589be, type: 3}
   audio: {fileID: 490114430694651045}
   explose: {fileID: 8300000, guid: 60cf1f57488dcfb4eb4d95accd7c29bb, type: 3}
+  spriteRenderer: {fileID: 394973464693738289}
+  rigidbody2D: {fileID: 6031949411223785763}
+  collider2D: {fileID: -832150850347325290}
+  trailRenderer: {fileID: 2943959836096852055}
 --- !u!96 &2943959836096852055
 TrailRenderer:
   serializedVersion: 3
