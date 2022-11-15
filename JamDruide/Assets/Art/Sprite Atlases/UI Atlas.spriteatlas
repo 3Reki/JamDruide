@@ -26,7 +26,7 @@ SpriteAtlas:
       m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
-      m_TextureCompression: 1
+      m_TextureCompression: 2
       m_CompressionQuality: 50
       m_CrunchedCompression: 0
       m_AllowsAlphaSplitting: 0
@@ -53,16 +53,33 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 614e3fe2a58de044fadbdf132803b1da, type: 3}
     - {fileID: 2800000, guid: b4b5e19a8d462e24982e07cd4a720696, type: 3}
     - {fileID: 2800000, guid: 2120e19906327ba468bb35353064906a, type: 3}
+    - {fileID: 2800000, guid: 9b6c8d922d8216c44a8e7d2071916c67, type: 3}
+    - {fileID: 2800000, guid: 0d0203c3fe1b3ac43a99f91f38e64e55, type: 3}
+    - {fileID: 2800000, guid: 053345ba8d8d3614eac69ae8e3b306c3, type: 3}
+    - {fileID: 2800000, guid: 4200182eb85b9864f8d8794ea2bad5a9, type: 3}
+    - {fileID: 2800000, guid: 9dc216d5874dcf1429489026de7786ee, type: 3}
+    - {fileID: 2800000, guid: c9016a005fc043c499875c4672547de4, type: 3}
+    - {fileID: 2800000, guid: 1f30573d6cfab9f42b12e7a1ecd2e195, type: 3}
+    - {fileID: 2800000, guid: cc70ca05c8e961e4d9239e3ba2274e6d, type: 3}
+    - {fileID: 2800000, guid: 83291b6dd2b2f48449532f4761603205, type: 3}
+    - {fileID: 2800000, guid: e71e98d2a5f51a7429967cfd3dbefcb2, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: c9016a005fc043c499875c4672547de4, type: 3}
+  - {fileID: 21300000, guid: 9b6c8d922d8216c44a8e7d2071916c67, type: 3}
+  - {fileID: 21300000, guid: e71e98d2a5f51a7429967cfd3dbefcb2, type: 3}
   - {fileID: 21300000, guid: 614e3fe2a58de044fadbdf132803b1da, type: 3}
+  - {fileID: 21300000, guid: 0d0203c3fe1b3ac43a99f91f38e64e55, type: 3}
+  - {fileID: 21300000, guid: cc70ca05c8e961e4d9239e3ba2274e6d, type: 3}
+  - {fileID: 21300000, guid: 9dc216d5874dcf1429489026de7786ee, type: 3}
   - {fileID: 21300000, guid: dacdb1c8347bd4543a354839e39a20fb, type: 3}
   - {fileID: 21300000, guid: 2120e19906327ba468bb35353064906a, type: 3}
   - {fileID: 21300000, guid: 4b58d8d970e10d64b870a7a0b39f7c25, type: 3}
   - {fileID: 21300000, guid: b4b5e19a8d462e24982e07cd4a720696, type: 3}
+  - {fileID: 21300000, guid: 053345ba8d8d3614eac69ae8e3b306c3, type: 3}
   - {fileID: 1146660257, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
   - {fileID: -792889066, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
   - {fileID: 629657255, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
@@ -874,17 +891,27 @@ SpriteAtlas:
   - {fileID: -507110460, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
   - {fileID: -1261179099, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
   - {fileID: 21300000, guid: 02416aec52174ac4db4bae133435948e, type: 3}
+  - {fileID: 21300000, guid: 1f30573d6cfab9f42b12e7a1ecd2e195, type: 3}
+  - {fileID: 21300000, guid: 83291b6dd2b2f48449532f4761603205, type: 3}
+  - {fileID: 21300000, guid: 4200182eb85b9864f8d8794ea2bad5a9, type: 3}
   - {fileID: 21300000, guid: d6d7540f2c24f00408ac5a92a445cf71, type: 3}
   - {fileID: -817474538, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
   - {fileID: -96528867, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
   - {fileID: -1383507764, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
   - {fileID: -1588436701, guid: 4ca1938f33eaf7b4b96120694e549c41, type: 3}
   m_PackedSpriteNamesToIndex:
+  - NumLock
+  - Alt
+  - Tab
   - IMG_1571
+  - Backspace
+  - Shift
+  - Enter
   - potionholder
   - IMG_1573
   - Restart Button
   - IMG_1572
+  - CapsLock
   - tilemap_308
   - tilemap_392
   - tilemap_393
@@ -1696,6 +1723,9 @@ SpriteAtlas:
   - tilemap_399
   - tilemap_309
   - Inventory frame
+  - NumpadEnter
+  - Space
+  - Ctrl
   - fiole vide
   - IMG_1501_1
   - IMG_1501_0
