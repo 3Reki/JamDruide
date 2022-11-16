@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class RebindingDisplay : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private KeyCodeImage defaultKeySprites;
-    [SerializeField] private KeyCodeImage azertyKeySprites;
+    [SerializeField] private SpriteArray defaultKeySprites;
+    [SerializeField] private SpriteArray azertyKeySprites;
+    [SerializeField] private SpriteArray mouseSprites;
     [SerializeField] private GameObject waiting;
     [SerializeField] private RebindGroup[] rebindGroups;
 
@@ -35,26 +36,65 @@ public class RebindingDisplay : MonoBehaviour
                 PlayerController.Controls.Enable();
                 playerInput.enabled = true;
 
-                Key code = Keyboard.current.FindKeyOnCurrentKeyboardLayout(rebindingOperation.selectedControl.displayName).keyCode;
+                Debug.Log(rebindingOperation.selectedControl.device.name);
 
-                KeyCodeImage currentSpriteList =
-                    GetCurrentLayout() == KeyboardLayout.Azerty ? azertyKeySprites : defaultKeySprites;
-
-                if (currentSpriteList.sprites[(int) code] != null)
+                if (rebindingOperation.selectedControl.device.name == "Mouse")
                 {
-                    group.bindingImage.sprite = currentSpriteList.sprites[(int) code];
-                    group.bindingImage.enabled = true;
-                    group.bindingText.enabled = false;
+                    MouseRebind(rebindingOperation, group);
                 }
                 else
                 {
-                    group.bindingImage.enabled = false;
-                    group.bindingText.text = rebindingOperation.selectedControl.displayName;
-                    group.bindingText.enabled = true;
+                    KeyboardRebind(rebindingOperation, group);
                 }
                 
                 rebindingOperation.Dispose();
             }).Start();
+    }
+
+    private void KeyboardRebind(InputActionRebindingExtensions.RebindingOperation rebindingOperation, RebindGroup group)
+    {
+        Key code = Keyboard.current.FindKeyOnCurrentKeyboardLayout(rebindingOperation.selectedControl.displayName).keyCode;
+
+        SpriteArray currentSpriteList =
+            GetCurrentLayout() == KeyboardLayout.Azerty ? azertyKeySprites : defaultKeySprites;
+
+        if (currentSpriteList.sprites[(int) code] != null)
+        {
+            group.bindingImage.sprite = currentSpriteList.sprites[(int) code];
+            group.bindingImage.enabled = true;
+            group.bindingText.enabled = false;
+        }
+        else
+        {
+            group.bindingImage.enabled = false;
+            group.bindingText.text = rebindingOperation.selectedControl.displayName;
+            group.bindingText.enabled = true;
+        }
+    }
+
+    private void MouseRebind(InputActionRebindingExtensions.RebindingOperation rebindingOperation, RebindGroup group)
+    {
+        if (rebindingOperation.selectedControl.displayName == Mouse.current.leftButton.displayName)
+        {
+            group.bindingImage.sprite = mouseSprites.sprites[0];
+        } 
+        else if (rebindingOperation.selectedControl.displayName == Mouse.current.middleButton.displayName)
+        {
+            group.bindingImage.sprite = mouseSprites.sprites[1];
+        } 
+        else if (rebindingOperation.selectedControl.displayName == Mouse.current.rightButton.displayName)
+        {
+            group.bindingImage.sprite = mouseSprites.sprites[2];
+        }
+        else
+        {
+            group.bindingImage.enabled = false;
+            group.bindingText.text = rebindingOperation.selectedControl.displayName;
+            group.bindingText.enabled = true;
+            return;
+        }
+        group.bindingImage.enabled = true;
+        group.bindingText.enabled = false;
     }
 
     public static KeyboardLayout GetCurrentLayout()

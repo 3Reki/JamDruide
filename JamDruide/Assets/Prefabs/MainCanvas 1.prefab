@@ -70,6 +70,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   defaultKeySprites: {fileID: 11400000, guid: 045d778cd6b5a8643941c1e846c06c90, type: 2}
   azertyKeySprites: {fileID: 11400000, guid: f39569603e5663846a6f3f856c10d5f0, type: 2}
+  mouseSprites: {fileID: 11400000, guid: 7fb303eb543c69148862ab40bbd52636, type: 2}
   waiting: {fileID: 3952360071905680176}
   rebindGroups:
   - inputActionName: Move
@@ -1998,7 +1999,7 @@ RectTransform:
   - {fileID: 4118931957827977700}
   - {fileID: 4487725569741178419}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
