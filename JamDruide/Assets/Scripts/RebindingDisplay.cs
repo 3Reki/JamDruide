@@ -3,62 +3,80 @@ using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 public class RebindingDisplay : MonoBehaviour
 {
-    [SerializeField] private InputActionReference jumpAction = null;
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private TextMeshProUGUI bindingDisplay;
-    [SerializeField] private GameObject startRebind;
-    [SerializeField] private KeyCodeImage keySprites;
-    [SerializeField] private Image img;
-    [SerializeField] private Sprite space;
-    [SerializeField] private Sprite other;
+    [SerializeField] private KeyCodeImage defaultKeySprites;
+    [SerializeField] private KeyCodeImage azertyKeySprites;
     [SerializeField] private GameObject waiting;
+    [SerializeField] private RebindGroup[] rebindGroups;
 
-    private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
-
-    public void StartRebinding()
+    private void Start()
     {
-        startRebind.SetActive(false);
+        playerInput = PlayerActions.Instance.GetComponent<PlayerInput>();
+    }
+
+    public void StartRebinding(int rebindGroupIndex)
+    {
+        RebindGroup group = rebindGroups[rebindGroupIndex];
+        InputAction inputAction = PlayerController.Controls.FindAction(group.inputActionName);
+        group.modifiedBinding.SetActive(false);
         waiting.SetActive(true);
 
-        foreach (KeyControl key in Keyboard.current.allKeys)
-        {
-            int i = key.scanCode;
-        }
-
-        // PlayerController.Controls.Movement.Jump.GetBindingDisplayString(
-        //     PlayerController.Controls.Movement.Jump.GetBindingIndexForControl(PlayerController.Controls.Movement
-        //         .Jump.controls[2]), out string deviceLayout, out string controlPath);
-        
-        Debug.Log(PlayerController.Controls.Movement.Jump.controls[0].displayName);
-        if (Keyboard.current.aKey.isPressed)
-        {
-            //Keyboard.current.aKey.
-        }
-        
         PlayerController.Controls.Disable();
         playerInput.enabled = false;
-        rebindingOperation = PlayerController.Controls.Movement.Jump
-            .PerformInteractiveRebinding(
-                PlayerController.Controls.Movement.Jump.GetBindingIndexForControl(PlayerController.Controls.Movement
-                    .Jump.controls[0])).OnMatchWaitForAnother(0.1f).OnComplete(_ =>
+        inputAction.PerformInteractiveRebinding(inputAction.GetBindingIndexForControl(inputAction.controls[0]))
+            .OnMatchWaitForAnother(0.1f).OnComplete(rebindingOperation =>
             {
-                startRebind.SetActive(true);
+                group.modifiedBinding.SetActive(true);
                 waiting.SetActive(false);
-                rebindingOperation.Dispose();
                 PlayerController.Controls.Enable();
                 playerInput.enabled = true;
-                Key code = Keyboard.current
-                    .FindKeyOnCurrentKeyboardLayout(PlayerController.Controls.Movement.Jump.controls[0].displayName)
-                    .keyCode;
-                if (keySprites.sprites[(int) code] != null)
+
+                Key code = Keyboard.current.FindKeyOnCurrentKeyboardLayout(rebindingOperation.selectedControl.displayName).keyCode;
+
+                KeyCodeImage currentSpriteList =
+                    GetCurrentLayout() == KeyboardLayout.Azerty ? azertyKeySprites : defaultKeySprites;
+
+                if (currentSpriteList.sprites[(int) code] != null)
                 {
-                    img.sprite = keySprites.sprites[(int) code];
+                    group.bindingImage.sprite = currentSpriteList.sprites[(int) code];
+                    group.bindingImage.enabled = true;
+                    group.bindingText.enabled = false;
                 }
+                else
+                {
+                    group.bindingImage.enabled = false;
+                    group.bindingText.text = rebindingOperation.selectedControl.displayName;
+                    group.bindingText.enabled = true;
+                }
+                
+                rebindingOperation.Dispose();
             }).Start();
     }
+
+    public static KeyboardLayout GetCurrentLayout()
+    {
+        return Keyboard.current.qKey.displayName == "A" && Keyboard.current.wKey.displayName == "Z"
+            ? KeyboardLayout.Azerty
+            : KeyboardLayout.Qwerty;
+    }
+
+    public enum KeyboardLayout
+    {
+        Qwerty,
+        Azerty
+    }
+
+    [Serializable]
+    private struct RebindGroup
+    {
+        public string inputActionName;
+        public Image bindingImage;
+        public GameObject modifiedBinding;
+        public TextMeshProUGUI bindingText;
+    }
 }
+
