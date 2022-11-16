@@ -29,7 +29,7 @@ public class RebindingDisplay : MonoBehaviour
         PlayerController.Controls.Disable();
         playerInput.enabled = false;
         inputAction.PerformInteractiveRebinding(inputAction.GetBindingIndexForControl(inputAction.controls[0]))
-            .OnMatchWaitForAnother(0.1f).OnComplete(rebindingOperation =>
+            .OnMatchWaitForAnother(0.1f).WithCancelingThrough("<Keyboard>/escape").OnComplete(rebindingOperation =>
             {
                 group.modifiedBinding.SetActive(true);
                 waiting.SetActive(false);
@@ -47,6 +47,14 @@ public class RebindingDisplay : MonoBehaviour
                     KeyboardRebind(rebindingOperation, group);
                 }
                 
+                rebindingOperation.Dispose();
+            }).OnCancel(rebindingOperation =>
+            {
+                group.modifiedBinding.SetActive(true);
+                waiting.SetActive(false);
+
+                PlayerController.Controls.Enable();
+                playerInput.enabled = true;
                 rebindingOperation.Dispose();
             }).Start();
     }
