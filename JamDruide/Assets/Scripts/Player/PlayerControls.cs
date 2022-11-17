@@ -104,6 +104,17 @@ namespace Player
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a1398694-9761-493f-93c3-bf3a4e9ff5a6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""358641aa-024d-4d0f-9430-672b5b68b1f2"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -126,12 +137,12 @@ namespace Player
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a1398694-9761-493f-93c3-bf3a4e9ff5a6"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""3db6452b-4c8b-437b-a3b1-95a3956b7bbd"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Jump"",
+                    ""action"": ""LookDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -142,17 +153,6 @@ namespace Player
                     ""interactions"": """",
                     ""processors"": ""AxisDeadzone"",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""LookDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3db6452b-4c8b-437b-a3b1-95a3956b7bbd"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
                     ""action"": ""LookDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -287,22 +287,22 @@ namespace Player
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3f255706-badc-41fd-9608-fe8d511ed103"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""id"": ""430af4e9-2ce6-4e3d-bc43-7d0f26d99052"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""430af4e9-2ce6-4e3d-bc43-7d0f26d99052"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""id"": ""3f255706-badc-41fd-9608-fe8d511ed103"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
