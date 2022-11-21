@@ -19,6 +19,27 @@ public class RebindingDisplay : MonoBehaviour
         playerInput = PlayerActions.Instance.GetComponent<PlayerInput>();
     }
 
+    public void ResetAllBindings()
+    {
+        foreach (InputActionMap actionMap in PlayerController.Controls.asset.actionMaps)
+        {
+            actionMap.RemoveAllBindingOverrides();
+        }
+
+        foreach (RebindGroup rebindGroup in rebindGroups)
+        {
+            InputControl control = PlayerController.Controls.FindAction(rebindGroup.inputActionName).controls[rebindGroup.controlNbr];
+            if (control.device.name == "Mouse")
+            {
+                MouseRebind(control.displayName, rebindGroup);
+            }
+            else
+            {
+                KeyboardRebind(control.displayName, rebindGroup);
+            }
+        }
+    }
+
     public void StartRebinding(int rebindGroupIndex)
     {
         RebindGroup group = rebindGroups[rebindGroupIndex];
@@ -28,15 +49,13 @@ public class RebindingDisplay : MonoBehaviour
 
         PlayerController.Controls.Disable();
         playerInput.enabled = false;
-        inputAction.PerformInteractiveRebinding(inputAction.GetBindingIndexForControl(inputAction.controls[0]))
+        inputAction.PerformInteractiveRebinding(inputAction.GetBindingIndexForControl(inputAction.controls[group.controlNbr]))
             .OnMatchWaitForAnother(0.1f).WithCancelingThrough("<Keyboard>/escape").OnComplete(rebindingOperation =>
             {
                 group.modifiedBinding.SetActive(true);
                 waiting.SetActive(false);
                 PlayerController.Controls.Enable();
                 playerInput.enabled = true;
-
-                Debug.Log(rebindingOperation.selectedControl.device.name);
 
                 if (rebindingOperation.selectedControl.device.name == "Mouse")
                 {
@@ -59,9 +78,12 @@ public class RebindingDisplay : MonoBehaviour
             }).Start();
     }
 
-    private void KeyboardRebind(InputActionRebindingExtensions.RebindingOperation rebindingOperation, RebindGroup group)
+    private void KeyboardRebind(InputActionRebindingExtensions.RebindingOperation rebindingOperation, RebindGroup group) =>
+        KeyboardRebind(rebindingOperation.selectedControl.displayName, group);
+
+    private void KeyboardRebind(string displayName, RebindGroup group)
     {
-        Key code = Keyboard.current.FindKeyOnCurrentKeyboardLayout(rebindingOperation.selectedControl.displayName).keyCode;
+        Key code = Keyboard.current.FindKeyOnCurrentKeyboardLayout(displayName).keyCode;
 
         SpriteArray currentSpriteList =
             GetCurrentLayout() == KeyboardLayout.Azerty ? azertyKeySprites : defaultKeySprites;
@@ -75,29 +97,32 @@ public class RebindingDisplay : MonoBehaviour
         else
         {
             group.bindingImage.enabled = false;
-            group.bindingText.text = rebindingOperation.selectedControl.displayName;
+            group.bindingText.text = displayName;
             group.bindingText.enabled = true;
         }
     }
 
-    private void MouseRebind(InputActionRebindingExtensions.RebindingOperation rebindingOperation, RebindGroup group)
+    private void MouseRebind(InputActionRebindingExtensions.RebindingOperation rebindingOperation, RebindGroup group) =>
+        MouseRebind(rebindingOperation.selectedControl.displayName, group);
+
+    private void MouseRebind(string displayName, RebindGroup group)
     {
-        if (rebindingOperation.selectedControl.displayName == Mouse.current.leftButton.displayName)
+        if (displayName == Mouse.current.leftButton.displayName)
         {
             group.bindingImage.sprite = mouseSprites.sprites[0];
         } 
-        else if (rebindingOperation.selectedControl.displayName == Mouse.current.middleButton.displayName)
+        else if (displayName == Mouse.current.middleButton.displayName)
         {
             group.bindingImage.sprite = mouseSprites.sprites[1];
         } 
-        else if (rebindingOperation.selectedControl.displayName == Mouse.current.rightButton.displayName)
+        else if (displayName == Mouse.current.rightButton.displayName)
         {
             group.bindingImage.sprite = mouseSprites.sprites[2];
         }
         else
         {
             group.bindingImage.enabled = false;
-            group.bindingText.text = rebindingOperation.selectedControl.displayName;
+            group.bindingText.text = displayName;
             group.bindingText.enabled = true;
             return;
         }
@@ -122,6 +147,7 @@ public class RebindingDisplay : MonoBehaviour
     private struct RebindGroup
     {
         public string inputActionName;
+        public int controlNbr;
         public Image bindingImage;
         public GameObject modifiedBinding;
         public TextMeshProUGUI bindingText;
