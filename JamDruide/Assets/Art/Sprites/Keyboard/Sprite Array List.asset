@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5fd1df6ac040ea893b6459ab558880, type: 3}
   m_Name: Sprite Array List
   m_EditorClassIdentifier: 
-  defaultKeySprites: {fileID: 0}
-  azertyKeySprites: {fileID: 0}
-  mouseSprites: {fileID: 0}
-  gamepadSprites: {fileID: 0}
+  defaultKeySprites: {fileID: 11400000, guid: 045d778cd6b5a8643941c1e846c06c90, type: 2}
+  azertyKeySprites: {fileID: 11400000, guid: f39569603e5663846a6f3f856c10d5f0, type: 2}
+  mouseSprites: {fileID: 11400000, guid: 7fb303eb543c69148862ab40bbd52636, type: 2}
