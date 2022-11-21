@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -18,9 +19,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject doubleJumpGameObject;
     [SerializeField] private Image speedSlider;
     [SerializeField] private GameObject speedGameObject;
+    [SerializeField] private KeySprite[] keySprites;
+    [SerializeField] private SpriteArrayList spriteLists;
 
     private Dictionary<CraftsList.Resources, Sprite> resourcesImages;
     private readonly WaitForSeconds animDelay = new(0.5f);
+
+    private void Awake()
+    {
+        RebindingDisplay.OnRebind += UpdateKeySprites;
+    }
 
     private void Start()
     {
@@ -42,6 +50,8 @@ public class UIManager : MonoBehaviour
                 CraftsList.Resources.None, resourceImages[4]
             }
         };
+        
+        UpdateKeySprites();
     }
 
 
@@ -51,24 +61,38 @@ public class UIManager : MonoBehaviour
         PlayerActions.onRecipeComplete += OnRecipeComplete;
         PlayerActions.onThrow += RemoveInventory;
         PlayerActions.onSelect += SelectPotion;
-        PauseMenu.OnPause.AddListener(() => enabled = false);
-        PauseMenu.OnResume.AddListener(() => enabled = true);
+        PauseMenu.OnPause.AddListener(SetEnableFalse);
+        PauseMenu.OnResume.AddListener(SetEnableTrue);
         SpeedPotion.onDrink += SpeedSlider;
         DoubleJumpPotion.onDrink += DoubleJumpSlider;
     }
-
     
-
     private void OnDisable()
     {
         PlayerActions.onCollect -= UpdateUI;
         PlayerActions.onRecipeComplete -= OnRecipeComplete;
         PlayerActions.onThrow -= RemoveInventory;
         PlayerActions.onSelect -= SelectPotion;
-        PauseMenu.OnPause.RemoveListener(() => enabled = false);
-        PauseMenu.OnResume.RemoveListener(() => enabled = true);
+        PauseMenu.OnPause.RemoveListener(SetEnableFalse);
+        PauseMenu.OnResume.RemoveListener(SetEnableTrue);
         SpeedPotion.onDrink -= SpeedSlider;
         DoubleJumpPotion.onDrink -= DoubleJumpSlider;
+        
+    }
+
+    private void OnDestroy()
+    {
+        RebindingDisplay.OnRebind -= UpdateKeySprites;
+    }
+
+    private void SetEnableFalse()
+    {
+        enabled = false;
+    }
+    
+    private void SetEnableTrue()
+    {
+        enabled = true;
     }
 
     private void UpdateUI(int resourceIndex, CraftsList.Resources resourceType)
@@ -138,6 +162,14 @@ public class UIManager : MonoBehaviour
         HandleSlider(speedSlider, speedGameObject, duration);
     }
 
+    private void UpdateKeySprites()
+    {
+        for (int i = 0; i < keySprites.Length; i++)
+        {
+            keySprites[i].image.sprite = spriteLists.GetSpriteForInputActionName(keySprites[i].inputActionName);
+        }
+    }
+
     private static void HandleSlider(Image slider, GameObject sliderGameObject, float duration)
     {
         sliderGameObject.SetActive(true);
@@ -157,5 +189,12 @@ public class UIManager : MonoBehaviour
         imageTransform.DOKill();
         imageTransform.localScale = Vector3.zero;
         imageTransform.DOScale(1.3f, 17f / 60f).onComplete = () => imageTransform.DOScale(1, 1f / 20f);
+    }
+    
+    [Serializable] 
+    public struct KeySprite
+    {
+        public string inputActionName;
+        public Image image;
     }
 }

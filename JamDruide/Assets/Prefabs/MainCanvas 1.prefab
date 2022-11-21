@@ -69,9 +69,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
-  defaultKeySprites: {fileID: 11400000, guid: 045d778cd6b5a8643941c1e846c06c90, type: 2}
-  azertyKeySprites: {fileID: 11400000, guid: f39569603e5663846a6f3f856c10d5f0, type: 2}
-  mouseSprites: {fileID: 11400000, guid: 7fb303eb543c69148862ab40bbd52636, type: 2}
   waiting: {fileID: 3952360071905680176}
   rebindGroups:
   - inputActionName: Move
@@ -129,6 +126,7 @@ MonoBehaviour:
     bindingImage: {fileID: 4136167854788253785}
     modifiedBinding: {fileID: 3450163308102404011}
     bindingText: {fileID: 5125746920600569149}
+  spriteLists: {fileID: 11400000, guid: c204c5766c4fc88429bc032d198a254b, type: 2}
 --- !u!1 &420898243615829188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,7 +2300,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2056935317, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
+  m_Sprite: {fileID: -2061508878, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2378,7 +2376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2061508878, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
+  m_Sprite: {fileID: -2056935317, guid: 2d6b6cdc0b6cb3c409cf27cca5650e87, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2528,6 +2526,16 @@ MonoBehaviour:
   doubleJumpGameObject: {fileID: 5443673648685921604}
   speedSlider: {fileID: 7661607833276069175}
   speedGameObject: {fileID: 3931185972881281308}
+  keySprites:
+  - inputActionName: Potion1
+    image: {fileID: 4290095429493035583}
+  - inputActionName: Potion2
+    image: {fileID: 4290095430649465630}
+  - inputActionName: Potion3
+    image: {fileID: 4290095429381606864}
+  - inputActionName: Restart
+    image: {fileID: 5402961769585084421}
+  spriteLists: {fileID: 11400000, guid: c204c5766c4fc88429bc032d198a254b, type: 2}
 --- !u!114 &6281733226756635131
 MonoBehaviour:
   m_ObjectHideFlags: 0

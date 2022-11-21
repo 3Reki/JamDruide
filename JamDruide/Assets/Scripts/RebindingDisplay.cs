@@ -8,15 +8,14 @@ using UnityEngine.UI;
 public class RebindingDisplay : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private SpriteArray defaultKeySprites;
-    [SerializeField] private SpriteArray azertyKeySprites;
-    [SerializeField] private SpriteArray mouseSprites;
     [SerializeField] private GameObject waiting;
     [SerializeField] private RebindGroup[] rebindGroups;
+    [SerializeField] private SpriteArrayList spriteLists;
 
     private void Start()
     {
         playerInput = PlayerActions.Instance.GetComponent<PlayerInput>();
+        RefreshKeys();
     }
 
     public void ResetAllBindings()
@@ -26,9 +25,18 @@ public class RebindingDisplay : MonoBehaviour
             actionMap.RemoveAllBindingOverrides();
         }
 
+        RefreshKeys();
+        OnRebind?.Invoke();
+        
+        PlayerPrefs.DeleteKey("rebinds");
+    }
+
+    private void RefreshKeys()
+    {
         foreach (RebindGroup rebindGroup in rebindGroups)
         {
-            InputControl control = PlayerController.Controls.FindAction(rebindGroup.inputActionName).controls[rebindGroup.controlNbr];
+            InputControl control = PlayerController.Controls.FindAction(rebindGroup.inputActionName)
+                .controls[rebindGroup.controlNbr];
             if (control.device.name == "Mouse")
             {
                 MouseRebind(control.displayName, rebindGroup);
@@ -65,7 +73,8 @@ public class RebindingDisplay : MonoBehaviour
                 {
                     KeyboardRebind(rebindingOperation, group);
                 }
-                
+
+                OnRebind?.Invoke();
                 rebindingOperation.Dispose();
             }).OnCancel(rebindingOperation =>
             {
@@ -83,14 +92,11 @@ public class RebindingDisplay : MonoBehaviour
 
     private void KeyboardRebind(string displayName, RebindGroup group)
     {
-        Key code = Keyboard.current.FindKeyOnCurrentKeyboardLayout(displayName).keyCode;
+        Sprite sprite = spriteLists.GetKeyboardSprite(displayName);
 
-        SpriteArray currentSpriteList =
-            GetCurrentLayout() == KeyboardLayout.Azerty ? azertyKeySprites : defaultKeySprites;
-
-        if (currentSpriteList.sprites[(int) code] != null)
+        if (sprite != null)
         {
-            group.bindingImage.sprite = currentSpriteList.sprites[(int) code];
+            group.bindingImage.sprite = sprite;
             group.bindingImage.enabled = true;
             group.bindingText.enabled = false;
         }
@@ -107,17 +113,10 @@ public class RebindingDisplay : MonoBehaviour
 
     private void MouseRebind(string displayName, RebindGroup group)
     {
-        if (displayName == Mouse.current.leftButton.displayName)
+        Sprite sprite = spriteLists.GetMouseSprite(displayName);
+        if (sprite != null)
         {
-            group.bindingImage.sprite = mouseSprites.sprites[0];
-        } 
-        else if (displayName == Mouse.current.middleButton.displayName)
-        {
-            group.bindingImage.sprite = mouseSprites.sprites[1];
-        } 
-        else if (displayName == Mouse.current.rightButton.displayName)
-        {
-            group.bindingImage.sprite = mouseSprites.sprites[2];
+            group.bindingImage.sprite = sprite;
         }
         else
         {
@@ -130,19 +129,6 @@ public class RebindingDisplay : MonoBehaviour
         group.bindingText.enabled = false;
     }
 
-    public static KeyboardLayout GetCurrentLayout()
-    {
-        return Keyboard.current.qKey.displayName == "A" && Keyboard.current.wKey.displayName == "Z"
-            ? KeyboardLayout.Azerty
-            : KeyboardLayout.Qwerty;
-    }
-
-    public enum KeyboardLayout
-    {
-        Qwerty,
-        Azerty
-    }
-
     [Serializable]
     private struct RebindGroup
     {
@@ -152,5 +138,7 @@ public class RebindingDisplay : MonoBehaviour
         public GameObject modifiedBinding;
         public TextMeshProUGUI bindingText;
     }
+
+    public static event Action OnRebind;
 }
 
