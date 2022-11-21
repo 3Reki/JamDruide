@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -33,10 +34,23 @@ namespace Player
         private void Awake()
         {
             Controls = new PlayerControls();
+            
+            string rebinds = PlayerPrefs.GetString("rebinds");
+            if (!string.IsNullOrEmpty(rebinds))
+            {
+                Controls.asset.LoadBindingOverridesFromJson(rebinds);
+            }
+            
             Controls.Enable();
             Invoke(nameof(Activate), 0.5f);
         }
         private void Activate() => active = true;
+
+        private void OnDestroy()
+        {
+            PlayerPrefs.SetString("rebinds", Controls.asset.SaveBindingOverridesAsJson());
+            PlayerPrefs.Save();
+        }
 
         private SpriteRenderer sprite;
         private Animator animator;
