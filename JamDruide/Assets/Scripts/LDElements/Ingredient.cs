@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,7 +10,25 @@ namespace LDElements
         
         [SerializeField] private GameObject input;
         [SerializeField] private new CircleCollider2D collider2D;
-        
+
+        private SpriteRenderer spriteRenderer;
+
+        private void Awake()
+        {
+            spriteRenderer = input.GetComponent<SpriteRenderer>();
+            
+        }
+
+        private void OnEnable()
+        {
+            UIManager.OnKeySpriteUpdate += UpdateInputSprite;
+        }
+
+        private void OnDisable()
+        {
+            UIManager.OnKeySpriteUpdate -= UpdateInputSprite;
+        }
+
         public void ResourceCollected()
         {
             NewResource();
@@ -39,6 +58,11 @@ namespace LDElements
             {
                 transform.DOScale(Vector3.one, 0.2f).onComplete = () => collider2D.enabled = true;
             };
+        }
+
+        private void UpdateInputSprite(SpriteArrayList spriteLists)
+        {
+            spriteRenderer.sprite = spriteLists.GetSpriteForInputActionName("Interact");
         }
     }
 }

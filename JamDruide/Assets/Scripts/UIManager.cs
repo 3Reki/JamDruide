@@ -168,6 +168,8 @@ public class UIManager : MonoBehaviour
         {
             keySprites[i].image.sprite = spriteLists.GetSpriteForInputActionName(keySprites[i].inputActionName);
         }
+        
+        OnKeySpriteUpdate?.Invoke(spriteLists);
     }
 
     private static void HandleSlider(Image slider, GameObject sliderGameObject, float duration)
@@ -197,4 +199,6 @@ public class UIManager : MonoBehaviour
         public string inputActionName;
         public Image image;
     }
+
+    public static event Action<SpriteArrayList> OnKeySpriteUpdate;
 }

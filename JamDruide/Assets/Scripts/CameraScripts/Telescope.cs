@@ -14,6 +14,23 @@ namespace CameraScripts
         private bool oldState;
         private Vector3 oldPos;
         private float oldSize;
+        private SpriteRenderer spriteRenderer;
+
+        private void Awake()
+        {
+            spriteRenderer = input.GetComponent<SpriteRenderer>();
+            
+        }
+
+        private void OnEnable()
+        {
+            UIManager.OnKeySpriteUpdate += UpdateInputSprite;
+        }
+
+        private void OnDisable()
+        {
+            UIManager.OnKeySpriteUpdate -= UpdateInputSprite;
+        }
         
         private void OnTriggerEnter2D(Collider2D col)
         {
@@ -54,6 +71,11 @@ namespace CameraScripts
             }
             
             CameraController.mainCamera.DOOrthoSize(oldSize, movementDuration);
+        }
+        
+        private void UpdateInputSprite(SpriteArrayList spriteLists)
+        {
+            spriteRenderer.sprite = spriteLists.GetSpriteForInputActionName("Interact");
         }
 
 #if UNITY_EDITOR
