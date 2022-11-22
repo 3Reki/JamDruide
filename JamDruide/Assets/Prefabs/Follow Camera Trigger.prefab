@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6409455551367007541
 BoxCollider2D:
@@ -72,4 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDuration: 0.5
-  viewSize: 20
+  viewSize: 10
+  lockX: 0
+  lockXPos: 0
+  lockY: 0
+  lockYPos: 0

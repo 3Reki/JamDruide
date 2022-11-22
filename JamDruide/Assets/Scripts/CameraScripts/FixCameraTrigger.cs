@@ -18,7 +18,7 @@ namespace CameraScripts
             if (other.CompareTag("Player"))
             {
                 CameraController.instance.enabled = false;
-                CameraController.mainCamera.transform.DOMove(new Vector3(anchorPosition.x, anchorPosition.y, -10), movementDuration);
+                CameraController.mainCamera.transform.DOMove(transform.TransformPoint(new Vector3(anchorPosition.x, anchorPosition.y, -10)), movementDuration);
                 CameraController.mainCamera.DOOrthoSize(viewSize, movementDuration);
             }
         }
