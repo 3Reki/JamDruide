@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,5 +17,11 @@ namespace LDElements
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(0.1f, 0.1f, 0.3f, 0.7f);
+            var transform1 = transform;
+            Gizmos.DrawCube(transform1.position, transform1.lossyScale);
+        }
     }
 }
