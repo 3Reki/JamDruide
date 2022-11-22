@@ -325,7 +325,6 @@ namespace Player
                         break;
                     }
                 }
-                //potions.Add((IPotion) recipe.output);
 
                 for (int i = 0; i < 2; i++)
                 {
@@ -340,19 +339,6 @@ namespace Player
             animator.Play("PlayerDeath");
             PlayerController.Controls.Disable();
             yield return new WaitForSeconds(deathTimer);
-            /*playerController.enabled = true;
-            animator.Play("PlayerIdle");
-            transform.position = lastCheckpoint.position;
-            for(int i = 0; i < potions.Length; i++)
-            {
-                potions[i] = null;
-                if (onThrow != null)
-                    onThrow.Invoke(i);
-            }
-            for (int i = 0; i < 2; i++)
-            {
-                currentResources[i] = CraftsList.Resources.None;
-            }*/
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
