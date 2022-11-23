@@ -55,7 +55,7 @@ namespace CameraScripts
             oldSize = CameraController.mainCamera.orthographicSize;
 
             CameraController.instance.enabled = false;
-            CameraController.mainCamera.transform.DOMove(new Vector3(anchorPosition.x, anchorPosition.y, -10), movementDuration);
+            CameraController.mainCamera.transform.DOMove(transform.TransformPoint(new Vector3(anchorPosition.x, anchorPosition.y, -10)), movementDuration);
             CameraController.mainCamera.DOOrthoSize(viewSize, movementDuration);
         }
 
@@ -79,11 +79,13 @@ namespace CameraScripts
         }
 
 #if UNITY_EDITOR
+        private const float aspectRatio = 16f / 9f;
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, transform.TransformPoint(anchorPosition));
             Gizmos.DrawSphere(transform.TransformPoint(anchorPosition), .5f);
+            Gizmos.DrawWireCube(transform.TransformPoint(anchorPosition), new Vector3(viewSize * 2 * aspectRatio, viewSize * 2));
         }
 #endif
     }

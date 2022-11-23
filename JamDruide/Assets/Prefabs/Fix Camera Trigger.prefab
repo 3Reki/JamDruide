@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3603938595299024493}
   - component: {fileID: 3603938595299024494}
   - component: {fileID: 3603938595299024495}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fix Camera Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
