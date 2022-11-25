@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace LDElements
@@ -7,11 +6,10 @@ namespace LDElements
     {
 
         public GameObject door;
-        bool isOpen;
         public Sprite brokenSprite;
+	    [SerializeField] private GameObject explosion;
         private SpriteRenderer _spriteRenderer;
-	[SerializeField]
-	private GameObject explosion;
+        private bool isOpen;
 
         private void Start()
         {
@@ -32,7 +30,7 @@ namespace LDElements
             _spriteRenderer.sprite = brokenSprite;
             isOpen = true;
             door.GetComponent<Animator>().Play("DoorOpen");
-	    Instantiate(explosion, transform.position, Quaternion.identity);
+	        Instantiate(explosion, transform.position, Quaternion.identity);
         }
 
     }

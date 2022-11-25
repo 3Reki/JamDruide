@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7460895819820265552
 SpriteRenderer:
@@ -101,6 +101,7 @@ MonoBehaviour:
   door: {fileID: 0}
   brokenSprite: {fileID: 21300000, guid: 21b48ce596c7c82408c16ad88c5d39f7, type: 3}
   explosion: {fileID: 632785731831517530, guid: ed852bb8fe97bf94695a49aaee01adfe, type: 3}
+  audioSource: {fileID: 0}
 --- !u!61 &7460895819820265554
 BoxCollider2D:
   m_ObjectHideFlags: 0
