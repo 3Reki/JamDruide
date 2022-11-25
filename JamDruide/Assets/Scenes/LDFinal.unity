@@ -134077,7 +134077,7 @@ GameObject:
   - component: {fileID: 1593793311}
   - component: {fileID: 1593793310}
   - component: {fileID: 1593793309}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 'Spike '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136656,11 +136656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5190443222812861759, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: offset.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5190443222812861759, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
-      propertyPath: smoothTime
-      value: 0.25
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5190443223109654352, guid: 16fe9015b2d55cf4ba1412332b38699d, type: 3}
       propertyPath: m_Name

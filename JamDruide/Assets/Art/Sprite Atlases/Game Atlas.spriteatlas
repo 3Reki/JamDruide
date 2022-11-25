@@ -59,6 +59,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 773404c2d8416bc42b88c03056a015fb, type: 3}
     - {fileID: 205335663, guid: e525a09dc13f57545ab18ebb0d6815c2, type: 3}
     - {fileID: 2800000, guid: c238017d6824dc2488d1acde93dda62e, type: 3}
+    - {fileID: 2800000, guid: 3684b99e445f65643aae50cef26e4c27, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -116,6 +117,7 @@ SpriteAtlas:
   - {fileID: -226226824, guid: 8776a00ee8e919b44adc27bad7038676, type: 3}
   - {fileID: -1252642324, guid: 8776a00ee8e919b44adc27bad7038676, type: 3}
   - {fileID: 21300000, guid: b45e7f4e578a61842bd79e2e76b78248, type: 3}
+  - {fileID: 21300000, guid: 3684b99e445f65643aae50cef26e4c27, type: 3}
   m_PackedSpriteNamesToIndex:
   - IMG_1510_3
   - IMG_1510_2
@@ -169,6 +171,7 @@ SpriteAtlas:
   - Clouds_2
   - Clouds_3
   - TONNEAU SIZE
+  - telescope
   m_RenderDataMap: {}
   m_Tag: Game Atlas
   m_IsVariant: 0
