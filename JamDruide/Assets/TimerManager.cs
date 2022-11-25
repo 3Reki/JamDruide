@@ -31,6 +31,11 @@ public class TimerManager : MonoBehaviour
         totalTime = 0;
     }
 
+    public void HideText()
+    {
+        timerText.gameObject.SetActive(false);
+    }
+
     public static string FormatTime(float time)
     {
         return $"{((int) time) / 3600:00}:{((int) time) % 3600 / 60:00}:{((int) time) % 3600 % 60:00}";
