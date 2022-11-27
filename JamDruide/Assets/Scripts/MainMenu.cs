@@ -27,11 +27,13 @@ public class MainMenu : MonoBehaviour
         audioMixer.SetFloat("Master", PlayerPrefs.GetFloat(saveName, 1));
         MusicInstance.instance.SwapMusicClip(defaultMusic, 1);
         slider.value = PlayerPrefs.GetFloat(saveName, 1);
+        TimerManager.Instance.HideText();
     }
 
     public void Play()
     {
         TimerManager.Instance.ResetTimer();
+        TimerManager.Instance.ShowText();
         SceneManager.LoadScene(level);
     }
 

@@ -35,6 +35,11 @@ public class TimerManager : MonoBehaviour
     {
         timerText.gameObject.SetActive(false);
     }
+    
+    public void ShowText()
+    {
+        timerText.gameObject.SetActive(true);
+    }
 
     public static string FormatTime(float time)
     {
