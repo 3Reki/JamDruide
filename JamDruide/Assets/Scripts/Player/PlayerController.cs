@@ -98,7 +98,7 @@ namespace Player
 
             if (Velocity.y < 0)
             {
-                animator.SetBool("IsFalling", true);
+                animator.SetBool(isFalling, true);
             }
 
             RunCollisionChecks();
@@ -146,9 +146,7 @@ namespace Player
         [SerializeField] [Range(0.05f, 0.3f)] private float _rayBuffer = 0.1f; // Prevents side detectors hitting the ground
 
         private RayRange raysUp, raysRight, raysDown, raysLeft;
-        private Vector2 upLeftStart, upRightStart;
         private bool colUp, colRight, colDown, colLeft;
-        private bool slip;
 
         private float timeLeftGrounded;
 
@@ -160,13 +158,12 @@ namespace Player
 
             // Ground
             LandingThisFrame = false;
-            slip = false;
             var groundedCheck = RunDetection(raysDown);
-            animator.SetBool("Grounded", groundedCheck);
+            animator.SetBool(grounded, groundedCheck);
             if (groundedCheck)
             {
-                animator.SetBool("IsJumping", false);
-                animator.SetBool("IsFalling", false);
+                animator.SetBool(isJumping, false);
+                animator.SetBool(isFalling, false);
             }
             if (colDown && !groundedCheck) timeLeftGrounded = Time.time; // Only trigger when first leaving
             else if (!colDown && groundedCheck)
@@ -187,17 +184,6 @@ namespace Player
                 return EvaluateRayPositions(range)
                     .Any(point => Physics2D.Raycast(point, range.dir, _detectionRayLength, _groundLayer));
             }
-
-            if (Physics2D.Raycast(upLeftStart, Vector2.up, _detectionRayLength * 0.8f + _characterBounds.extents.y, _groundLayer))
-            {
-                colUp = true;
-                slip = true;
-            } 
-            else if (Physics2D.Raycast(upRightStart, Vector2.up, _detectionRayLength * 0.8f + _characterBounds.extents.y, _groundLayer))
-            {
-                colUp = true;
-                slip = true;
-            }
         }
 
         private void CalculateRayRanged()
@@ -210,10 +196,6 @@ namespace Player
             raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
             raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
             raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
-            
-            float height = (position + _characterBounds.center).y;
-            upLeftStart = new Vector2(b.min.x, height);
-            upRightStart = new Vector2(b.max.x, height);
         }
 
 
@@ -233,7 +215,7 @@ namespace Player
             Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
 
             // Rays
-            if (!Application.isPlaying)
+            //if (!Application.isPlaying)
             {
                 CalculateRayRanged();
                 Gizmos.color = Color.blue;
@@ -244,8 +226,6 @@ namespace Player
                         Gizmos.DrawRay(point, range.dir * _detectionRayLength);
                     }
                 }
-                Gizmos.DrawRay(upLeftStart, Vector3.up * (_detectionRayLength + _characterBounds.extents.y));
-                Gizmos.DrawRay(upRightStart, Vector3.up * (_detectionRayLength + _characterBounds.extents.y));
             }
 
             if (!Application.isPlaying) return;
@@ -368,7 +348,7 @@ namespace Player
                 timeLeftGrounded = float.MinValue;
                 JumpingThisFrame = true;
                 doubleJumpUsed = false;
-                animator.SetBool("IsJumping", true);
+                animator.SetBool(isJumping, true);
             }
             else
             {
@@ -388,10 +368,6 @@ namespace Player
                 {
                     endedJumpEarly = true;
                     currentVerticalSpeed = 0;
-                }
-                if (slip)
-                {
-                    currentVerticalSpeed = -8; // TODO
                 }
             }
         }
@@ -418,6 +394,11 @@ namespace Player
         [SerializeField, Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
         private int _freeColliderIterations = 10;
 
+        private static readonly int isMoving = Animator.StringToHash("IsMoving");
+        private static readonly int isJumping = Animator.StringToHash("IsJumping");
+        private static readonly int isFalling = Animator.StringToHash("IsFalling");
+        private static readonly int grounded = Animator.StringToHash("Grounded");
+
         // We cast our bounds before moving to avoid future collisions
         private void MoveCharacter()
         {
@@ -425,14 +406,7 @@ namespace Player
             Vector3 pos = transformPos + _characterBounds.center;
             RawMovement = new Vector3(currentHorizontalSpeed, currentVerticalSpeed); // Used externally
             Vector3 move = RawMovement * Time.deltaTime;
-            if (move != Vector3.zero)
-            {
-                animator.SetBool("IsMoving", true);
-            }
-            else
-            {
-                animator.SetBool("IsMoving", false);
-            }
+            animator.SetBool(isMoving, move != Vector3.zero);
             Vector3 furthestPoint = pos + move;
 
             // check furthest movement. If nothing hit, move and don't do extra checks
@@ -458,15 +432,91 @@ namespace Player
                     // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                     if (i == 1)
                     {
-                        if (currentVerticalSpeed < 0) currentVerticalSpeed = 0;
-                        var dir = transformPos - hit.transform.position;
-                        transform.position += dir.normalized * move.magnitude;
+                        ResolveCornerCollision(pos, furthestPoint);
+                        // if (currentVerticalSpeed < 0) currentVerticalSpeed = 0;
+                        // var dir = transformPos - hit.transform.position;
+                        // transform.position += dir.normalized * move.magnitude;
                     }
 
                     return;
                 }
 
                 positionToMoveTo = posToTry;
+            }
+        }
+
+        private void ResolveCornerCollision(Vector3 pos, Vector3 furthestPoint)
+        {
+            Vector2 wantedPosition;
+            if (Math.Abs(furthestPoint.y - pos.y) > 0.01f)
+            {
+                wantedPosition = new Vector2(pos.x, furthestPoint.y);
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
+            }
+            
+            
+
+            if (Math.Abs(furthestPoint.x - pos.x) > 0.01f)
+            {
+                wantedPosition = new Vector2(furthestPoint.x, pos.y);
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
+            
+                wantedPosition = new Vector2(pos.x + (pos.x - furthestPoint.x), furthestPoint.y);
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
+            }
+            else
+            {
+                wantedPosition = new Vector2(pos.x + 0.15f, furthestPoint.y);
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
+                
+                wantedPosition = new Vector2(pos.x - 0.15f, furthestPoint.y);
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
+            }
+
+            if (Math.Abs(furthestPoint.y - pos.y) > 0.01f)
+            {
+                wantedPosition = new Vector2(furthestPoint.x, pos.y + (pos.y - furthestPoint.y));
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
+            }
+            else
+            {
+                wantedPosition = new Vector2(furthestPoint.x, pos.y + 0.15f);
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
+                
+                wantedPosition = new Vector2(furthestPoint.x, pos.y - 0.15f);
+                if (!Physics2D.OverlapBox(wantedPosition, _characterBounds.size, 0, _groundLayer))
+                {
+                    transform.position = wantedPosition;
+                    return;
+                }
             }
         }
 
