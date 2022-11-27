@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         RebindingDisplay.OnRebind += UpdateKeySprites;
+        PauseMenu.OnPause.AddListener(SetEnableFalse);
+        PauseMenu.OnResume.AddListener(SetEnableTrue);
     }
 
     private void Start()
@@ -61,8 +63,6 @@ public class UIManager : MonoBehaviour
         PlayerActions.onRecipeComplete += OnRecipeComplete;
         PlayerActions.onThrow += RemoveInventory;
         PlayerActions.onSelect += SelectPotion;
-        PauseMenu.OnPause.AddListener(SetEnableFalse);
-        PauseMenu.OnResume.AddListener(SetEnableTrue);
         SpeedPotion.onDrink += SpeedSlider;
         DoubleJumpPotion.onDrink += DoubleJumpSlider;
     }
@@ -73,8 +73,6 @@ public class UIManager : MonoBehaviour
         PlayerActions.onRecipeComplete -= OnRecipeComplete;
         PlayerActions.onThrow -= RemoveInventory;
         PlayerActions.onSelect -= SelectPotion;
-        PauseMenu.OnPause.RemoveListener(SetEnableFalse);
-        PauseMenu.OnResume.RemoveListener(SetEnableTrue);
         SpeedPotion.onDrink -= SpeedSlider;
         DoubleJumpPotion.onDrink -= DoubleJumpSlider;
         
@@ -83,6 +81,8 @@ public class UIManager : MonoBehaviour
     private void OnDestroy()
     {
         RebindingDisplay.OnRebind -= UpdateKeySprites;
+        PauseMenu.OnPause.RemoveListener(SetEnableFalse);
+        PauseMenu.OnResume.RemoveListener(SetEnableTrue);
     }
 
     private void SetEnableFalse()
