@@ -7,6 +7,7 @@ public class ShadowBehaviour : MonoBehaviour
 {
     [SerializeField] private PlayerActions player;
     [SerializeField] private float startDelay;
+    [SerializeField] private AudioClip epicDrillRemix;
     
     private float startTime;
     private readonly Queue<Vector3> playerPositions = new();
@@ -27,6 +28,7 @@ public class ShadowBehaviour : MonoBehaviour
     private void Start()
     {
         startTime = Time.time;
+        MusicInstance.instance.SwapMusicClip(epicDrillRemix, 0.22f);
         StartCoroutine(WaitForMove());
     }
 

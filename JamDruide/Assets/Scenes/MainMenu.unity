@@ -1111,6 +1111,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 1dfed899f67a2bd48b0b9a8bbfbb5016, type: 2}
   volume: {fileID: 2045842205}
   slider: {fileID: 633434202}
+  defaultMusic: {fileID: 8300000, guid: 2c9092a9dc0252c4eae0a4e827773517, type: 3}
   saveName: audio
 --- !u!1 &200277116
 GameObject:
@@ -4430,7 +4431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 403801752683409542, guid: f627ab48f4a3ffc4ea3472d2819032f7, type: 3}
       propertyPath: m_LocalPosition.x

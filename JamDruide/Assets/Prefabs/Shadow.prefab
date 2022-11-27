@@ -4948,6 +4948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   startDelay: 1.5
+  epicDrillRemix: {fileID: 8300000, guid: 0fa802cf36bf043448a105bc7261799d, type: 3}
 --- !u!58 &4620376884544317100
 CircleCollider2D:
   m_ObjectHideFlags: 0

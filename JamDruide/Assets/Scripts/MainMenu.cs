@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -10,13 +7,14 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    [SerializeField] int level;
+    [SerializeField] private int level;
 
-    [SerializeField] AudioMixer audioMixer;
-    [SerializeField] TMP_Text volume;
-    [SerializeField] Slider slider;
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private TMP_Text volume;
+    [SerializeField] private Slider slider;
+    [SerializeField] private AudioClip defaultMusic;
     [SerializeField] private string saveName;
-    float displayNumber;
+    private float displayNumber;
 
     private void Awake()
     {
@@ -27,6 +25,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         audioMixer.SetFloat("Master", PlayerPrefs.GetFloat(saveName, 1));
+        MusicInstance.instance.SwapMusicClip(defaultMusic, 1);
         slider.value = PlayerPrefs.GetFloat(saveName, 1);
     }
 
