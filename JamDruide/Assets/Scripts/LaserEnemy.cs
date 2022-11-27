@@ -65,7 +65,7 @@ public class LaserEnemy : MonoBehaviour
             
         if (hit.collider == null || !hit.transform.CompareTag("Player")) return;
             
-        StartCoroutine(player.Death());
+        player.StartCoroutine(player.Death());
         Invoke(nameof(DeactivateLaser), 1);
         laserActive = false;
         player = null;

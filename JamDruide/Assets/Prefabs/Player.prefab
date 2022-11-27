@@ -185,7 +185,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   pointPrefab: {fileID: 3207998565831689386, guid: d7e598630dd605f4a8bbec124be6cc96, type: 3}
   pointsCount: 20
-  deathTimer: 1
+  deathTimer: 2
   die: {fileID: 8300000, guid: 8189d41bb2246874d851ee661d2b0570, type: 3}
   craft: {fileID: 8300000, guid: e7989f306e8604f48b2681d19be57681, type: 3}
   collect: {fileID: 8300000, guid: d7fad1dab2e5d0c408bf50762bb11a89, type: 3}

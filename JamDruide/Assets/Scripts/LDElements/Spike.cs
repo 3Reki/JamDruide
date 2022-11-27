@@ -1,15 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Spike : MonoBehaviour
+namespace LDElements
 {
-    private void OnTriggerEnter2D(Collider2D col)
+    public class Spike : MonoBehaviour
     {
-        if (col.gameObject.CompareTag("Player"))
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            StartCoroutine(Player.PlayerActions.Instance.Death());
+            if (col.gameObject.CompareTag("Player"))
+            {
+                StartCoroutine(Player.PlayerActions.Instance.Death());
+            }
         }
     }
 }
